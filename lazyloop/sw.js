@@ -7,7 +7,7 @@ const currentCacheName = "looptap-v" + version;
 
 self.addEventListener("install", function(e) {
 	console.log("Install event triggered. New updates available.");
-	const filesToCache = ["/", "/favicon.ico", "/vue.min.js", "/style.css", "/script.js", "/manifest.json"];
+	const filesToCache = ["/lazyloop", "/lazyloop/favicon.ico", "/lazyloop/vue.min.js", "/lazyloop/style.css", "/lazyloop/script.js", "/lazyloop/manifest.json"];
 
 	// Deleting the previous version of cache
 	e.waitUntil(
