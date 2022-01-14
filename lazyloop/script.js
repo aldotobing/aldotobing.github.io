@@ -134,5 +134,5 @@ if ("ontouchstart" in window) {
 }
 
 if ("serviceWorker" in navigator) {
-	navigator.serviceWorker.register("/looptap/sw.js");
+	navigator.serviceWorker.register("/lazyloop/sw.js");
 }
