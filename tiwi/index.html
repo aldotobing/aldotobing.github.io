@@ -18,9 +18,7 @@
   </head>
 
   <body>
-    <audio autoplay="autoplay">
-      <source src="/tiwi/img/hbd.mp3" />
-    </audio>
+    <audio src="/tiwi/img/hbd.mp3"></audio>
 
     <div class="container">
       <div class="one">
@@ -154,6 +152,14 @@
       </div>
     </div>
   </body>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+      const audio = document.querySelector("audio");
+      audio.volume = 50;
+      audio.play();
+    });
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
   <script type="application/javascript" src="/tiwi/script/main.js"></script>
