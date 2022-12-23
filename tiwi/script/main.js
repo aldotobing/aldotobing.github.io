@@ -1,8 +1,3 @@
-//Music
-<audio autoplay="autoplay">
-  <source src="https://github.com/AnshumanMahato/Happy-Birthday-Card/blob/main/src/resources/sfx/hbd.mp3" />
-</audio>;
-
 // Import the data to customize and insert them into page
 const fetchData = () => {
   fetch("/tiwi/customize.json")
