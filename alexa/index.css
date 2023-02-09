@@ -13,14 +13,7 @@ body{
 	font-size: 4.5rem;
   }
   
-  .one > img {
-	vertical-align: middle;
-	margin-bottom: 10px;
-	max-width: 100%;
-	height: auto;
-  }
-  
-  .two {
+.two {
 	font-size: 1.2rem;
 	font-weight: lighter;
   }
