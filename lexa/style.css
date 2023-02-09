@@ -19,25 +19,14 @@ $to-mobile: 520px;
 
 html,
 body {
-    overflow:hidden;
-    background-color:#fcfcfc;
-    margin:0;
-    padding:0;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  
-  min-height: 100vh;
-  @include flex-center();
-
-  background-color: $col-bg;
-  font-size: 62.5%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  @media screen and (max-width: $to-mobile) {
-      /* don't know how to set default units to rem in mojs :(( */
-  }
+  overflow:hidden;
+	background-color:#fcfcfc;
+	margin:0;
+	padding:0;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .container {
