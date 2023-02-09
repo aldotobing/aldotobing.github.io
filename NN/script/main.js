@@ -1,6 +1,6 @@
 // Import the data to customize and insert them into page
 const fetchData = () => {
-  fetch("/tiwi/customize.json")
+  fetch("http://aldotobing.github.io/NN/customize.json")
     .then((data) => data.json())
     .then((data) => {
       dataArr = Object.keys(data);
