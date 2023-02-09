@@ -27,6 +27,11 @@ body {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  @media screen and (max-width: $to-mobile) {
+      /* don't know how to set default units to rem in mojs :(( */
+  }
 }
 
 .container {
