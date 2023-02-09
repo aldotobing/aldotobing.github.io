@@ -9,15 +9,6 @@ body{
 	transform: translate(-50%, -50%);
 }
 
-.one {
-	font-size: 4.5rem;
-  }
-  
-.two {
-	font-size: 1.2rem;
-	font-weight: lighter;
-  }
-
 #page-wrap {
 	width: 800px;
 	margin: 0 auto;
