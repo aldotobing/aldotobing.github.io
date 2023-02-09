@@ -9,6 +9,22 @@ body{
 	transform: translate(-50%, -50%);
 }
 
+.one {
+	font-size: 4.5rem;
+  }
+  
+  .one > img {
+	vertical-align: middle;
+	margin-bottom: 10px;
+	max-width: 100%;
+	height: auto;
+  }
+  
+  .two {
+	font-size: 1.2rem;
+	font-weight: lighter;
+  }
+
 #page-wrap {
 	width: 800px;
 	margin: 0 auto;
