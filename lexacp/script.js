@@ -10,13 +10,15 @@ var setCanvasSize = function () {
 var randHeart = function () {
   return ["❤", "♥"][Math.floor(Math.random() * 2)];
 };
-var Sprite = function (x, y, rot) {
-  this.x = x || Math.random() * c.width;
-  this.y = y || Math.random() * c.height;
-  this.rot = rot || 0;
-  this.c = "rgba(238,85,85,1)";
-  this.text = randHeart();
-};
+class Sprite {
+  constructor(x, y, rot) {
+    this.x = x || Math.random() * c.width;
+    this.y = y || Math.random() * c.height;
+    this.rot = rot || 0;
+    this.c = "rgba(238,85,85,1)";
+    this.text = randHeart();
+  }
+}
 var items = [new Sprite()];
 var shape = function (x, y, text, c) {
   _.font = "5em Arial";
