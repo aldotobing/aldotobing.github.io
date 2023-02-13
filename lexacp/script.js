@@ -65,11 +65,11 @@ var render = function () {
     if (item.x >= c.width || item.x <= 0) item.x = -item.x;
   }
 };
-window.requestAnimationFrame = (function () {
+window.requestAnimFrame = (function () {
   return (
     window.requestAnimationFrame ||
-    window.requestAnimationFrame ||
-    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
     function (callback) {
       window.setTimeout(callback, 1000 / 60);
     }
