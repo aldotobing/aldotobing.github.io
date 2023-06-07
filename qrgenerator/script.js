@@ -32,7 +32,7 @@ input.addEventListener("input", function () {
   // Set a timeout of 1 second
   setTimeout(function () {
     // Remove the loading message
-    qrCode.querySelector("div").removeChild(loading);
+    qrCode.querySelector("qr-code").removeChild(loading);
 
     // Generate the QR code with the input value
     qrcode.makeCode(data);
