@@ -16,9 +16,59 @@
       placeholder="Paste the URL or TEXT"
     />
     <div id="qr-code" class="qr"></div>
-    <button id="save-btn" class="btn">Save QR</button>
+    <!-- Add a button to save the image -->
+    <button id="save-btn" class="btn">Save Image</button>
 
     <script type="text/javascript" src="/qrgenerator/qrcode.min.js"></script>
     <script type="text/javascript" src="/qrgenerator/script.js"></script>
+    <!-- Add some code to handle the loading and saving logic -->
+    <script>
+      // Get the elements
+      const qrData = document.getElementById("qr-data");
+      const qrCode = document.getElementById("qr-code");
+      const saveBtn = document.getElementById("save-btn");
+
+      // Create a new QRCode object
+      const qrcode = new QRCode(qrCode, {
+        text: "",
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H,
+      });
+
+      // Add an event listener to the input element
+      qrData.addEventListener("input", () => {
+        // Clear the previous QR code
+        qrcode.clear();
+        // Show a loading message
+        qrCode.innerHTML = "Generating QR...";
+        // Set a timeout to simulate some delay
+        setTimeout(() => {
+          // Generate a new QR code with the input value
+          qrcode.makeCode(qrData.value);
+        }, 100); // Change this value to 100 milliseconds
+      });
+
+      // Add an event listener to the save button
+      saveBtn.addEventListener("click", () => {
+        // Get the canvas element inside the QR code element
+        const canvas = qrCode.querySelector("canvas");
+        // Convert the canvas to a data URL
+        const dataURL = canvas.toDataURL("image/png");
+        // Create a link element
+        const link = document.createElement("a");
+        // Set the link attributes
+        link.href = dataURL;
+        link.download = "qr-code.png";
+        // Append the link to the body
+        document.body.appendChild(link);
+        // Click the link
+        link.click();
+        // Remove the link from the body
+        document.body.removeChild(link);
+      });
+    </script>
   </body>
 </html>
