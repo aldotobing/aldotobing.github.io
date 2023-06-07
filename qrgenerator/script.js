@@ -38,10 +38,10 @@ input.addEventListener("input", function () {
     qrcode.makeCode(data);
 
     // Create a save image button
-    var saveButton = document.createElement("button");
-    saveButton.textContent = "Save image";
-    saveButton.style.display = "block";
-    saveButton.style.margin = "10px auto";
+    // var saveButton = document.createElement("button");
+    // saveButton.textContent = "Save image";
+    // saveButton.style.display = "block";
+    // saveButton.style.margin = "10px auto";
 
     // Add an event listener to the save button
     saveButton.addEventListener("click", function () {
