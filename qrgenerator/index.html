@@ -16,20 +16,14 @@
       placeholder="Paste the URL or TEXT"
     />
     <div id="qr-code" class="qr"></div>
-    <!-- Add a button to save the image -->
-    <button id="save-btn" class="btn">Save Image</button>
-
     <script type="text/javascript" src="/qrgenerator/qrcode.min.js"></script>
-    <script type="text/javascript" src="/qrgenerator/script.js"></script>
-    <!-- Add some code to handle the loading and saving logic -->
-    <script>
-      // Get the elements
-      const qrData = document.getElementById("qr-data");
-      const qrCode = document.getElementById("qr-code");
-      const saveBtn = document.getElementById("save-btn");
+    <script type="text/javascript">
+      // Get the input element and the qr-code element
+      var input = document.getElementById("qr-data");
+      var qrCode = document.getElementById("qr-code");
 
       // Create a new QRCode object
-      const qrcode = new QRCode(qrCode, {
+      var qrcode = new QRCode(qrCode, {
         text: "",
         width: 256,
         height: 256,
@@ -39,35 +33,64 @@
       });
 
       // Add an event listener to the input element
-      qrData.addEventListener("input", () => {
-        // Clear the previous QR code
-        qrcode.clear();
-        // Show a loading message
-        qrCode.innerHTML = "Generating QR...";
-        // Set a timeout to simulate some delay
-        setTimeout(() => {
-          // Generate a new QR code with the input value
-          qrcode.makeCode(qrData.value);
-        }, 100); // Change this value to 100 milliseconds
-      });
+      input.addEventListener("input", function () {
+        // Get the input value
+        var data = input.value;
 
-      // Add an event listener to the save button
-      saveBtn.addEventListener("click", () => {
-        // Get the canvas element inside the QR code element
-        const canvas = qrCode.querySelector("canvas");
-        // Convert the canvas to a data URL
-        const dataURL = canvas.toDataURL("image/png");
-        // Create a link element
-        const link = document.createElement("a");
-        // Set the link attributes
-        link.href = dataURL;
-        link.download = "qr-code.png";
-        // Append the link to the body
-        document.body.appendChild(link);
-        // Click the link
-        link.click();
-        // Remove the link from the body
-        document.body.removeChild(link);
+        // Clear the qr-code element
+        qrCode.innerHTML = "";
+
+        // Create a loading message
+        var loading = document.createElement("p");
+        loading.textContent = "Generating QR code...";
+        loading.style.textAlign = "center";
+        loading.style.color = "gray";
+
+        // Append the loading message to the qr-code element
+        qrCode.appendChild(loading);
+
+        // Set a timeout of 1 second
+        setTimeout(function () {
+          // Remove the loading message
+          qrCode.removeChild(loading);
+
+          // Generate the QR code with the input value
+          qrcode.makeCode(data);
+
+          // Create a save image button
+          var saveButton = document.createElement("button");
+          saveButton.textContent = "Save image";
+          saveButton.style.display = "block";
+          saveButton.style.margin = "10px auto";
+
+          // Add an event listener to the save button
+          saveButton.addEventListener("click", function () {
+            // Get the canvas element inside the qr-code element
+            var canvas = qrCode.querySelector("canvas");
+
+            // Get the canvas data as an image URL
+            var imageURL = canvas.toDataURL("image/png");
+
+            // Create a link element with the image URL as the href attribute
+            var link = document.createElement("a");
+            link.href = imageURL;
+
+            // Set the download attribute to the file name
+            link.download = "qr-code.png";
+
+            // Append the link to the document body
+            document.body.appendChild(link);
+
+            // Click the link to download the image
+            link.click();
+
+            // Remove the link from the document body
+            document.body.removeChild(link);
+          });
+
+          // Append the save button to the qr-code element
+          qrCode.appendChild(saveButton);
+        }, 1000);
       });
     </script>
   </body>
