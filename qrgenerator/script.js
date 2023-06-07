@@ -70,5 +70,5 @@ input.addEventListener("input", function () {
 
     // Append the save button to the qr-code element
     qrCode.appendChild(saveButton);
-  }, 1000);
+  }, 100);
 });
