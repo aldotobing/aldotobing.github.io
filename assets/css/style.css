@@ -8,6 +8,18 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+    /* Dark Mode */
+    body.dark-mode {
+      background-color: #111;
+      color: #fff;
+    }
+
+    body.dark-mode a {
+      color: #fff;
+    }
+
+    /* Add more styling for dark mode as needed */
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #272829;
