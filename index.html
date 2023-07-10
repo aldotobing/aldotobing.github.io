@@ -40,8 +40,6 @@
 
 <body>
 
-  <button id="darkModeToggle" class="btn btn-sm btn-dark toggle-button">Toggle Dark Mode</button>
-
   <a rel="me" href="https://vmst.io/@aldotobing">Mastodon</a>
 
   <!-- ======= Mobile nav toggle button ======= -->
@@ -379,6 +377,10 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <button id="darkModeToggle" class="btn btn-sm btn-dark toggle-button"></button>
+
+  
+
   <script>
     // Check the current time of day and enable dark mode if it's evening or night
     const currentTime = new Date().getHours();
@@ -413,6 +415,7 @@
     // Event listener for dark mode toggle button
     document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
   </script>
+
 
 </body>
 
