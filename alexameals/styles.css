@@ -1,0 +1,129 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #ffebee;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.container {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #ffcdd2;
+  border-radius: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+h1 {
+  color: #e57373;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #f06292;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e57373;
+}
+
+.meal h2 {
+  color: #f06292;
+  margin-bottom: 10px;
+}
+
+.meal p {
+  color: #ff80ab;
+  font-size: 18px;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+}
+
+.clock {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px solid #ff80ab;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  background-color: white;
+  z-index: 1;
+  left: 60px; /* Adjust to the desired margin from the left */
+  top: 50%;
+}
+
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: 50% 100%;
+  transform: rotate(0deg);
+  z-index: 2;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 30px;
+  background: #e57373;
+  margin-left: -2px; /* half of width */
+}
+
+.minute-hand {
+  width: 2px;
+  height: 40px;
+  background: #f06292;
+  margin-left: -1px; /* half of width */
+}
+
+.second-hand {
+  width: 1px;
+  height: 45px;
+  background: #ff80ab;
+  margin-left: -0.5px; /* half of width */
+}
+
+.number {
+  position: absolute;
+  font-weight: bold;
+  color: #ff80ab;
+}
+
+.twelve {
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.three {
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+}
+
+.six {
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nine {
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+}

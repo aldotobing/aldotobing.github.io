@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Alexa's Personal Meal Planner</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Alexa Today's Meal Plan</h1>
+      <div class="clock">
+        <div class="number twelve">12</div>
+        <div class="number three">3</div>
+        <div class="number six">6</div>
+        <div class="number nine">9</div>
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+      <button id="randomize">Refresh</button>
+      <div class="meal">
+        <h2>Breakfast</h2>
+        <p id="breakfast"></p>
+      </div>
+      <div class="meal">
+        <h2>Lunch</h2>
+        <p id="lunch"></p>
+      </div>
+      <div class="meal">
+        <h2>Dinner</h2>
+        <p id="dinner"></p>
+      </div>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
