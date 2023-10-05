@@ -115,6 +115,17 @@ function updateMeals() {
 
 document.getElementById("randomize").addEventListener("click", updateMeals);
 
+// Function to trigger the animation
+function triggerAnimation() {
+  refreshButton.classList.add("demanding-click");
+  setTimeout(() => {
+    refreshButton.classList.remove("demanding-click");
+  }, 5000); // The animation will last for 5 seconds because of the 'infinite' keyword in the CSS
+}
+
+// Apply the animation every 5 seconds
+setInterval(triggerAnimation, 5000);
+
 // Initialize meals on page load
 updateMeals();
 
