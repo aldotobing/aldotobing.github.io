@@ -57,9 +57,30 @@ function randomMeal(type) {
 }
 
 function updateMeals() {
-  document.getElementById("breakfast").innerText = randomMeal("breakfast");
-  document.getElementById("lunch").innerText = randomMeal("lunch");
-  document.getElementById("dinner").innerText = randomMeal("dinner");
+  // Get the meal elements
+  const breakfastEl = document.getElementById("breakfast");
+  const lunchEl = document.getElementById("lunch");
+  const dinnerEl = document.getElementById("dinner");
+
+  // Reset animations
+  breakfastEl.style.animation = "none";
+  lunchEl.style.animation = "none";
+  dinnerEl.style.animation = "none";
+
+  // Force a reflow, flushing the CSS changes
+  void breakfastEl.offsetWidth;
+  void lunchEl.offsetWidth;
+  void dinnerEl.offsetWidth;
+
+  // Re-apply the animation
+  breakfastEl.style.animation = "";
+  lunchEl.style.animation = "";
+  dinnerEl.style.animation = "";
+
+  // Update the meals
+  breakfastEl.innerText = randomMeal("breakfast");
+  lunchEl.innerText = randomMeal("lunch");
+  dinnerEl.innerText = randomMeal("dinner");
 }
 
 document.getElementById("randomize").addEventListener("click", updateMeals);
