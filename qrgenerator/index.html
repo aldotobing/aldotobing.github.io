@@ -38,17 +38,27 @@
         const inputValue = input.value;
         
         // Generate QR code
-        QRCode.toCanvas(document.getElementById('qr-code'), inputValue, function (error) {
-          if (error) console.error(error);
-        });
+        generateQRCode(inputValue);
         
         // Generate barcode
-        JsBarcode("#barcode", inputValue, {
+        generateBarcode(inputValue);
+      });
+
+      // Function to generate QR code
+      function generateQRCode(data) {
+        QRCode.toCanvas(document.getElementById('qr-code'), data, function (error) {
+          if (error) console.error(error);
+        });
+      }
+
+      // Function to generate barcode
+      function generateBarcode(data) {
+        JsBarcode("#barcode", data, {
           format: "CODE128",
           width: 2,
           height: 30
         });
-      });
+      }
     </script>
   </body>
 </html>
