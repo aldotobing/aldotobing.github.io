@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Generate QR-Code</title>
+    <title>Generate QR-Code and Barcode</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -12,16 +12,43 @@
     <link rel="stylesheet" href="/qrgenerator/style.css" />
   </head>
   <body>
-    <!-- Add some classes to your elements -->
+    <!-- Input -->
     <input
       type="text"
-      id="qr-data"
+      id="data"
       class="input"
       placeholder="Paste the URL or TEXT"
     />
+    
+    <!-- QR Code -->
     <div id="qr-code" class="qr"></div>
+    
+    <!-- Barcode -->
+    <div id="barcode" class="barcode"></div>
 
     <script type="text/javascript" src="/qrgenerator/qrcode.min.js"></script>
-    <script type="text/javascript" src="/qrgenerator/script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/jsbarcode.min.js"></script>
+    <script type="text/javascript">
+      // Select input element
+      const input = document.getElementById('data');
+      
+      // Add event listener for input change
+      input.addEventListener('input', function() {
+        // Get input value
+        const inputValue = input.value;
+        
+        // Generate QR code
+        QRCode.toCanvas(document.getElementById('qr-code'), inputValue, function (error) {
+          if (error) console.error(error);
+        });
+        
+        // Generate barcode
+        JsBarcode("#barcode", inputValue, {
+          format: "CODE128",
+          width: 2,
+          height: 30
+        });
+      });
+    </script>
   </body>
 </html>
