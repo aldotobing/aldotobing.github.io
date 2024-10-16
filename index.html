@@ -269,45 +269,66 @@
 
           <div class="section-title" data-aos="fade-up">
             <h2>Technologies I Use</h2>
-            <div class="logo-grid">
-              <div class="logo">
-                <img src="assets/img/logos/java.jpg" alt="Java Logo" />
+            <div class="tech-logos">
+              <div class="logo-grid">
+                <div class="logo" data-tech="Java">
+                  <img src="assets/img/logos/java.jpg" alt="Java Logo" />
+                  <span class="logo-name">Java</span>
+                </div>
+                <div class="logo" data-tech="Golang">
+                  <img src="assets/img/logos/golang.jpg" alt="Golang Logo" />
+                  <span class="logo-name">Golang</span>
+                </div>
+                <div class="logo" data-tech="PostgreSQL">
+                  <img
+                    src="assets/img/logos/postgresql.jpg"
+                    alt="PostgreSQL Logo"
+                  />
+                  <span class="logo-name">PostgreSQL</span>
+                </div>
+                <div class="logo" data-tech="Docker">
+                  <img src="assets/img/logos/docker.jpg" alt="Docker Logo" />
+                  <span class="logo-name">Docker</span>
+                </div>
+                <div class="logo" data-tech="Linux">
+                  <img src="assets/img/logos/linux.jpg" alt="Linux Logo" />
+                  <span class="logo-name">Linux</span>
+                </div>
+                <div class="logo" data-tech="Nginx">
+                  <img src="assets/img/logos/nginx.jpg" alt="Nginx Logo" />
+                  <span class="logo-name">Nginx</span>
+                </div>
+                <div class="logo" data-tech="Tildeslash">
+                  <img
+                    src="assets/img/logos/tildeslash.png"
+                    alt="Tildeslash Logo"
+                  />
+                  <span class="logo-name">Tildeslash</span>
+                </div>
+                <div class="logo" data-tech="Bitbucket">
+                  <img
+                    src="assets/img/logos/bitbucket.jpg"
+                    alt="Bitbucket Logo"
+                  />
+                  <span class="logo-name">Bitbucket</span>
+                </div>
+                <div class="logo" data-tech="Redis">
+                  <img src="assets/img/logos/redis.jpg" alt="Redis Logo" />
+                  <span class="logo-name">Redis</span>
+                </div>
+                <div class="logo" data-tech="AWS">
+                  <img src="assets/img/logos/aws.jpg" alt="AWS Logo" />
+                  <span class="logo-name">AWS</span>
+                </div>
               </div>
-              <div class="logo">
-                <img src="assets/img/logos/golang.jpg" alt="Golang Logo" />
-              </div>
-              <div class="logo">
-                <img
-                  src="assets/img/logos/postgresql.jpg"
-                  alt="PostgreSQL Logo"
-                />
-              </div>
-              <div class="logo">
-                <img src="assets/img/logos/docker.jpg" alt="Docker Logo" />
-              </div>
-              <div class="logo">
-                <img src="assets/img/logos/linux.jpg" alt="Linux Logo" />
-              </div>
-              <div class="logo">
-                <img src="assets/img/logos/nginx.jpg" alt="Nginx Logo" />
-              </div>
-              <div class="logo">
-                <img
-                  src="assets/img/logos/tildeslash.png"
-                  alt="Tildeslash Logo"
-                />
-              </div>
-              <div class="logo">
-                <img
-                  src="assets/img/logos/bitbucket.jpg"
-                  alt="Bitbucket Logo"
-                />
-              </div>
-              <div class="logo">
-                <img src="assets/img/logos/redis.jpg" alt="Redis Logo" />
-              </div>
-              <div class="logo">
-                <img src="assets/img/logos/aws.jpg" alt="AWS Logo" />
+            </div>
+            <div class="popup-overlay">
+              <div class="popup-content">
+                <button class="close-popup" aria-label="Close">
+                  <span class="close-icon"></span>
+                </button>
+                <h2 id="popup-title"></h2>
+                <p id="popup-description"></p>
               </div>
             </div>
           </div>
@@ -562,6 +583,7 @@
     <script src="assets/js/darkmode.js"></script>
     <script src="assets/js/chart.js"></script>
     <script src="assets/js/autoswitch.js"></script>
+    <script src="assets/js/logo.js"></script>
 
     <!-- Switch Dark Mode (Global) -->
   </body>
