@@ -1,0 +1,170 @@
+/* Dark mode styles */
+body.dark-mode .abilities-grid {
+  background-color: rgba(255, 255, 255, 0.1); /* Background redup */
+  color: #f0f0f0; /* Warna teks lebih cerah */
+}
+
+body.dark-mode .ability-card {
+  background-color: rgba(255, 255, 255, 0.2); /* Card background redup */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Border card */
+}
+
+/* Ikon dan teks dalam card */
+body.dark-mode .ability-card i {
+  color: #f0f0f0; /* Warna ikon */
+}
+
+/* Styling untuk ikon matahari dan bulan */
+.sun-icon,
+.moon-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px; /* Ukuran ikon */
+  color: white; /* Warna ikon */
+  transition: opacity 0.4s; /* Transisi halus untuk opacity */
+}
+
+.sun-icon {
+  right: 10px; /* Posisi ikon matahari */
+  opacity: 1; /* Mulai dengan transparan di dark mode */
+}
+
+.moon-icon {
+  left: 10px; /* Posisi ikon bulan */
+  opacity: 0; /* Mulai terlihat di dark mode */
+}
+
+input:checked + .slider .sun-icon {
+  opacity: 0; /* Tampilkan matahari saat light mode */
+}
+
+input:checked + .slider .moon-icon {
+  opacity: 1; /* Sembunyikan bulan saat light mode */
+}
+
+/* Styling Switch Global */
+.switch-global {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  z-index: 9999; /* Supaya di atas elemen lain */
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Optional Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* Navbar Setup */
+#navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+}
+
+/* Switch Container di Kanan Atas */
+.switch-container {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1000; /* Supaya selalu di atas konten lain */
+}
+
+/* Switch Styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Optional: Dark Mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
