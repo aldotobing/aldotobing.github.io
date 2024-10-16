@@ -274,3 +274,125 @@ body.dark-mode .chart-frame h4 {
   margin: 0 auto; /* Centering gambar di dalam kolom */
   display: block; /* Membuat gambar menjadi block element untuk centering */
 }
+
+/* Contact */
+.frame-contact {
+  border-radius: 15px; /* Rounded corners yang lebih halus */
+  padding: 30px; /* Padding inside the frame */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  background-color: #fff; /* Light mode background */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transition for dark mode */
+  margin-top: 20px; /* Margin atas untuk pemisahan dari elemen lain */
+}
+
+.frame-contact.dark-mode {
+  background-color: #2c2c2c; /* Dark mode background */
+  color: #2c2c2c; /* Text color in dark mode */
+}
+
+/* Info Box */
+.info-box {
+  display: flex; /* Gunakan flexbox untuk info box */
+  flex-direction: column; /* Susunan kolom */
+  justify-content: center; /* Rata tengah secara vertikal */
+  align-items: center; /* Rata tengah secara horizontal */
+  border-radius: 10px; /* Rounded corners untuk info box */
+  background-color: #f9f9f9; /* Background info box */
+  padding: 20px; /* Padding dalam info box */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow untuk info box */
+  height: 100%; /* Set height info box agar sesuai */
+}
+
+/* Form Box */
+.form-box {
+  border-radius: 10px; /* Rounded corners untuk form box */
+  background-color: #f9f9f9; /* Background form box */
+  padding: 20px; /* Padding dalam form box */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow untuk form box */
+}
+
+/* Judul di dalam info */
+.info-box h4,
+.form-box h4 {
+  color: #333; /* Warna judul */
+  margin-bottom: 5px; /* Jarak antara judul dan teks */
+  font-weight: bold; /* Bold untuk judul */
+}
+
+/* Info Box di Dark Mode */
+.info-box.dark-mode {
+  background-color: #3a3a3a; /* Latar belakang gelap */
+  color: #ffffff; /* Warna teks yang lebih cerah */
+}
+
+/* Teks dalam info untuk Dark Mode */
+.info-box.dark-mode p {
+  color: #ffffff; /* Pastikan teks tetap terlihat dalam dark mode */
+}
+
+/* Ikon untuk Dark Mode */
+.info-box.dark-mode i {
+  color: #007bff; /* Warna ikon tetap sama dalam dark mode */
+}
+
+.info-box.dark-mode h4,
+.form-box.dark-mode h4 {
+  color: #000000; /* Warna judul di dark mode */
+}
+
+/* Teks dalam info */
+.info-box p {
+  margin: 5px 0; /* Jarak atas dan bawah untuk teks */
+  text-align: center; /* Rata tengah teks */
+}
+
+.info-box.dark-mode p,
+.form-box.dark-mode p {
+  color: #212121; /* Warna teks biasa di dark mode */
+}
+
+/* Ikon */
+.info-box i {
+  font-size: 24px; /* Ukuran ikon lebih besar */
+  color: #007bff; /* Warna ikon default */
+  margin-bottom: 10px; /* Jarak antar ikon dan teks */
+}
+
+.info-box.dark-mode i,
+.form-box.dark-mode i {
+  color: #f0f0f0; /* Warna ikon di dark mode */
+}
+
+/* Button styles */
+.frame-contact button {
+  background-color: #007bff; /* Warna tombol */
+  color: white; /* Warna teks tombol */
+  border: none; /* Tanpa border */
+  border-radius: 5px; /* Rounded corners untuk tombol */
+  padding: 10px 15px; /* Padding tombol */
+  cursor: pointer; /* Pointer saat hover */
+  transition: background-color 0.3s; /* Transition saat hover */
+}
+
+.frame-contact button:hover {
+  background-color: #0056b3; /* Warna tombol saat hover */
+}
+
+.frame-contact.dark-mode button {
+  background-color: #0069d9; /* Warna tombol di dark mode */
+}
+
+.frame-contact.dark-mode button:hover {
+  background-color: #0056b3; /* Warna tombol saat hover di dark mode */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .frame-contact .row {
+    flex-direction: column; /* Susunan kolom di mobile */
+  }
+  .frame-contact .col-lg-4,
+  .frame-contact .col-lg-8 {
+    width: 100%; /* Lebar penuh pada mobile */
+  }
+}

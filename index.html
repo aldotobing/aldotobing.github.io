@@ -264,6 +264,9 @@
               </div>
             </div>
           </div>
+
+          <div class="section-title" data-aos="fade-up"></div>
+
           <div class="section-title" data-aos="fade-up">
             <h2>Technologies I Use</h2>
             <div class="logo-grid">
@@ -409,95 +412,101 @@
         </div>
       </section>
 
-      <!-- Contact Section -->
-      <!-- <section id="contact" class="contact">
+      <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
           <div class="section-title">
             <h2>Contact</h2>
           </div>
-          <div class="row mt-1">
-            <div class="col-lg-4">
-              <div class="info">
-                <div class="address">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Location:</h3>
-                  <p>Surabaya, ID</p>
+
+          <div class="frame-contact">
+            <div class="row mt-1">
+              <div class="col-lg-4">
+                <div class="info-box">
+                  <!-- Tambahkan class info-box -->
+                  <div class="address">
+                    <i class="bi bi-geo-alt"></i>
+                    <p>Surabaya, ID</p>
+                  </div>
+
+                  <div class="email">
+                    <i class="bi bi-envelope"></i>
+                    <p>aldo_tobing@pm.me</p>
+                  </div>
+
+                  <div class="phone">
+                    <i class="bi bi-phone"></i>
+                    <p>NaN</p>
+                  </div>
                 </div>
-                <div class="email">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email:</h3>
-                  <p>aldo_tobing@pm.me</p>
-                </div>
-                <div class="phone">
-                  <i class="bi bi-phone"></i>
-                  <h3>Call:</h3>
-                  <p>NaN</p>
+              </div>
+
+              <div class="col-lg-8 mt-5 mt-lg-0">
+                <div class="form-box">
+                  <!-- Tambahkan class form-box -->
+                  <form
+                    action="forms/contact.php"
+                    method="post"
+                    role="form"
+                    class="php-email-form"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <input
+                          type="text"
+                          name="name"
+                          class="form-control"
+                          id="name"
+                          placeholder="Your Name"
+                          required
+                        />
+                      </div>
+                      <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input
+                          type="email"
+                          class="form-control"
+                          name="email"
+                          id="email"
+                          placeholder="Your Email"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group mt-3">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="subject"
+                        id="subject"
+                        placeholder="Subject"
+                        required
+                      />
+                    </div>
+                    <div class="form-group mt-3">
+                      <textarea
+                        class="form-control"
+                        name="message"
+                        rows="5"
+                        placeholder="Message"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="my-3">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">
+                        Your message has been sent. Thank you!
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <button type="submit">Send Message</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-            <div class="col-lg-8 mt-5 mt-lg-0">
-              <form
-                action="https://formspree.io/f/your-formspree-endpoint"
-                method="POST"
-                role="form"
-                class="php-email-form"
-              >
-                <div class="row">
-                  <div class="col-md-6 form-group">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      id="name"
-                      placeholder="Your Name"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-6 form-group mt-3 mt-md-0">
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      id="email"
-                      placeholder="Your Email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="form-group mt-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="subject"
-                    id="subject"
-                    placeholder="Subject"
-                    required
-                  />
-                </div>
-                <div class="form-group mt-3">
-                  <textarea
-                    class="form-control"
-                    name="message"
-                    rows="5"
-                    placeholder="Message"
-                    required
-                  ></textarea>
-                </div>
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">
-                    Your message has been sent. Thank you!
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit">Send Message</button>
-                </div>
-              </form>
-            </div>
           </div>
         </div>
-      </section> -->
+      </section>
     </main>
 
     <!-- Footer -->
