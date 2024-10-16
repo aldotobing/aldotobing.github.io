@@ -396,3 +396,51 @@ body.dark-mode .chart-frame h4 {
     width: 100%; /* Lebar penuh pada mobile */
   }
 }
+
+.twitter {
+  display: inline-flex; /* Aligns the icon vertically */
+  align-items: center; /* Centers the icon vertically */
+  justify-content: center; /* Centers the icon horizontally */
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  border-radius: 50%; /* Makes the icon circular */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  color: #1da1f2; /* Twitter's official color */
+  text-decoration: none; /* Removes underline */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  position: relative; /* Position relative for flying effect */
+}
+
+.twitter:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* Change background on hover */
+  transform: translateY(-5px) scale(1.1); /* Fly upwards and scale slightly */
+}
+
+/* Optional: If you want to change the color on hover */
+.twitter:hover i {
+  color: #fff; /* Change icon color on hover */
+}
+
+.linkedin {
+  display: inline-flex; /* Aligns the icon vertically */
+  align-items: center; /* Centers the icon vertically */
+  justify-content: center; /* Centers the icon horizontally */
+  width: 40px; /* Set a fixed width */
+  height: 40px; /* Set a fixed height */
+  border-radius: 50%; /* Makes the icon circular */
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  color: #0077b5; /* LinkedIn's official color */
+  text-decoration: none; /* Removes underline */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+  position: relative; /* Position relative for flying effect */
+}
+
+.linkedin:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* Change background on hover */
+  transform: translateY(-5px) scale(1.1); /* Fly upwards and scale slightly */
+}
+
+/* Optional: If you want to change the color on hover */
+.linkedin:hover i {
+  color: #fff; /* Change icon color on hover */
+}
