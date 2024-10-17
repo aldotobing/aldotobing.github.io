@@ -20,7 +20,7 @@ document
 
     try {
       const response = await fetch(
-        "https://mysidomuncul.sidomuncul.co.id:3030/send-email",
+        "https://mysidomuncul.sidomuncul.co.id/send-email",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
