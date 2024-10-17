@@ -19,7 +19,7 @@ document
     sentMessage.style.display = "none";
 
     try {
-      const response = await fetch("http://16.78.8.108:3030/send-email", {
+      const response = await fetch("https://16.78.8.108:3030/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, subject, message }),
