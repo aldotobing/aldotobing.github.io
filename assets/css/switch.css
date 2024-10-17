@@ -46,7 +46,7 @@ input:checked + .slider .moon-icon {
 /* Styling Switch Global */
 .switch-global {
   position: fixed;
-  top: 15px;
+  top: 17px;
   right: 60px;
   z-index: 9999; /* Supaya di atas elemen lain */
 }
@@ -459,10 +459,10 @@ body.dark-mode .chart-frame h4 {
 
 .logo-grid .logo {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   justify-content: center;
