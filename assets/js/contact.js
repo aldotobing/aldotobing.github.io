@@ -19,11 +19,14 @@ document
     sentMessage.style.display = "none";
 
     try {
-      const response = await fetch("http://localhost:3030/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message }),
-      });
+      const response = await fetch(
+        "https://mysidomuncul.sidomuncul.co.id:3030/send-email",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, subject, message }),
+        }
+      );
 
       const result = await response.json();
 
