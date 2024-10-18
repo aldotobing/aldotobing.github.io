@@ -163,7 +163,7 @@ function convertMarkdownToHtml(text) {
 
   // Convert newlines to <br> tags (but not inside code blocks)
   text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
-  text = text.replace(/\n/g, "<br>"); // Mengganti newline dengan <br>
+  text = text.replace(/<br>/g, "\n");
 
   return text;
 }
