@@ -1059,7 +1059,7 @@ body.dark-mode .frame-contact {
 }
 
 /* Info Box (Location, Email, Phone) */
-.info-box {
+/* .info-box {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1067,29 +1067,29 @@ body.dark-mode .frame-contact {
   padding: 24px;
   margin-bottom: 24px;
   transition: all var(--transition-speed) ease;
-}
+} */
 
 body.dark-mode .info-box {
   background-color: rgba(44, 44, 46, 0.8);
   color: var(--text-dark);
 }
 
-.info-box i {
+/* .info-box i {
   font-size: 28px;
   color: var(--primary-color);
   margin-right: 16px;
   transition: color var(--transition-speed) ease;
-}
+} */
 
 /* Form Styling */
-.form-box {
+/* .form-box {
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: var(--border-radius);
   padding: 24px;
   transition: all var(--transition-speed) ease;
-}
+} */
 
 body.dark-mode .form-box {
   background-color: rgba(44, 44, 46, 0.8);
@@ -1189,12 +1189,12 @@ body.dark-mode .loading {
   animation: fadeIn 0.5s forwards;
 }
 
-.contact {
+/* .contact {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   body:not(.light-mode) {

@@ -1,0 +1,106 @@
+:root {
+  --text-color: #45505b;
+  --highlight-color: #0563bb;
+  --background-hover: rgba(5, 99, 187, 0.1);
+  --envelope-color: #0563bb;
+}
+
+body.dark-mode {
+  --text-color: #ffffff;
+  --envelope-color: #4ca1ff;
+}
+
+.email-container {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.email-container:hover {
+  background-color: var(--background-hover);
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.email i {
+  font-size: 24px;
+  color: var(--highlight-color);
+  transition: all 0.3s ease;
+}
+
+.email p {
+  margin: 0;
+}
+
+.email a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.email-container:hover .email i {
+  transform: translateX(-3px) rotate(-10deg);
+}
+
+.email-container:hover .email a {
+  color: var(--highlight-color);
+}
+
+.email-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.email-container:hover .email-text {
+  animation: pulseText 1s ease infinite;
+}
+
+@keyframes pulseText {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.email-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 100%;
+  background-color: var(--background-hover);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  z-index: -1;
+  border-radius: 8px;
+}
+
+.email-container:hover::before {
+  width: 100%;
+}
+
+.email-container:hover .email i {
+  animation: sendEmail 1s ease infinite;
+}
+
+@keyframes sendEmail {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+  50% {
+    transform: translateX(5px) rotate(15deg);
+  }
+}

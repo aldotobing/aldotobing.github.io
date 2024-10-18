@@ -79,6 +79,7 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/switch.css" rel="stylesheet" />
+    <link href="assets/css/animation.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -252,7 +253,8 @@
                     <ul>
                       <li>
                         <i class="bi bi-chevron-right"></i>
-                        <strong>Email:</strong> <span>aldo_tobing@pm.me</span>
+                        <strong>Email:</strong>
+                        <a href="mailto:aldo_tobing@pm.me">aldo_tobing@pm.me</a>
                       </li>
                       <li>
                         <i class="bi bi-chevron-right"></i>
@@ -449,14 +451,25 @@
                     <p>Surabaya, ID</p>
                   </div>
 
-                  <div class="email">
-                    <i class="bi bi-envelope"></i>
-                    <p>aldo_tobing@pm.me</p>
+                  <div class="email-container">
+                    <div class="email">
+                      <i class="bi bi-envelope"></i>
+                      <div class="email-text">
+                        <p>
+                          <a href="mailto:aldo_tobing@pm.me"
+                            >aldo_tobing@pm.me</a
+                          >
+                        </p>
+                      </div>
+                    </div>
+                    <div class="email-animation"></div>
                   </div>
 
                   <div class="phone">
                     <i class="bi bi-phone"></i>
-                    <p>NaN</p>
+                    <p>
+                      <a href="tel:+6281234567890">NN</a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -523,7 +536,7 @@
                     </div>
                     <div class="text-center">
                       <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                        <i class="fas fa-paper-plane"></i> Send
                       </button>
                     </div>
                   </form>

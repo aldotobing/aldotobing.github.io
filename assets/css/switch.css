@@ -301,6 +301,39 @@ body.dark-mode .chart-frame h4 {
   padding: 20px; /* Padding dalam info box */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow untuk info box */
   height: 100%; /* Set height info box agar sesuai */
+  gap: 20px;
+}
+
+.info-box div {
+  display: flex;
+  flex-direction: column; /* Agar ikon di atas dan teks di bawah */
+  align-items: center; /* Posisikan konten di tengah */
+  text-align: center; /* Biar teks juga rata tengah */
+  gap: 0.1px;
+}
+
+.info-box i {
+  font-size: 2rem; /* Ukuran ikon */
+  color: #555; /* Warna ikon */
+}
+
+.info-box p {
+  margin: 0; /* Hilangkan margin default */
+  font-size: 1rem; /* Ukuran teks */
+}
+
+.info-box .phone p {
+  margin-left: 0.5px; /* Geser teks sedikit ke kiri */
+  text-align: left; /* Biar teks lebih ke kiri */
+}
+
+.info-box a {
+  text-decoration: none; /* Hilangkan garis bawah link */
+  color: inherit; /* Ikuti warna teks default */
+}
+
+.info-box a:hover {
+  text-decoration: underline; /* Beri efek underline saat hover */
 }
 
 /* Form Box */
