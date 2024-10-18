@@ -80,6 +80,7 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/switch.css" rel="stylesheet" />
     <link href="assets/css/animation.css" rel="stylesheet" />
+    <link href="assets/css/chat.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -608,8 +609,34 @@
     <script src="assets/js/autoswitch.js"></script>
     <script src="assets/js/logo.js"></script>
     <script src="assets/js/contact.js"></script>
+    <script src="assets/js/chat.js"></script>
     <!-- <script src="assets/js/send-button.js"></script> -->
 
     <!-- Switch Dark Mode (Global) -->
+
+    <div id="chat-widget" class="chat-widget">
+      <button id="chat-toggle" class="chat-toggle" aria-label="Toggle chat">
+        <i class="fas fa-comments"></i>
+      </button>
+      <div id="chat-container" class="chat-container">
+        <div class="chat-header">
+          <h3>Chat with us</h3>
+          <button id="chat-close" class="chat-close" aria-label="Close chat">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="user-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-message" aria-label="Send message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

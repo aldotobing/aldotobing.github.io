@@ -19,14 +19,11 @@ document
     sentMessage.style.display = "none";
 
     try {
-      const response = await fetch(
-        "https://mysidomuncul.sidomuncul.co.id/send-email",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, subject, message }),
-        }
-      );
+      const response = await fetch("https://mailer.aldo-tobing.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, subject, message }),
+      });
 
       // Mengurai respons JSON dari server
       const result = await response.json();
