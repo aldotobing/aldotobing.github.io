@@ -30,6 +30,7 @@ document
 
       // Mengurai respons JSON dari server
       const result = await response.json();
+      console.log(result);
 
       if (response.ok) {
         // Tampilkan pesan sukses
