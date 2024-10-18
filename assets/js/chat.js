@@ -17,8 +17,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 500);
   });
 
+  chatToggle.addEventListener("click", () => {
+    chatContainer.style.display = "flex"; // Tampilkan chat container
+    chatToggle.style.display = "none"; // Sembunyikan toggle
+  });
+
+  // Tutup chat container jika klik di luar
+  document.addEventListener("click", (event) => {
+    // Cek apakah klik terjadi di luar chat container dan toggle
+    if (
+      !chatContainer.contains(event.target) &&
+      !chatToggle.contains(event.target)
+    ) {
+      chatContainer.style.display = "none"; // Sembunyikan chat container
+      chatToggle.style.display = "flex"; // Tampilkan kembali toggle
+    }
+  });
+
   chatClose.addEventListener("click", () => {
-    chatContainer.classList.remove("active");
+    chatContainer.style.display = "none";
+    chatToggle.style.display = "flex";
   });
 
   async function sendChatMessage() {
@@ -57,11 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const data = await response.json();
+
         console.log("Response data:", data); // Debugging
 
         // Extract joke response from backend
-        const prompt = data[1]?.response?.response || "No joke found!";
-        typeWriterEffect(prompt); // Call typing effect
+        const result = data[1]?.response?.response || "No joke found!";
+
+        typeWriterEffect(convertMarkdownToHtml(result)); // Call typing effect
+        console.log("Hasil :", result);
       } catch (error) {
         console.error("Error:", error);
         addMessage(
@@ -111,3 +132,48 @@ document.addEventListener("DOMContentLoaded", function () {
     type(); // Start typing effect
   }
 });
+
+function convertMarkdownToHtml(text) {
+  // Convert code blocks (surrounded by ```)
+  text = text.replace(
+    /```(\w+)?\n([\s\S]*?)```/g,
+    function (match, language, code) {
+      return `<pre><code class="language-${language || ""}">${escapeHtml(
+        code.trim()
+      )}</code></pre>`;
+    }
+  );
+
+  // Convert inline code (surrounded by `)
+  text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+  // Convert bold text (surrounded by **)
+  text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+  // Convert italic text (surrounded by single *)
+  text = text.replace(/\*([^\*]+)\*/g, "<em>$1</em>");
+
+  // Convert bullet points
+  text = text.replace(/^- (.+)$/gm, "<li>$1</li>");
+  text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>");
+
+  // Convert numbered lists
+  text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
+  text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ol>$&</ol>");
+
+  // Convert newlines to <br> tags (but not inside code blocks)
+  text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
+  text = text.replace(/\n/g, "<br>"); // Mengganti newline dengan <br>
+
+  return text;
+}
+
+// Helper function to escape HTML special characters
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
