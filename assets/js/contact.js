@@ -30,14 +30,13 @@ document
 
       // Mengurai respons JSON dari server
       const result = await response.json();
-      console.log(result);
 
       if (response.ok) {
         // Tampilkan pesan sukses
         loadingMessage.style.display = "none";
         sentMessage.style.display = "block";
-        // Anda bisa menggunakan result jika perlu
-        console.log(result);
+        // Anda bisa menggunakan result jika perlu, tetapi tidak perlu console.log
+        // console.log(result); // Hapus atau komentari baris ini
       } else {
         // Jika ada pesan kesalahan, lemparkan error
         throw new Error(result.message || "Failed to send message");
