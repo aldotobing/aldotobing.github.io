@@ -46,8 +46,8 @@
   position: absolute;
   bottom: 80px;
   right: 0;
-  width: 300px;
-  height: 400px;
+  width: 350px; /* Increased width for elegance */
+  height: 450px; /* Adjust height as needed */
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -82,6 +82,22 @@
   flex-grow: 1;
   overflow-y: auto;
   padding: 10px;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Firefox */
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid transparent;
 }
 
 .chat-input {
@@ -142,4 +158,99 @@
 .chat-container.active {
   display: flex;
   animation: fadeIn 0.3s ease-out;
+}
+
+#send-message {
+  width: 50px;
+  height: 50px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.3s;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan awal */
+}
+
+#send-message:hover {
+  background-color: #45a049;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid white;
+  transform: rotate(45deg);
+}
+
+/* Efek saat tombol dipencet */
+#send-message:active {
+  transform: translateY(2px); /* Tombol terlihat tenggelam */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Bayangan lebih pendek */
+}
+
+/* Styling utama untuk dark mode */
+body.dark-mode .chat-container {
+  background-color: #1e1e1e; /* Background gelap */
+  color: white; /* Warna teks putih */
+}
+
+body.dark-mode .chat-header {
+  background-color: #333; /* Warna header lebih netral */
+}
+
+body.dark-mode .chat-close,
+body.dark-mode .chat-toggle i,
+body.dark-mode .chat-header h3 i {
+  color: #ddd;
+}
+
+body.dark-mode .chat-messages {
+  background-color: #2a2a2a;
+  color: #f5f5f5; /* Teks pesan */
+}
+
+body.dark-mode .chat-input input {
+  background-color: #3a3a3a;
+  color: white;
+  border: 1px solid #555;
+}
+
+body.dark-mode .chat-input input::placeholder {
+  color: #aaa;
+}
+
+body.dark-mode .chat-input button {
+  background-color: #4caf50;
+}
+
+body.dark-mode .user-message {
+  background-color: #4b4b4b;
+}
+
+body.dark-mode .bot-message {
+  background-color: #3e3e3e;
+}
+
+.chat-input button {
+  background-color: #007bff;
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}
+
+/* Efek animasi */
+.chat-container.active {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Input Fokus */
+.chat-input input:focus {
+  outline: 2px solid #007bff;
 }

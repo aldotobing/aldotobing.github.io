@@ -97,13 +97,15 @@ document.addEventListener("DOMContentLoaded", function () {
     messageElement.classList.add("message", "bot-message");
     chatMessages.appendChild(messageElement);
     let index = 0;
+
     function type() {
       if (index < text.length) {
         messageElement.textContent += text.charAt(index);
         index++;
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
         setTimeout(type, 50); // Typing speed, can be adjusted
       } else {
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Final scroll to bottom
       }
     }
     type(); // Start typing effect
