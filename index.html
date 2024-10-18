@@ -535,9 +535,14 @@
                       </div>
                     </div>
                     <div class="text-center">
-                      <button type="submit">
-                        <i class="fas fa-paper-plane"></i> Send Message
+                      <button type="submit" id="sendButton">
+                        <i class="fas fa-paper-plane"></i> Send
                       </button>
+                      <!-- Opsional: Tampilkan status pengiriman -->
+                      <div
+                        id="sendingStatus"
+                        style="display: none; margin-top: 10px"
+                      ></div>
                     </div>
                   </form>
                 </div>
@@ -603,6 +608,7 @@
     <script src="assets/js/autoswitch.js"></script>
     <script src="assets/js/logo.js"></script>
     <script src="assets/js/contact.js"></script>
+    <!-- <script src="assets/js/send-button.js"></script> -->
 
     <!-- Switch Dark Mode (Global) -->
   </body>
