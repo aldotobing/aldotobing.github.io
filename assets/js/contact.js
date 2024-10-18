@@ -28,26 +28,23 @@ document
         }
       );
 
+      // Mengurai respons JSON dari server
       const result = await response.json();
 
       if (response.ok) {
-        // Mengurai respons JSON dari server
-        const responseData = await response.json();
         // Tampilkan pesan sukses
         loadingMessage.style.display = "none";
         sentMessage.style.display = "block";
-        // Anda bisa menggunakan responseData jika perlu
-        console.log(responseData);
-    } else {
-        try {
-            // Mengurai respons JSON dari server untuk error
-            const result = await response.json();
-            throw new Error(result.message || "Failed to send message");
-        } catch (error) {
-            // Tampilkan pesan error
-            loadingMessage.style.display = "none";
-            errorMessage.textContent = error.message;
-            errorMessage.style.display = "block";
-        }
+        // Anda bisa menggunakan result jika perlu
+        console.log(result);
+      } else {
+        // Jika ada pesan kesalahan, lemparkan error
+        throw new Error(result.message || "Failed to send message");
+      }
+    } catch (error) {
+      // Tampilkan pesan error
+      loadingMessage.style.display = "none";
+      errorMessage.textContent = error.message;
+      errorMessage.style.display = "block";
     }
   });
