@@ -161,9 +161,23 @@ document.addEventListener("DOMContentLoaded", function () {
     text = text.replace(
       /```(\w+)?\n([\s\S]*?)```/g,
       function (match, language, code) {
-        return `<pre><code class="language-${
+        // Hapus whitespace di awal dan akhir, tapi pertahankan indentasi relatif
+        const lines = code.split("\n");
+        const minIndent = lines.reduce((min, line) => {
+          const indent = line.match(/^\s*/)[0].length;
+          return line.trim().length > 0 ? Math.min(min, indent) : min;
+        }, Infinity);
+
+        const formattedCode = lines
+          .map((line) => line.slice(minIndent))
+          .join("\n")
+          .trim()
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+
+        return `<pre class="code-block-wrapper"><code class="code-block language-${
           language || "plaintext"
-        }">${escapeHtml(code.trim())}</code></pre>`;
+        }">${formattedCode}</code></pre>`;
       }
     );
 

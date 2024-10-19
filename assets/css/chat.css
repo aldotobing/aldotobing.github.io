@@ -273,3 +273,79 @@ body.dark-mode #send-message:hover {
   animation: fly-out 0.5s forwards; /* Mainkan animasi */
   pointer-events: none; /* Non-aktifkan interaksi selama animasi */
 }
+
+.code-block-wrapper {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  padding: 1em;
+  margin: 0.5em 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.code-block {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  display: block;
+  color: #333; /* Warna teks default untuk mode terang */
+}
+
+/* Styling untuk highlight.js */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+  .code-block-wrapper {
+    background-color: #2d2d2d;
+  }
+
+  .code-block {
+    color: #e6e6e6; /* Warna teks untuk mode gelap */
+  }
+
+  /* Sesuaikan warna highlight untuk mode gelap */
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in,
+  .hljs-name,
+  .hljs-tag {
+    color: #e78c45;
+  }
+
+  .hljs-string,
+  .hljs-title,
+  .hljs-section,
+  .hljs-attribute,
+  .hljs-literal,
+  .hljs-template-tag,
+  .hljs-template-variable,
+  .hljs-type,
+  .hljs-addition {
+    color: #b9ca4a;
+  }
+
+  .hljs-comment,
+  .hljs-quote,
+  .hljs-deletion,
+  .hljs-meta {
+    color: #7f8c8d;
+  }
+
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-title,
+  .hljs-section,
+  .hljs-doctag,
+  .hljs-type,
+  .hljs-name,
+  .hljs-strong {
+    font-weight: bold;
+  }
+}
