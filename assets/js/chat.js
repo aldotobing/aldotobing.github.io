@@ -149,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         chatMessages.scrollTop = chatMessages.scrollHeight;
         setTimeout(type, 25); // Adjust typing speed here
       } else {
+        applyCodeHighlight(); // Terapkan highlight setelah selesai mengetik
         if (callback) callback(); // Panggil callback setelah selesai
       }
     }
@@ -160,9 +161,9 @@ document.addEventListener("DOMContentLoaded", function () {
     text = text.replace(
       /```(\w+)?\n([\s\S]*?)```/g,
       function (match, language, code) {
-        return `<pre><code class="language-${language || ""}">${escapeHtml(
-          code.trim()
-        )}</code></pre>`;
+        return `<pre><code class="language-${
+          language || "plaintext"
+        }">${escapeHtml(code.trim())}</code></pre>`;
       }
     );
 
@@ -183,9 +184,16 @@ document.addEventListener("DOMContentLoaded", function () {
     text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
     text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ol>$&</ol>");
 
+    // Convert headers
+    text = text.replace(/^# (.*$)/gm, "<h1>$1</h1>");
+    text = text.replace(/^## (.*$)/gm, "<h2>$1</h2>");
+    text = text.replace(/^### (.*$)/gm, "<h3>$1</h3>");
+
+    // Convert links
+    text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2">$1</a>');
+
     // Convert newlines to <br> tags (but not inside code blocks)
     text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
-    text = text.replace(/<br>/g, "\n");
 
     return text;
   }
@@ -197,5 +205,12 @@ document.addEventListener("DOMContentLoaded", function () {
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#039;");
+  }
+
+  // Fungsi untuk menerapkan highlight syntax pada blok kode
+  function applyCodeHighlight() {
+    document.querySelectorAll("pre code").forEach((block) => {
+      hljs.highlightBlock(block);
+    });
   }
 });
