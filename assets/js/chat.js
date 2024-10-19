@@ -79,9 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Response data:", data); // Debugging
 
         // Extract joke response from backend
-        const result = data[1]?.response?.response || "No joke found!";
+        const result = data[1]?.response?.response || "No response found!";
 
-        typeWriterEffect(convertMarkdownToHtml(result)); // Call typing effect
+        const htmlResult = convertMarkdownToHtml(result);
+        typeWriterEffect(htmlResult);
         console.log("Hasil :", result);
       } catch (error) {
         console.error("Error:", error);
@@ -112,68 +113,84 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Typing effect function
-  function typeWriterEffect(text) {
+  function typeWriterEffect(html) {
     const chatMessages = document.getElementById("chat-messages");
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", "bot-message");
     chatMessages.appendChild(messageElement);
-    let index = 0;
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    const nodes = Array.from(tempDiv.childNodes);
+
+    let nodeIndex = 0;
+    let charIndex = 0;
 
     function type() {
-      if (index < text.length) {
-        messageElement.textContent += text.charAt(index);
-        index++;
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
-        setTimeout(type, 50); // Typing speed, can be adjusted
-      } else {
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Final scroll to bottom
+      if (nodeIndex < nodes.length) {
+        const node = nodes[nodeIndex];
+        console.log("Processing node:", node); // Debug log
+        if (node.nodeType === Node.TEXT_NODE) {
+          if (charIndex < node.length) {
+            messageElement.innerHTML += node.textContent[charIndex];
+            charIndex++;
+          } else {
+            nodeIndex++;
+            charIndex = 0;
+          }
+        } else {
+          messageElement.appendChild(node.cloneNode(true));
+          nodeIndex++;
+        }
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        setTimeout(type, 25); // Adjust typing speed here
       }
     }
-    type(); // Start typing effect
+    type();
+  }
+
+  function convertMarkdownToHtml(text) {
+    // Convert code blocks (surrounded by ```)
+    text = text.replace(
+      /```(\w+)?\n([\s\S]*?)```/g,
+      function (match, language, code) {
+        return `<pre><code class="language-${language || ""}">${escapeHtml(
+          code.trim()
+        )}</code></pre>`;
+      }
+    );
+
+    // Convert inline code (surrounded by `)
+    text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+
+    // Convert bold text (surrounded by **)
+    text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
+    // Convert italic text (surrounded by single *)
+    text = text.replace(/\*([^\*]+)\*/g, "<em>$1</em>");
+
+    // Convert bullet points
+    text = text.replace(/^- (.+)$/gm, "<li>$1</li>");
+    text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>");
+
+    // Convert numbered lists
+    text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
+    text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ol>$&</ol>");
+
+    // Convert newlines to <br> tags (but not inside code blocks)
+    text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
+    text = text.replace(/<br>/g, "\n");
+
+    return text;
+  }
+
+  // Helper function to escape HTML special characters
+  function escapeHtml(unsafe) {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
   }
 });
-
-function convertMarkdownToHtml(text) {
-  // Convert code blocks (surrounded by ```)
-  text = text.replace(
-    /```(\w+)?\n([\s\S]*?)```/g,
-    function (match, language, code) {
-      return `<pre><code class="language-${language || ""}">${escapeHtml(
-        code.trim()
-      )}</code></pre>`;
-    }
-  );
-
-  // Convert inline code (surrounded by `)
-  text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
-
-  // Convert bold text (surrounded by **)
-  text = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-
-  // Convert italic text (surrounded by single *)
-  text = text.replace(/\*([^\*]+)\*/g, "<em>$1</em>");
-
-  // Convert bullet points
-  text = text.replace(/^- (.+)$/gm, "<li>$1</li>");
-  text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>");
-
-  // Convert numbered lists
-  text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
-  text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ol>$&</ol>");
-
-  // Convert newlines to <br> tags (but not inside code blocks)
-  text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
-  text = text.replace(/<br>/g, "\n");
-
-  return text;
-}
-
-// Helper function to escape HTML special characters
-function escapeHtml(unsafe) {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
