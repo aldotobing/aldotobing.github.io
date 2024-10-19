@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }),
         });
 
-        console.log("Response status:", response.status); // Debugging
+        // console.log("Response status:", response.status); // Debugging
 
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
@@ -79,11 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
         //console.log("Response data:", data); // Debugging
 
         // Extract joke response from backend
-        const result = data[1]?.response?.response || "No response found!";
+        const result = data?.response || "No response found!";
 
         const htmlResult = convertMarkdownToHtml(result);
         typeWriterEffect(htmlResult);
-        console.log("Hasil :", result);
+        //console.log("Hasil :", result);
       } catch (error) {
         console.error("Error:", error);
         addMessage(
