@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         console.error("Error:", error);
-        this.disabled = false; // Enable button jika ada error
+        this.disabled = false; // Enable button jika ada error33
         this.classList.remove("sending"); // Hapus class sending jika error
         addMessage(
           "Sorry, there was an error processing your request.",
