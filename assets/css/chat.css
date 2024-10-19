@@ -111,6 +111,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 3px;
 }
 
 #send-message:hover {
@@ -119,6 +120,32 @@
 
 #send-message:active {
   transform: scale(0.95);
+}
+
+.sending {
+  position: relative; /* Positioning untuk menempatkan spinner */
+  display: flex; /* Menggunakan flexbox */
+  justify-content: center; /* Center horizontal */
+  align-items: center; /* Center vertical */
+}
+
+.sending i {
+  display: none; /* Sembunyikan ikon asli saat sending */
+}
+
+.sending::after {
+  content: ""; /* Membuat spinner */
+  display: inline-block;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  border-top-color: white; /* Warna spinner */
+  width: 16px; /* Ukuran spinner */
+  height: 16px; /* Ukuran spinner */
+  animation: spin 1s linear infinite; /* Animasi berputar */
+  position: absolute; /* Ganti ke absolute untuk posisi lebih fleksibel */
+  left: 31%; /* Centering */
+  top: 31%; /* Centering */
+  transform: translate(-50%, -50%); /* Untuk menggeser spinner ke tengah */
 }
 
 .message {

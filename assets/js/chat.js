@@ -9,28 +9,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   chatToggle.addEventListener("click", () => {
     chatContainer.classList.toggle("active");
-    // Tambahin efek bubble
     chatToggle.classList.add("bubble");
-    // Hapus class setelah animasi selesai (0.5s)
     setTimeout(() => {
       chatToggle.classList.remove("bubble");
     }, 500);
   });
 
   chatToggle.addEventListener("click", () => {
-    chatContainer.style.display = "flex"; // Tampilkan chat container
-    chatToggle.style.display = "none"; // Sembunyikan toggle
+    chatContainer.style.display = "flex";
+    chatToggle.style.display = "none";
   });
 
-  // Tutup chat container jika klik di luar
   document.addEventListener("click", (event) => {
-    // Cek apakah klik terjadi di luar chat container dan toggle
     if (
       !chatContainer.contains(event.target) &&
       !chatToggle.contains(event.target)
     ) {
-      chatContainer.style.display = "none"; // Sembunyikan chat container
-      chatToggle.style.display = "flex"; // Tampilkan kembali toggle
+      chatContainer.style.display = "none";
+      chatToggle.style.display = "flex";
     }
   });
 
@@ -39,68 +35,78 @@ document.addEventListener("DOMContentLoaded", function () {
     chatToggle.style.display = "flex";
   });
 
-  async function sendChatMessage() {
-    const userInput = document.getElementById("user-input").value.trim();
-    if (userInput) {
-      addMessage(userInput, "user-message");
-      document.getElementById("user-input").value = "";
+  sendMessage.addEventListener("click", function () {
+    // Disable button dan tambahkan class sending
+    this.disabled = true; // Nonaktifkan tombol
+    this.classList.add("sending"); // Tampilkan spinner
 
-      try {
-        const response = await fetch("https://ai.aldo-tobing.workers.dev/", {
-          // Replace with your actual Cloudflare Worker URL
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            messages: [
-              {
-                role: "system",
-                content:
-                  "You are a be a helpful and friendly virtual assistant, \
-                  created by Aldo Tobing. \
-                  You will act like a customer cares level emotions, \
-                  showing empathy, patience, \
-                  and attentiveness while assisting users in a warm and supportive manner.",
-              },
-              { role: "user", content: userInput },
-            ],
-          }),
-        });
+    // Ambil value dari userInput
+    const message = userInput.value;
 
-        // console.log("Response status:", response.status); // Debugging
-
-        if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        //console.log("Response data:", data); // Debugging
-
-        // Extract joke response from backend
-        const result = data?.response || "No response found!";
-
-        const htmlResult = convertMarkdownToHtml(result);
-        typeWriterEffect(htmlResult);
-        //console.log("Hasil :", result);
-      } catch (error) {
+    // Simulasi pengiriman pesan (ganti dengan fungsi chat asli)
+    sendChatMessage(message)
+      .then(() => {
+        // Reset input dan enable button setelah chat terkirim
+        userInput.value = ""; // Kosongkan input
+        this.disabled = false; // Enable button
+        this.classList.remove("sending"); // Hapus class sending
+      })
+      .catch((error) => {
         console.error("Error:", error);
+        this.disabled = false; // Enable button jika ada error
+        this.classList.remove("sending"); // Hapus class sending jika error
         addMessage(
           "Sorry, there was an error processing your request.",
           "bot-message"
         );
+      });
+  });
+
+  async function sendChatMessage(userInput) {
+    const userId = localStorage.getItem("user_id") || generateUniqueId();
+
+    addMessage(userInput, "user-message");
+
+    try {
+      const response = await fetch("https://ai.aldo-tobing.workers.dev/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userId,
+          messages: [{ role: "user", content: userInput }],
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status}`);
       }
+
+      const data = await response.json();
+      const result = data?.content || "No response found!";
+
+      const htmlResult = convertMarkdownToHtml(result);
+      typeWriterEffect(htmlResult);
+    } catch (error) {
+      console.error("Error:", error);
+      addMessage(
+        "Sorry, there was an error processing your request.",
+        "bot-message"
+      );
     }
   }
 
-  document
-    .getElementById("send-message")
-    .addEventListener("click", sendChatMessage);
+  function generateUniqueId() {
+    const id = `user-${Math.random().toString(36).substring(2, 15)}`;
+    localStorage.setItem("user_id", id);
+    return id;
+  }
+
   document.getElementById("user-input").addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      sendChatMessage();
+      sendMessage.click(); // Memanggil event click pada button
     }
   });
 
@@ -112,8 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
-  // Typing effect function
-  function typeWriterEffect(html) {
+  function typeWriterEffect(html, callback) {
     const chatMessages = document.getElementById("chat-messages");
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", "bot-message");
@@ -129,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function type() {
       if (nodeIndex < nodes.length) {
         const node = nodes[nodeIndex];
-        //console.log("Processing node:", node); // Debug log
         if (node.nodeType === Node.TEXT_NODE) {
           if (charIndex < node.length) {
             messageElement.innerHTML += node.textContent[charIndex];
@@ -144,6 +148,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         chatMessages.scrollTop = chatMessages.scrollHeight;
         setTimeout(type, 25); // Adjust typing speed here
+      } else {
+        if (callback) callback(); // Panggil callback setelah selesai
       }
     }
     type();
@@ -184,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return text;
   }
 
-  // Helper function to escape HTML special characters
   function escapeHtml(unsafe) {
     return unsafe
       .replace(/&/g, "&amp;")
