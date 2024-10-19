@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const data = await response.json();
 
-        console.log("Response data:", data); // Debugging
+        //console.log("Response data:", data); // Debugging
 
         // Extract joke response from backend
         const result = data[1]?.response?.response || "No response found!";
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function addMessage(text, className) {
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", className);
-    messageElement.textContent = text;
+    messageElement.innerHTML = text;
     chatMessages.appendChild(messageElement);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function type() {
       if (nodeIndex < nodes.length) {
         const node = nodes[nodeIndex];
-        console.log("Processing node:", node); // Debug log
+        //console.log("Processing node:", node); // Debug log
         if (node.nodeType === Node.TEXT_NODE) {
           if (charIndex < node.length) {
             messageElement.innerHTML += node.textContent[charIndex];
