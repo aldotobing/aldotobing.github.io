@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const sendMessage = document.getElementById("send-message");
   const chatMessages = document.getElementById("chat-messages");
 
+  sendMessage.disabled = true;
+
   chatToggle.addEventListener("click", () => {
     chatContainer.classList.toggle("active");
     chatToggle.classList.add("bubble");
@@ -35,26 +37,45 @@ document.addEventListener("DOMContentLoaded", function () {
     chatToggle.style.display = "flex";
   });
 
+  // Tambahkan event listener untuk memantau perubahan nilai input
+  userInput.addEventListener("input", function () {
+    if (this.value.trim() !== "") {
+      // Enable tombol send jika input tidak kosong
+      sendMessage.disabled = false;
+    } else {
+      // Disable tombol send jika input kosong
+      sendMessage.disabled = true;
+    }
+  });
+
   sendMessage.addEventListener("click", function () {
-    // Disable button dan tambahkan class sending
-    this.disabled = true; // Nonaktifkan tombol
-    this.classList.add("sending"); // Tampilkan spinner
+    // Disable tombol dan tambahkan spinner/loading
+    this.disabled = true;
+    this.classList.add("sending");
 
-    // Ambil value dari userInput
-    const message = userInput.value;
+    const message = userInput.value.trim();
+    userInput.value = ""; // Reset input biar kosong
 
-    // Simulasi pengiriman pesan (ganti dengan fungsi chat asli)
     sendChatMessage(message)
       .then(() => {
-        // Reset input dan enable button setelah chat terkirim
-        userInput.value = ""; // Kosongkan input
-        this.disabled = false; // Enable button
-        this.classList.remove("sending"); // Hapus class sending
+        // Pastikan class 'sending' ada sebelum di-remove
+        if (this.classList.contains("sending")) {
+          this.classList.remove("sending");
+        }
+
+        // Kembali cek kalau input kosong, disable lagi tombolnya
+        if (userInput.value.trim() === "") {
+          sendMessage.disabled = true;
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
-        this.disabled = false; // Enable button jika ada error33
-        this.classList.remove("sending"); // Hapus class sending jika error
+        // Handle error dan aktifkan tombol kembali
+        if (this.classList.contains("sending")) {
+          //this.classList.remove("sending");
+        }
+        this.disabled = false;
+
         addMessage(
           "Sorry, there was an error processing your request.",
           "bot-message"
@@ -87,7 +108,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const result = data?.content || "No response found!";
 
       const htmlResult = convertMarkdownToHtml(result);
-      typeWriterEffect(htmlResult);
+      await typeWriterEffect(htmlResult, () => {
+        console.log("Done");
+      });
     } catch (error) {
       console.error("Error:", error);
       addMessage(
@@ -142,18 +165,38 @@ document.addEventListener("DOMContentLoaded", function () {
             nodeIndex++;
             charIndex = 0;
           }
+        } else if (node.nodeName === "PRE" && node.querySelector("code")) {
+          const codeBlock = node.cloneNode(true);
+          messageElement.appendChild(codeBlock);
+          nodeIndex++;
+          setTimeout(() => {
+            hljs.highlightElement(codeBlock.querySelector("code"));
+          }, 0);
         } else {
           messageElement.appendChild(node.cloneNode(true));
           nodeIndex++;
         }
         chatMessages.scrollTop = chatMessages.scrollHeight;
-        setTimeout(type, 25); // Adjust typing speed here
+        setTimeout(type, 25); // Speed typing
       } else {
-        applyCodeHighlight(); // Terapkan highlight setelah selesai mengetik
-        if (callback) callback(); // Panggil callback setelah selesai
+        if (callback) callback();
       }
     }
+
     type();
+
+    return new Promise((resolve) => {
+      const originalCallback = callback;
+      callback = () => {
+        if (originalCallback) originalCallback();
+        resolve();
+
+        // Cek kembali input kosong atau tidak
+        if (userInput.value.trim() === "") {
+          sendMessage.disabled = true;
+        }
+      };
+    });
   }
 
   function convertMarkdownToHtml(text) {

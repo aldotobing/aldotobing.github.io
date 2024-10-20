@@ -72,6 +72,26 @@ body {
   margin: 0;
 }
 
+/* Dark Mode Styling untuk Ability Card */
+.dark-mode .ability-card {
+  background-color: #212121; /* Background jadi gelap */
+  color: #e0e0e0; /* Warna teks jadi abu terang */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow lebih soft */
+}
+
+.dark-mode .ability-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Hover shadow lebih bold */
+}
+
+.dark-mode .ability-card i {
+  color: #4fc3f7; /* Icon lebih cerah */
+}
+
+.dark-mode .ability-card p {
+  color: #bdbdbd; /* Warna teks jadi abu-abu muda */
+}
+
 /* Closing Text */
 .closing-text {
   font-size: 18px;
@@ -264,6 +284,23 @@ h6 {
     margin-left: 100px;
   }
 }
+
+/* Styling untuk Dark Mode */
+.dark-mode #header {
+  background: rgba(18, 18, 18, 0.8); /* Hitam transparan */
+  color: #ddd; /* Teks lebih terang */
+  border-right: 1px solid rgba(255, 255, 255, 0.2); /* Batas putih semi-transparan */
+}
+
+/* Warna link di dalam navbar saat dark mode */
+.dark-mode #navbar .nav-link {
+  color: #aaa;
+}
+
+.dark-mode #navbar .nav-link.active {
+  color: #fff; /* Link aktif jadi lebih jelas */
+}
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -417,20 +454,29 @@ h6 {
   color: #0563bb;
   letter-spacing: 1px;
 }
+
 #hero .social-links {
-  margin-top: 30px;
+  margin-top: 20px;
+  gap: 20px; /* Ini nggak akan berfungsi di inline-block, kita hapus */
 }
+
 #hero .social-links a {
   font-size: 24px;
   display: inline-block;
   color: #45505b;
-  line-height: 1;
-  margin-right: 20px;
+  line-height: 1.7;
   transition: 0.3s;
+  margin-right: 20px; /* Jarak antar item */
 }
+
+#hero .social-links a:last-child {
+  margin-right: 0; /* Menghapus margin di item terakhir */
+}
+
 #hero .social-links a:hover {
   color: #0563bb;
 }
+
 @media (max-width: 992px) {
   #hero {
     text-align: center;
@@ -444,6 +490,37 @@ h6 {
     font-size: 20px;
     line-height: 24px;
   }
+}
+
+/* Hero Section di Dark Mode */
+.dark-mode #hero {
+  background: url("../img/profile-img.jpg") top right no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.dark-mode #hero:before {
+  background: rgba(0, 0, 0, 0.6); /* Overlay hitam semi-transparan */
+}
+
+.dark-mode #hero h1 {
+  color: #fff; /* Warna teks putih */
+}
+
+.dark-mode #hero p {
+  color: #ddd; /* Warna teks jadi lebih terang */
+}
+
+.dark-mode #hero p span {
+  color: #4b94ff; /* Biru lebih cerah */
+}
+
+.dark-mode #hero .social-links a {
+  color: #aaa; /* Warna icon jadi lebih terang */
+}
+
+.dark-mode #hero .social-links a:hover {
+  color: #4b94ff; /* Hover biru lebih cerah */
 }
 
 /*--------------------------------------------------------------

@@ -1,6 +1,6 @@
 /* Dark mode styles */
 body.dark-mode .abilities-grid {
-  background-color: rgba(255, 255, 255, 0.1); /* Background redup */
+  background-color: rgba(18, 18, 18, 0.1); /* Background redup */
   color: #f0f0f0; /* Warna teks lebih cerah */
 }
 
@@ -184,12 +184,12 @@ body.dark-mode {
   font-weight: bold;
 }
 
-#footer .social-links a {
+/* #footer .social-links a {
   color: #333;
   margin: 0 10px;
   font-size: 24px;
   transition: color 0.4s;
-}
+} */
 
 #footer .copyright {
   margin-top: 10px;
@@ -200,14 +200,6 @@ body.dark-mode {
 body.dark-mode #footer {
   background-color: #121212;
   color: #f1f1f1;
-}
-
-body.dark-mode #footer .social-links a {
-  color: #4caf50;
-}
-
-body.dark-mode #footer .social-links a:hover {
-  color: #8bc34a;
 }
 
 /* WakaTime Chart */

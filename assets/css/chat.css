@@ -122,6 +122,22 @@
   transform: scale(0.95);
 }
 
+#send-message:disabled {
+  /* Warna abu-abu (dim) ketika disabled */
+  background-color: #ccc; /* Warna abu-abu (dim) untuk tombol send saat disabled */
+  color: #666; /* Warna teks abu-abu tua */
+  cursor: not-allowed; /* Ganti kursor menjadi 'not-allowed' */
+  box-shadow: none; /* Hilangkan efek bayangan */
+  transition: none; /* Hilangkan transisi warna pada hover */
+}
+
+#send-message:disabled:hover {
+  /* Sama seperti kondisi disabled, tanpa perubahan warna atau efek, menunjukkan tombol send tidak bisa diklik (not-allowed) */
+  background-color: #ccc; /* Warna abu-abu (dim) pada tombol send saat disabled */
+  color: #666; /* Warna teks abu-abu tua */
+  cursor: not-allowed; /* Ganti kursor menjadi 'not-allowed' */
+}
+
 .sending {
   position: relative; /* Positioning untuk menempatkan spinner */
   display: flex; /* Menggunakan flexbox */
@@ -290,7 +306,6 @@ body.dark-mode #send-message:hover {
   font-size: 0.9em;
   line-height: 1.4;
   display: block;
-  color: #333; /* Warna teks default untuk mode terang */
 }
 
 /* Styling untuk highlight.js */
@@ -306,7 +321,7 @@ body.dark-mode #send-message:hover {
   }
 
   .code-block {
-    color: #e6e6e6; /* Warna teks untuk mode gelap */
+    color: #e6e6e6;
   }
 
   /* Sesuaikan warna highlight untuk mode gelap */
@@ -348,4 +363,13 @@ body.dark-mode #send-message:hover {
   .hljs-strong {
     font-weight: bold;
   }
+}
+
+.typewriter-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.typewriter-item {
+  margin-bottom: 5px;
 }
