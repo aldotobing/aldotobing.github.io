@@ -1,7 +1,7 @@
 /* Animasi glowing */
 @keyframes chip-glow {
   0% {
-    color: #32a852; /* Hijau lembut */
+    color: #3880c3; /* Hijau lembut */
     text-shadow: 0 0 5px #32a852;
   }
   50% {
@@ -9,7 +9,7 @@
     text-shadow: 0 0 15px #66bb6a, 0 0 20px #4caf50;
   }
   100% {
-    color: #32a852;
+    color: #d3b81e;
     text-shadow: 0 0 5px #32a852;
   }
 }
@@ -44,8 +44,9 @@
 /* Styling dan animasi untuk teks */
 .text-label {
   position: relative;
-  top: -4px; /* Naik sedikit */
-  font-family: "Poppins", sans-serif;
+  top: -3.2px; /* Naik sedikit */
+  font-family: inherit;
+  font-size: 20px;
   letter-spacing: 0.5px;
   font-weight: 600;
   color: inherit;
