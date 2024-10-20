@@ -37,7 +37,7 @@
 /* Styling untuk ikon */
 #loading-icon {
   animation: chip-glow 5s infinite alternate; /* Durasi lebih lambat */
-  font-size: 22px;
+  font-size: 21px;
   transition: color 0.9s ease-in-out;
 }
 
