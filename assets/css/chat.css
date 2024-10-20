@@ -44,7 +44,7 @@
 /* Styling dan animasi untuk teks */
 .text-label {
   position: relative;
-  top: -3px; /* Naik sedikit */
+  top: 1px; /* Naik sedikit */
   font-family: inherit;
   font-size: 20px;
   letter-spacing: 0.5px;
