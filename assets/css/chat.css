@@ -1,24 +1,57 @@
 /* Animasi glowing */
+/* Animasi glowing untuk ikon */
+/* Animasi glowing untuk ikon */
 @keyframes chip-glow {
   0% {
     color: #32a852; /* Hijau lembut */
     text-shadow: 0 0 5px #32a852;
   }
   50% {
-    color: #66bb6a; /* Hijau lebih cerah */
+    color: #66bb6a;
     text-shadow: 0 0 15px #66bb6a, 0 0 20px #4caf50;
   }
   100% {
-    color: #32a852; /* Kembali ke hijau lembut */
+    color: #32a852;
     text-shadow: 0 0 5px #32a852;
   }
 }
 
-/* Memberikan efek microchip hidup */
+/* Animasi setrum untuk teks */
+@keyframes text-shock {
+  0%,
+  100% {
+    transform: translateX(0);
+    color: inherit;
+    text-shadow: none;
+  }
+  20% {
+    transform: translateX(2px);
+    color: #4caf50;
+    text-shadow: 0 0 10px #4caf50;
+  }
+  40% {
+    transform: translateX(-2px);
+    color: #66bb6a;
+    text-shadow: 0 0 15px #66bb6a;
+  }
+}
+
+/* Styling untuk ikon */
 #loading-icon {
   animation: chip-glow 2s infinite alternate;
-  font-size: 24px; /* Sesuaikan ukuran ikon */
+  font-size: 24px;
   transition: color 0.3s ease-in-out;
+}
+
+/* Styling dan animasi untuk teks */
+.text-label {
+  position: relative;
+  top: -2px; /* Sedikit ke atas */
+  font-family: "Poppins", sans-serif; /* Font smooth */
+  font-weight: 300; /* Font lebih ringan */
+  color: inherit;
+  letter-spacing: 0.5px; /* Sedikit spasi antar huruf */
+  animation: text-shock 2s infinite alternate;
 }
 
 /* Base styles */
