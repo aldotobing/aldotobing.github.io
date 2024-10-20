@@ -15,7 +15,7 @@
 }
 
 /* Animasi setrum untuk teks */
-@keyframes text-shock {
+/* @keyframes text-shock {
   0%,
   100% {
     transform: translateX(0);
@@ -32,7 +32,7 @@
     color: #66bb6a;
     text-shadow: 0 0 15px #66bb6a;
   }
-}
+} */
 
 /* Styling untuk ikon */
 #loading-icon {
@@ -45,7 +45,7 @@
 .text-label {
   position: relative;
   top: -4px; /* Naik sedikit */
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
   letter-spacing: 0.5px;
   font-weight: 600;
   color: inherit;
