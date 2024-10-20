@@ -37,14 +37,14 @@
 /* Styling untuk ikon */
 #loading-icon {
   animation: chip-glow 5s infinite alternate; /* Durasi lebih lambat */
-  font-size: 28px;
+  font-size: 22px;
   transition: color 0.9s ease-in-out;
 }
 
 /* Styling dan animasi untuk teks */
 .text-label {
   position: relative;
-  top: -3.2px; /* Naik sedikit */
+  top: -2.2px; /* Naik sedikit */
   font-family: inherit;
   font-size: 20px;
   letter-spacing: 0.5px;
