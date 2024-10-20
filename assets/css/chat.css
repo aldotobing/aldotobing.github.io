@@ -1,6 +1,4 @@
 /* Animasi glowing */
-/* Animasi glowing untuk ikon */
-/* Animasi glowing untuk ikon */
 @keyframes chip-glow {
   0% {
     color: #32a852; /* Hijau lembut */
@@ -38,19 +36,19 @@
 
 /* Styling untuk ikon */
 #loading-icon {
-  animation: chip-glow 2s infinite alternate;
-  font-size: 24px;
-  transition: color 0.3s ease-in-out;
+  animation: chip-glow 5s infinite alternate; /* Durasi lebih lambat */
+  font-size: 28px;
+  transition: color 0.9s ease-in-out;
 }
 
 /* Styling dan animasi untuk teks */
 .text-label {
   position: relative;
-  top: -2px; /* Sedikit ke atas */
-  font-family: "Poppins", sans-serif; /* Font smooth */
-  font-weight: 300; /* Font lebih ringan */
+  top: -4px; /* Naik sedikit */
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.5px;
+  font-weight: 600;
   color: inherit;
-  letter-spacing: 0.5px; /* Sedikit spasi antar huruf */
   animation: text-shock 2s infinite alternate;
 }
 
