@@ -6,6 +6,30 @@
 */
 
 /* Typography & Global Settings */
+.icon-smooth {
+  font-style: normal; /* Pastikan ikon tidak italic */
+  font-size: 24px; /* Ukuran ikon */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition untuk perubahan warna dan transformasi */
+  margin-top: 8px; /* Posisi sedikit ke bawah */
+  animation: thinking 2s infinite; /* Panggil animasi thinking */
+  display: inline-block; /* Memastikan elemen inline-block untuk animasi transform */
+}
+
+/* Warna untuk mode terang */
+.icon-smooth {
+  color: #282c34; /* Warna ikon untuk mode terang */
+}
+
+/* Warna untuk mode gelap */
+body.dark-mode .icon-smooth {
+  color: #ffffff; /* Warna ikon untuk mode gelap */
+}
+
+/* Efek hover */
+.icon-smooth:hover {
+  color: #3498db; /* Ganti warna saat hover untuk efek interaktif */
+  transform: scale(1.1); /* Tambahkan efek zoom saat hover */
+}
 
 body {
   font-family: "Poppins", sans-serif;

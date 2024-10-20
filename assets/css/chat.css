@@ -5,15 +5,16 @@
   transition: all 0.3s ease;
   right: 20px; /* Position from the left side */
 }
+
 .chat-toggle {
-  width: 50px; /* Ukuran lebar tombol lebih kecil */
-  height: 50px; /* Ukuran tinggi tombol lebih kecil */
+  width: 50px; /* Ukuran lebar tombol */
+  height: 50px; /* Ukuran tinggi tombol */
   border-radius: 50%; /* Bulatkan tombol */
   background-color: #007bff; /* Warna latar belakang */
   color: white; /* Warna teks */
   border: none; /* Tidak ada border */
   cursor: pointer; /* Kursor tangan saat hover */
-  font-size: 20px; /* Ukuran font lebih kecil */
+  font-size: 20px; /* Ukuran font */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
   transition: all 0.3s ease; /* Transisi halus */
   display: flex; /* Flexbox untuk penempatan isi */
@@ -24,9 +25,32 @@
   right: 20px; /* Jarak dari kanan */
 }
 
+/* Animasi jiggle */
+@keyframes jiggle {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-5px, 0);
+  }
+  50% {
+    transform: translate(5px, 0);
+  }
+  75% {
+    transform: translate(-3px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.jiggle {
+  animation: jiggle 1s ease-in-out; /* Jalankan animasi jiggle */
+}
+
 .chat-toggle:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+  background-color: #0056b3; /* Warna saat hover */
+  transform: scale(1.05); /* Sedikit membesar saat hover */
 }
 
 .chat-container {
@@ -37,19 +61,46 @@
   display: none; /* Mulai dengan tidak ditampilkan */
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 2s ease;
   max-height: 80vh; /* Maksimum tinggi */
   right: 0; /* Posisi di sisi kanan */
   bottom: 70px; /* Jarak dari bawah */
 }
 
+.chat-container.open {
+  max-height: 80vh;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chat-container.active {
+  display: block; /* Tampilkan container */
+  opacity: 1; /* Buat visible */
+  transform: translateY(0); /* Kembalikan posisi ke normal */
+}
+
 .chat-header {
-  background-color: #007bff;
+  background-color: #007bff; /* Biru solid */
   color: white;
-  padding: 15px;
+  padding: 15px 20px; /* Penyesuaian padding untuk lebih nyaman */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 12px 12px 0 0; /* Border radius hanya pada bagian atas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow untuk depth */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk efek hover */
+
+  /* Hover effect */
+  &:hover {
+    background-color: #0069d9; /* Biru yang sedikit lebih gelap saat dihover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Shadow yang lebih tebal saat dihover */
+  }
+
+  /* Additional styling for better visual appeal */
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .chat-header h3 {
