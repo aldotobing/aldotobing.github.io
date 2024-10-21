@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const aiUserInput = document.getElementById("user-input");
   const aiSendMessage = document.getElementById("send-message");
-  const spinner = document.getElementById("spinner");
   const aiChatMessages = document.getElementById("chat-messages");
 
   // Disable tombol send message saat halaman load
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   aiUserInput.addEventListener("input", toggleSendButton);
 
   aiSendMessage.addEventListener("click", function () {
-    // Disable tombol, sembunyikan icon dan tampilkan spinner
     this.disabled = true;
     this.querySelector("i").style.display = "none"; // Sembunyikan icon
 
@@ -32,15 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sendChatMessage(message)
       .then(() => {
-        // Kembali tampilkan icon dan sembunyikan spinner
         this.querySelector("i").style.display = "block"; // Tampilkan icon
-        spinner.style.display = "none"; // Sembunyikan spinner
         this.disabled = false; // Aktifkan tombol kembali
       })
       .catch((error) => {
         console.error("Error:", error);
         this.disabled = false; // Aktifkan tombol kembali
-        spinner.style.display = "none"; // Sembunyikan spinner
         addMessage(
           "Sorry, there was an error processing your request.",
           "bot-message"
@@ -126,9 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
         setTimeout(type, 25); // Speed typing
       } else {
-        // Proses selesai, tampilkan icon dan sembunyikan spinner
         aiSendMessage.querySelector("i").style.display = "block"; // Tampilkan icon
-        spinner.style.display = "none"; // Sembunyikan spinner
         aiSendMessage.disabled = false; // Aktifkan tombol kembali
       }
     }
