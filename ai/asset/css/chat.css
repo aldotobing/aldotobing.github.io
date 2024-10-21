@@ -7,12 +7,51 @@
   --input-background: #f5f7fa;
   --message-user: #e1f5fe;
   --message-bot: #f1f8e9;
-  --send-button: #4caf50;
-  /* --send-button-hover: #45a049; */
 }
 
 #send-message {
   position: relative; /* Untuk positioning spinner */
+}
+
+#send-message {
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CSS untuk tombol kirim */
+#send-message {
+  background-color: #007bff; /* Warna default tombol */
+  border: none; /* Menghilangkan border */
+  padding: 10px 20px; /* Padding */
+  cursor: pointer; /* Menampilkan cursor pointer saat hover */
+  transition: background-color 0.3s; /* Transisi warna */
+}
+
+/* CSS untuk tombol yang dinonaktifkan */
+#send-message:disabled {
+  background-color: #007bff; /* Warna abu-abu saat dinonaktifkan */
+  cursor: not-allowed; /* Menampilkan cursor tidak diizinkan */
+}
+
+#send-message:hover {
+  background-color: #043365;
+}
+
+#send-message:active {
+  transform: scale(0.95);
+}
+
+#send-message i {
+  font-size: 1.2em;
 }
 
 * {
@@ -44,7 +83,7 @@ body {
 .chat-widget {
   width: 100%;
   max-width: 800px;
-  height: 90vh;
+  height: 80vh;
   background: var(--chat-background);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -137,48 +176,6 @@ body {
 #user-input:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--primary-color);
-}
-
-#send-message {
-  background-color: var(--send-button);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* CSS untuk tombol kirim */
-#send-message {
-  background-color: #007bff; /* Warna default tombol */
-  border: none; /* Menghilangkan border */
-  padding: 10px 20px; /* Padding */
-  cursor: pointer; /* Menampilkan cursor pointer saat hover */
-  transition: background-color 0.3s; /* Transisi warna */
-}
-
-/* CSS untuk tombol yang dinonaktifkan */
-#send-message:disabled {
-  background-color: grey; /* Warna abu-abu saat dinonaktifkan */
-  cursor: not-allowed; /* Menampilkan cursor tidak diizinkan */
-}
-
-#send-message:hover {
-  background-color: #043365;
-}
-
-#send-message:active {
-  transform: scale(0.95);
-}
-
-#send-message i {
-  font-size: 1.2em;
 }
 
 @media (max-width: 768px) {
