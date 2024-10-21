@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Kosongkan input setelah mengirim
     aiUserInput.value = "";
 
-    this.querySelector("i").style.display = "none"; // Sembunyikan icon
+    //this.querySelector("i").style.display = "none"; // Sembunyikan icon
     this.disabled = true; // Nonaktifkan tombol kirim
     this.style.backgroundColor = "grey"; // Ganti warna tombol jadi abu-abu
 
@@ -128,13 +128,18 @@ document.addEventListener("DOMContentLoaded", function () {
           nodeIndex++;
         }
         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-        setTimeout(type, 25); // Speed typing
+        setTimeout(type, 50); // Speed typing
       } else {
         aiSendMessage.querySelector("i").style.display = "block"; // Tampilkan icon
         aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Nonaktifkan jika input kosong
         aiSendMessage.style.backgroundColor = aiSendMessage.disabled
           ? "grey"
           : ""; // Ganti warna tombol
+
+        // Tampilkan ikon dengan warna normal
+        aiSendMessage.querySelector("i").style.color = aiSendMessage.disabled
+          ? "rgba(255, 255, 255, 0.5)"
+          : "white";
       }
     }
 

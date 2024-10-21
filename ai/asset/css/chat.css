@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #3a7bd5;
+  --primary-color: #2b4160;
   --secondary-color: #00d2ff;
   --background-color: #f0f4f8;
   --chat-background: #ffffff;
   --text-color: #333333;
   --input-background: #f5f7fa;
   --message-user: #e1f5fe;
-  --message-bot: #f1f8e9;
+  --message-bot: #53564f3e;
 }
 
 #send-message {
@@ -54,6 +54,42 @@
   font-size: 1.2em;
 }
 
+.chat-header-title {
+  display: flex; /* Flexbox untuk alignment */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Center content */
+  gap: 10px; /* Spacing between icon and text */
+  margin: 0; /* Remove default margin */
+}
+
+#loading-icon {
+  font-size: 1.5em; /* Size of the icon */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+#loading-icon:hover {
+  transform: scale(1.1); /* Scale up icon on hover */
+}
+
+/* Optional: Adding shadow effect to text */
+.text-label {
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+}
+
+.chat-header {
+  background: linear-gradient(
+    135deg,
+    #46464f,
+    #141757
+  ); /* Gradient background */
+  color: rgba(18, 16, 16, 0); /* Warna teks putih */
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5em;
+  border-radius: 20px 20px 0 0; /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -93,18 +129,20 @@ body {
 }
 
 .chat-container {
+  flex: 1; /* Allow the chat container to take available space */
   display: flex;
   flex-direction: column;
-  height: 100%;
+  overflow: auto; /* Allow scrolling if content exceeds the height */
 }
 
 .chat-header {
   background: linear-gradient(
     135deg,
-    var(--primary-color),
-    var(--secondary-color)
+    rgba(58, 123, 213, 0.8),
+    /* Primary color with opacity */ rgba(0, 210, 255, 0.8)
+      /* Secondary color with opacity */
   );
-  color: white;
+  color: #444;
   padding: 20px;
   text-align: center;
   font-size: 1.2em;
@@ -120,6 +158,9 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+  background-color: var(
+    --chat-background
+  ); /* Pastikan area chat juga menggunakan background lembut */
 }
 
 .message {
@@ -145,15 +186,24 @@ body {
 
 .user-message {
   background-color: var(--message-user);
-  align-self: flex-end;
+  align-self: flex-end; /* Tetap di sebelah kanan */
   margin-left: auto;
   border-bottom-right-radius: 4px;
+  max-width: fit-content; /* Ukuran mengikuti konten */
+  padding: 10px 15px; /* Padding untuk memberi ruang di dalam pesan */
+  margin-right: 20px; /* Jarak dari tepi kanan */
+  word-wrap: break-word; /* Untuk memecah kata yang panjang */
 }
 
 .bot-message {
   background-color: var(--message-bot);
-  align-self: flex-start;
+  align-self: flex-start; /* Tetap di sebelah kiri */
   border-bottom-left-radius: 4px;
+  max-width: fit-content; /* Ukuran mengikuti konten */
+  padding: 10px 15px; /* Padding untuk memberi ruang di dalam pesan */
+  margin-right: 30px; /* Jarak dari tepi kanan */
+  margin-left: 20px; /* Jarak dari tepi kiri */
+  word-wrap: break-word; /* Untuk memecah kata yang panjang */
 }
 
 .chat-input {
