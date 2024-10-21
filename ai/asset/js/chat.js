@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
           nodeIndex++;
         }
         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-        setTimeout(type, 50); // Speed typing
+        setTimeout(type, 20); // Speed typing
       } else {
         aiSendMessage.querySelector("i").style.display = "block"; // Tampilkan icon
         aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Nonaktifkan jika input kosong
