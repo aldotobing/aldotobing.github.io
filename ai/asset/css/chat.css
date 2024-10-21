@@ -187,11 +187,11 @@ body {
 .user-message {
   background-color: var(--message-user);
   align-self: flex-end; /* Tetap di sebelah kanan */
-  margin-left: auto;
+  margin-left: auto; /* Mengalirkan pesan ke kanan */
   border-bottom-right-radius: 4px;
   max-width: fit-content; /* Ukuran mengikuti konten */
   padding: 10px 15px; /* Padding untuk memberi ruang di dalam pesan */
-  margin-right: 20px; /* Jarak dari tepi kanan */
+  margin-right: 5px; /* Jarak dari tepi kanan, tambahkan sedikit */
   word-wrap: break-word; /* Untuk memecah kata yang panjang */
 }
 
@@ -201,8 +201,7 @@ body {
   border-bottom-left-radius: 4px;
   max-width: fit-content; /* Ukuran mengikuti konten */
   padding: 10px 15px; /* Padding untuk memberi ruang di dalam pesan */
-  margin-right: 30px; /* Jarak dari tepi kanan */
-  margin-left: 20px; /* Jarak dari tepi kiri */
+  margin-left: 5px; /* Jarak dari tepi kiri */
   word-wrap: break-word; /* Untuk memecah kata yang panjang */
 }
 
@@ -226,21 +225,6 @@ body {
 #user-input:focus {
   outline: none;
   box-shadow: 0 0 0 2px var(--primary-color);
-}
-
-@media (max-width: 768px) {
-  .chat-widget {
-    height: 100vh;
-    border-radius: 0;
-  }
-
-  .chat-header {
-    border-radius: 0;
-  }
-
-  body {
-    padding: 0;
-  }
 }
 
 /* Scrollbar Styles */

@@ -18,6 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Tambahkan event listener untuk input
   aiUserInput.addEventListener("input", toggleSendButton);
 
+  aiUserInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter" && !aiSendMessage.disabled) {
+      // Cek apakah tombol Enter ditekan
+      event.preventDefault(); // Mencegah tindakan default (seperti baris baru)
+      aiSendMessage.click(); // Simulasikan klik pada tombol kirim
+    }
+  });
+
   aiSendMessage.addEventListener("click", function () {
     const message = aiUserInput.value.trim(); // Ambil value input
 
