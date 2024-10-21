@@ -118,8 +118,8 @@ body {
 
 .chat-widget {
   width: 100%;
-  max-width: 800px;
-  height: 80vh;
+  max-width: 900px;
+  height: 90vh;
   background: var(--chat-background);
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
