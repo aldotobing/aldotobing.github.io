@@ -206,13 +206,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // Convert italic text (surrounded by single *)
     text = text.replace(/\*([^\*]+)\*/g, "<em>$1</em>");
 
-    // Convert bullet points
-    text = text.replace(/^- (.+)$/gm, "<li>$1</li>");
-    text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ul>$&</ul>");
+    // Convert bullet points with double tab
+    text = text.replace(/^- (.+)$/gm, "\t\t<li>$1</li>");
+    text = text.replace(
+      /(<li>.*<\/li>\n?)+/g,
+      "<ul style='padding-left: 2em;'>$&</ul>"
+    );
 
-    // Convert numbered lists
-    text = text.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
-    text = text.replace(/(<li>.*<\/li>\n?)+/g, "<ol>$&</ol>");
+    // Convert numbered lists with double tab
+    text = text.replace(/^(\d+)\. (.+)$/gm, "\t\t<li value='$1'>$2</li>");
+    text = text.replace(
+      /(<li.*<\/li>\n?)+/g,
+      "<ol style='padding-left: 2em;'>$&</ol>"
+    );
 
     // Convert headers
     text = text.replace(/^# (.*$)/gm, "<h1>$1</h1>");
