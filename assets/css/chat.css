@@ -1,7 +1,7 @@
 /* Animasi glowing */
 @keyframes chip-glow {
   0% {
-    color: #3880c3; /* Hijau lembut */
+    color: #3880c3;
     text-shadow: 0 0 5px #32a852;
   }
   50% {
@@ -14,144 +14,45 @@
   }
 }
 
-/* Animasi setrum untuk teks */
-/* @keyframes text-shock {
-  0%,
-  100% {
-    transform: translateX(0);
-    color: inherit;
-    text-shadow: none;
+/* Animasi fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  20% {
-    transform: translateX(2px);
-    color: #4caf50;
-    text-shadow: 0 0 10px #4caf50;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  40% {
-    transform: translateX(-2px);
-    color: #66bb6a;
-    text-shadow: 0 0 15px #66bb6a;
-  }
-} */
-
-/* Styling untuk ikon */
-#loading-icon {
-  animation: chip-glow 5s infinite alternate; /* Durasi lebih lambat */
-  font-size: 21px;
-  transition: color 0.9s ease-in-out;
 }
 
-/* Styling dan animasi untuk teks */
-.text-label {
-  position: relative;
-  top: 1px; /* Naik sedikit */
-  font-family: inherit;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-  color: inherit;
-  animation: text-shock 2s infinite alternate;
-}
-
-/* Base styles */
+/* Chat Widget Base Styles */
 .chat-widget {
   position: fixed;
   z-index: 1000;
-  transition: all 0.3s ease;
-  right: 20px; /* Position from the left side */
-}
-
-.chat-toggle {
-  width: 50px; /* Ukuran lebar tombol */
-  height: 50px; /* Ukuran tinggi tombol */
-  border-radius: 50%; /* Bulatkan tombol */
-  background-color: #007bff; /* Warna latar belakang */
-  color: white; /* Warna teks */
-  border: none; /* Tidak ada border */
-  cursor: pointer; /* Kursor tangan saat hover */
-  font-size: 20px; /* Ukuran font */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan */
-  transition: all 0.3s ease; /* Transisi halus */
-  display: flex; /* Flexbox untuk penempatan isi */
-  align-items: center; /* Vertikal center */
-  justify-content: center; /* Horizontal center */
-  position: fixed; /* Tetap di posisi tetap */
-  bottom: 100px; /* Jarak dari bawah lebih tinggi */
-  right: 20px; /* Jarak dari kanan */
-}
-
-/* Animasi jiggle */
-@keyframes jiggle {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-5px, 0);
-  }
-  50% {
-    transform: translate(5px, 0);
-  }
-  75% {
-    transform: translate(-3px, 0);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-.jiggle {
-  animation: jiggle 1s ease-in-out; /* Jalankan animasi jiggle */
-}
-
-.chat-toggle:hover {
-  background-color: #0056b3; /* Warna saat hover */
-  transform: scale(1.05); /* Sedikit membesar saat hover */
-}
-
-.chat-container {
-  position: absolute;
+  right: 20px;
+  bottom: 40px;
+  width: 400px; /* Perbesar width */
+  height: 600px; /* Perbesar height */
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
   background-color: white;
   border-radius: 25px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  display: none; /* Mulai dengan tidak ditampilkan */
-  flex-direction: column;
   overflow: hidden;
-  transition: all 2s ease;
-  max-height: 80vh; /* Maksimum tinggi */
-  right: 0; /* Posisi di sisi kanan */
-  bottom: 70px; /* Jarak dari bawah */
+  animation: fadeIn 0.3s ease-out;
 }
 
-.chat-container.open {
-  max-height: 80vh;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.chat-container.active {
-  display: block; /* Tampilkan container */
-  opacity: 1; /* Buat visible */
-  transform: translateY(0); /* Kembalikan posisi ke normal */
-}
-
+/* Chat Header */
 .chat-header {
-  background-color: #007bff; /* Biru solid */
+  background-color: #007bff;
   color: white;
-  padding: 15px 20px; /* Penyesuaian padding untuk lebih nyaman */
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-radius: 12px 12px 0 0; /* Border radius hanya pada bagian atas */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow untuk depth */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transition untuk efek hover */
-
-  /* Hover effect */
-  &:hover {
-    background-color: #0069d9; /* Biru yang sedikit lebih gelap saat dihover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Shadow yang lebih tebal saat dihover */
-  }
-
-  /* Additional styling for better visual appeal */
+  border-radius: 12px 12px 0 0;
   font-family: "Arial", sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -176,6 +77,7 @@
   color: #f0f0f0;
 }
 
+/* Chat Messages */
 .chat-messages {
   flex-grow: 1;
   overflow-y: auto;
@@ -184,6 +86,7 @@
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
+/* Chat Input */
 .chat-input {
   display: flex;
   padding: 15px;
@@ -228,122 +131,8 @@
   transform: scale(0.95);
 }
 
-#send-message:disabled {
-  /* Warna abu-abu (dim) ketika disabled */
-  background-color: #ccc; /* Warna abu-abu (dim) untuk tombol send saat disabled */
-  color: #666; /* Warna teks abu-abu tua */
-  cursor: not-allowed; /* Ganti kursor menjadi 'not-allowed' */
-  box-shadow: none; /* Hilangkan efek bayangan */
-  transition: none; /* Hilangkan transisi warna pada hover */
-}
-
-#send-message:disabled:hover {
-  /* Sama seperti kondisi disabled, tanpa perubahan warna atau efek, menunjukkan tombol send tidak bisa diklik (not-allowed) */
-  background-color: #ccc; /* Warna abu-abu (dim) pada tombol send saat disabled */
-  color: #666; /* Warna teks abu-abu tua */
-  cursor: not-allowed; /* Ganti kursor menjadi 'not-allowed' */
-}
-
-.sending {
-  position: relative; /* Positioning untuk menempatkan spinner */
-  display: flex; /* Menggunakan flexbox */
-  justify-content: center; /* Center horizontal */
-  align-items: center; /* Center vertical */
-}
-
-.sending i {
-  display: none; /* Sembunyikan ikon asli saat sending */
-}
-
-.sending::after {
-  content: ""; /* Membuat spinner */
-  display: inline-block;
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  border-radius: 50%;
-  border-top-color: white; /* Warna spinner */
-  width: 16px; /* Ukuran spinner */
-  height: 16px; /* Ukuran spinner */
-  animation: spin 1s linear infinite; /* Animasi berputar */
-  position: absolute; /* Ganti ke absolute untuk posisi lebih fleksibel */
-  left: 31%; /* Centering */
-  top: 31%; /* Centering */
-  transform: translate(-50%, -50%); /* Untuk menggeser spinner ke tengah */
-}
-
-.message {
-  margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 18px;
-  max-width: 80%;
-  line-height: 1.4;
-}
-
-.user-message {
-  background-color: #e6f2ff;
-  align-self: flex-end;
-  margin-left: auto;
-}
-
-.bot-message {
-  background-color: #f1f1f1;
-  align-self: flex-start;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .chat-widget {
-    bottom: 20px;
-    right: 20px;
-  }
-
-  .chat-container {
-    width: calc(100vw - 40px);
-    max-width: 350px;
-    height: 60vh;
-    right: 0;
-    bottom: 80px;
-  }
-
-  .chat-toggle {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-  }
-}
-
-@media (min-width: 769px) {
-  .chat-widget {
-    bottom: 40px;
-    right: 40px;
-  }
-
-  .chat-container {
-    width: 380px;
-    height: 500px;
-    right: 0;
-    bottom: 80px;
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.chat-container.active {
-  display: flex;
-  animation: fadeIn 0.3s ease-out;
-}
-
-/* Dark mode styles */
-body.dark-mode .chat-container {
+/* Dark Mode Styles */
+body.dark-mode .chat-widget {
   background-color: #2a2a2a;
   color: #f0f0f0;
 }
@@ -366,116 +155,47 @@ body.dark-mode .bot-message {
   background-color: #3e3e3e;
 }
 
-body.dark-mode .chat-toggle,
 body.dark-mode #send-message {
   background-color: #0056b3;
 }
 
-body.dark-mode .chat-toggle:hover,
 body.dark-mode #send-message:hover {
   background-color: #003d82;
 }
 
-@keyframes fly-out {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-30px) scale(1.2);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(-50px) scale(0);
-    opacity: 0;
-  }
-}
-
-.chat-toggle.fly-out {
-  animation: fly-out 0.5s forwards; /* Mainkan animasi */
-  pointer-events: none; /* Non-aktifkan interaksi selama animasi */
-}
-
-.code-block-wrapper {
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  background-color: #f4f4f4;
-  border-radius: 4px;
-  padding: 1em;
-  margin: 0.5em 0;
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.code-block {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.9em;
+/* Message Styles */
+.message {
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 80%;
   line-height: 1.4;
-  display: block;
 }
 
-/* Styling untuk highlight.js */
-.hljs {
-  background: transparent !important;
-  padding: 0 !important;
+.user-message {
+  background-color: #e6f2ff;
+  align-self: flex-end;
+  margin-left: auto;
 }
 
-/* Dark mode styles */
-@media (prefers-color-scheme: dark) {
-  .code-block-wrapper {
-    background-color: #2d2d2d;
-  }
+.bot-message {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
 
-  .code-block {
-    color: #e6e6e6;
-  }
-
-  /* Sesuaikan warna highlight untuk mode gelap */
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-built_in,
-  .hljs-name,
-  .hljs-tag {
-    color: #e78c45;
-  }
-
-  .hljs-string,
-  .hljs-title,
-  .hljs-section,
-  .hljs-attribute,
-  .hljs-literal,
-  .hljs-template-tag,
-  .hljs-template-variable,
-  .hljs-type,
-  .hljs-addition {
-    color: #b9ca4a;
-  }
-
-  .hljs-comment,
-  .hljs-quote,
-  .hljs-deletion,
-  .hljs-meta {
-    color: #7f8c8d;
-  }
-
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-literal,
-  .hljs-title,
-  .hljs-section,
-  .hljs-doctag,
-  .hljs-type,
-  .hljs-name,
-  .hljs-strong {
-    font-weight: bold;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .chat-widget {
+    width: calc(100vw - 40px);
+    height: 60vh;
+    bottom: 20px;
+    right: 20px;
   }
 }
 
-.typewriter-list {
-  margin: 0;
-  padding-left: 20px;
-}
-
-.typewriter-item {
-  margin-bottom: 5px;
+@media (min-width: 769px) {
+  .chat-widget {
+    bottom: 40px;
+    right: 40px;
+  }
 }
