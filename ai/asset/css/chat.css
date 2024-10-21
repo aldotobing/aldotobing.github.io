@@ -156,7 +156,19 @@ body {
 }
 
 .chat-header i {
-  margin-right: 0px;
+  margin-right: 1.5px;
+  color: #28a745; /* Warna hijau */
+  animation: blink 1s infinite alternate; /* Animasi berkedip */
+}
+
+/* Keyframes untuk animasi berkedip */
+@keyframes blink {
+  0% {
+    color: #28a745; /* Hijau */
+  }
+  100% {
+    color: rgba(0, 0, 0, 0); /* Transparan */
+  }
 }
 
 .chat-messages {
