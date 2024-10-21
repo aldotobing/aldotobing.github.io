@@ -1,38 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const aiChatContainer = document.getElementById("chat-container");
-  const chatToggle = document.getElementById("chat-toggle"); // Pastikan ada elemen ini di HTML
   const aiUserInput = document.getElementById("user-input");
   const aiSendMessage = document.getElementById("send-message");
   const spinner = document.getElementById("spinner");
   const aiChatMessages = document.getElementById("chat-messages");
 
+  // Disable tombol send message saat halaman load
   aiSendMessage.disabled = true;
 
-  document.addEventListener("click", (event) => {
-    if (
-      !aiChatContainer.contains(event.target) &&
-      !chatToggle.contains(event.target)
-    ) {
-      aiChatContainer.style.display = "none";
-      chatToggle.style.display = "flex";
-    }
-  });
+  // Fungsi untuk ngecek status tombol send
+  function toggleSendButton() {
+    aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Disable jika input kosong
+  }
 
-  aiUserInput.addEventListener("input", function () {
-    aiSendMessage.disabled = this.value.trim() === "";
-  });
+  // Panggil fungsi untuk set status tombol saat load
+  toggleSendButton();
+
+  // Tambahkan event listener untuk input
+  aiUserInput.addEventListener("input", toggleSendButton);
 
   aiSendMessage.addEventListener("click", function () {
     // Disable tombol, sembunyikan icon dan tampilkan spinner
     this.disabled = true;
     this.querySelector("i").style.display = "none"; // Sembunyikan icon
-    spinner.style.display = "block"; // Tampilkan spinner
 
     const message = aiUserInput.value.trim();
-    aiUserInput.value = ""; // Reset input
 
-    // Menghilangkan focus dari input saat mengirim
-    aiUserInput.blur();
+    if (message === "") {
+      this.disabled = false; // Aktifkan tombol kembali jika pesan kosong
+      return; // Keluar dari fungsi jika pesan kosong
+    }
 
     sendChatMessage(message)
       .then(() => {
@@ -91,13 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("user_id", id);
     return id;
   }
-
-  aiUserInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      aiSendMessage.click(); // Memanggil event click pada button
-    }
-  });
 
   function addMessage(text, className) {
     const messageElement = document.createElement("div");

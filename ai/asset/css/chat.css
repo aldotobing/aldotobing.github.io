@@ -8,35 +8,11 @@
   --message-user: #e1f5fe;
   --message-bot: #f1f8e9;
   --send-button: #4caf50;
-  --send-button-hover: #45a049;
+  /* --send-button-hover: #45a049; */
 }
 
-.spinner {
-  border: 3px solid rgba(255, 255, 255, 0.5);
-  border-top: 3px solid white;
-  border-radius: 50%;
-  width: 20px; /* Ukuran spinner */
-  height: 20px; /* Ukuran spinner */
-  animation: spin 0.6s linear infinite; /* Efek putar */
-  position: absolute; /* Posisi absolut */
-  left: 50%; /* Tengah horizontal */
-  top: 50%; /* Tengah vertical */
-  transform: translate(-50%, -50%); /* Pusatkan spinner */
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Tombol disabled */
-#send-message:disabled {
-  background-color: #ccc; /* Warna abu-abu */
-  cursor: not-allowed; /* Cursor jadi not-allowed */
+#send-message {
+  position: relative; /* Untuk positioning spinner */
 }
 
 * {
@@ -187,6 +163,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* CSS untuk tombol kirim */
+#send-message {
+  background-color: #007bff; /* Warna default tombol */
+  color: white; /* Warna teks default */
+  border: none; /* Menghilangkan border */
+  padding: 10px 20px; /* Padding */
+  cursor: pointer; /* Menampilkan cursor pointer saat hover */
+  transition: background-color 0.3s; /* Transisi warna */
+}
+
+/* CSS untuk tombol yang dinonaktifkan */
+#send-message:disabled {
+  background-color: grey; /* Warna abu-abu saat dinonaktifkan */
+  cursor: not-allowed; /* Menampilkan cursor tidak diizinkan */
 }
 
 #send-message:hover {
