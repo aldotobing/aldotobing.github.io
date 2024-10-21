@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Fungsi untuk ngecek status tombol send
   function toggleSendButton() {
     aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Disable jika input kosong
+    aiSendMessage.style.backgroundColor = aiSendMessage.disabled ? "grey" : ""; // Ganti warna tombol
   }
 
   // Panggil fungsi untuk set status tombol saat load
@@ -18,24 +19,28 @@ document.addEventListener("DOMContentLoaded", function () {
   aiUserInput.addEventListener("input", toggleSendButton);
 
   aiSendMessage.addEventListener("click", function () {
-    this.disabled = true;
-    this.querySelector("i").style.display = "none"; // Sembunyikan icon
+    const message = aiUserInput.value.trim(); // Ambil value input
 
-    const message = aiUserInput.value.trim();
-
+    // Cek apakah pesan kosong
     if (message === "") {
       this.disabled = false; // Aktifkan tombol kembali jika pesan kosong
       return; // Keluar dari fungsi jika pesan kosong
     }
 
+    // Kosongkan input setelah mengirim
+    aiUserInput.value = "";
+
+    this.querySelector("i").style.display = "none"; // Sembunyikan icon
+    this.disabled = true; // Nonaktifkan tombol kirim
+    this.style.backgroundColor = "grey"; // Ganti warna tombol jadi abu-abu
+
     sendChatMessage(message)
       .then(() => {
         this.querySelector("i").style.display = "block"; // Tampilkan icon
-        this.disabled = false; // Aktifkan tombol kembali
+        this.style.backgroundColor = ""; // Kembali ke warna default
       })
       .catch((error) => {
         console.error("Error:", error);
-        this.disabled = false; // Aktifkan tombol kembali
         addMessage(
           "Sorry, there was an error processing your request.",
           "bot-message"
@@ -103,6 +108,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let nodeIndex = 0;
     let charIndex = 0;
 
+    // Nonaktifkan tombol kirim saat mengetik
+    aiSendMessage.disabled = true;
+    aiSendMessage.style.backgroundColor = "grey"; // Ganti warna tombol jadi abu-abu
+
     function type() {
       if (nodeIndex < nodes.length) {
         const node = nodes[nodeIndex];
@@ -122,7 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(type, 25); // Speed typing
       } else {
         aiSendMessage.querySelector("i").style.display = "block"; // Tampilkan icon
-        aiSendMessage.disabled = false; // Aktifkan tombol kembali
+        aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Nonaktifkan jika input kosong
+        aiSendMessage.style.backgroundColor = aiSendMessage.disabled
+          ? "grey"
+          : ""; // Ganti warna tombol
       }
     }
 
