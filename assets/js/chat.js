@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const htmlResult = convertMarkdownToHtml(result);
       await typeWriterEffect(htmlResult, () => {
-        console.log("Done");
+        //console.log("Done");
       });
     } catch (error) {
       console.error("Error:", error);
