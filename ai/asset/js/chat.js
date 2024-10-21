@@ -6,6 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // Disable tombol send message saat halaman load
   aiSendMessage.disabled = true;
 
+  // Menentukan teks yang akan ditampilkan
+  const titleText = document.getElementById("title-text");
+  const fullTitle = "Kapal Lawd GPT"; // Teks lengkap
+
+  // Fungsi untuk menampilkan teks dengan animasi typing
+  function typeWriter(text, i) {
+    if (i < text.length) {
+      titleText.innerHTML += text.charAt(i);
+      setTimeout(() => typeWriter(text, i + 1), 100); // Kecepatan ketik
+    }
+  }
+
+  // Memulai animasi typing saat halaman di-load
+  window.onload = () => {
+    titleText.innerHTML = ""; // Bersihkan teks saat mulai
+    typeWriter(fullTitle, 0); // Mulai mengetik dari index 0
+  };
+
   // Fungsi untuk ngecek status tombol send
   function toggleSendButton() {
     aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Disable jika input kosong
