@@ -60,7 +60,7 @@
   justify-content: center; /* Center content */
   gap: 5px; /* Spacing antara icon dan teks */
   margin: 0; /* Hilangkan margin default */
-  font-size: 20px; /* Ukuran font */
+  font-size: 15px; /* Ukuran font */
   color: rgba(60, 60, 67, 0.8); /* Warna solid ala iOS */
 
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,

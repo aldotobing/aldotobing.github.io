@@ -31,7 +31,7 @@
   background-color: transparent; /* Background transparan */
   border: #000000; /* No border */
   cursor: pointer; /* Cursor pointer */
-  font-size: 24px; /* Ukuran font untuk icon */
+  font-size: 20px; /* Ukuran font untuk icon */
   color: #3d7cd5; /* Sesuaikan dengan warna text yang ada */
   transition: color 0.3s ease; /* Transisi warna saat hover */
 }
