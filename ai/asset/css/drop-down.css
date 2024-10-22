@@ -21,12 +21,6 @@
   margin-right: 5px; /* Jarak antara ikon dan teks judul */
 }
 
-.selected-item {
-  margin-left: 0px; /* Jarak antara dropdown dan teks terpilih */
-  font-size: 18px; /* Ukuran font untuk teks terpilih */
-  color: var(--text-color); /* Warna teks terpilih */
-}
-
 .dropbtn {
   background-color: transparent; /* Background transparan */
   border: #000000; /* No border */
@@ -61,15 +55,15 @@
 }
 
 .dropdown-content a {
-  color: var(--text-color); /* Warna text */
-  padding: 12px 16px; /* Padding untuk link */
-  text-decoration: none; /* Hilangkan underline */
-  display: block; /* Tampilkan sebagai block */
-  text-align: left; /* Rata kiri untuk text */
+  color: #e0e0e0; /* Warna teks link */
+  padding: 5px 10px; /* Padding link */
+  text-decoration: solid; /* Hilangkan underline */
+  display: block; /* Biar full height */
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1; /* Background saat hover */
+  background-color: #7b8084; /* Background hover */
+  color: white; /* Warna teks hover */
 }
 
 /* Tambahan untuk mengatur header */
@@ -79,11 +73,12 @@
 }
 
 .dropdown-content {
+  border-radius: 20px;
   display: none; /* Sembunyikan dropdown */
   position: absolute; /* Posisi absolut untuk dropdown */
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  background-color: rgba(99, 97, 97, 0); /* Semi-transparent background */
   min-width: 160px; /* Lebar minimum dropdown */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
   z-index: 1; /* Agar di depan */
   border-radius: 8px; /* Membuat sudut bulat */
   opacity: 0; /* Awalnya transparan */
