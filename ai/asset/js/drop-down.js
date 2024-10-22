@@ -37,6 +37,6 @@ dropdownItems.forEach((item) => {
       currentMode = "image";
     }
 
-    console.log("Current Mode:", currentMode); // Debugging log
+    //console.log("Current Mode:", currentMode); // Debugging log
   });
 });
