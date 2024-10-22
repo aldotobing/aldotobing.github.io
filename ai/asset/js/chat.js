@@ -78,6 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const userId = localStorage.getItem("user_id") || generateUniqueId();
     addMessage(userInput, "user-message");
 
+    const loadingMessage = addLoadingIndicator();
+
     try {
       let endpointUrl;
       let requestBody;
@@ -103,6 +105,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         body: JSON.stringify(requestBody),
       });
+
+      loadingMessage.remove();
 
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status}`);
@@ -185,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
           nodeIndex++;
         }
         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
-        setTimeout(type, 20); // Speed typing
+        setTimeout(type, 15); // Speed typing
       } else {
         aiSendMessage.querySelector("i").style.display = "block"; // Tampilkan icon
         aiSendMessage.disabled = aiUserInput.value.trim() === ""; // Nonaktifkan jika input kosong
@@ -263,5 +267,19 @@ document.addEventListener("DOMContentLoaded", function () {
     text = text.replace(/\n(?!<\/(code|pre)>)/g, "<br>");
 
     return text;
+  }
+
+  function addLoadingIndicator() {
+    const loadingMessage = document.createElement("div");
+    loadingMessage.classList.add("loading-message", "typing-dots");
+
+    // Menentukan teks yang ditampilkan berdasarkan currentMode
+    const loadingText =
+      currentMode === "image" ? "Generating image" : "Thinking";
+    loadingMessage.innerHTML = `<span>${loadingText}</span><span>.</span><span>.</span><span>.</span>`; // Tambahkan titik-titik
+
+    aiChatMessages.appendChild(loadingMessage); // Menambahkan di bagian bawah
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight; // Scroll ke bawah
+    return loadingMessage;
   }
 });

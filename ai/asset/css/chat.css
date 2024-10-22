@@ -198,7 +198,7 @@ body {
 }
 
 .bot-message {
-  background-color: var(--message-bot);
+  /* background-color: var(--message-bot); */
   align-self: flex-start; /* Tetap di sebelah kiri */
   border-bottom-left-radius: 4px;
   max-width: fit-content; /* Ukuran mengikuti konten */
@@ -246,4 +246,53 @@ body {
 
 .chat-messages::-webkit-scrollbar-thumb:hover {
   background: #555; /* Darker on hover */
+}
+
+@keyframes waveEffect {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes lightSweep {
+  0% {
+    background-position: -150%;
+  }
+  100% {
+    background-position: 250%;
+  }
+}
+
+.loading-message {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: lighter;
+  color: #808080; /* Sesuaikan dengan warna teks */
+  padding: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: "Arial", sans-serif; /* Ganti dengan font yang diinginkan */
+}
+
+.typing-dots span {
+  display: inline-block;
+  font-size: 15px;
+  margin-right: 2px; /* Spasi antar titik */
+  animation: waveEffect 1.5s ease-in-out infinite;
+  font-style: italic;
+  font-family: "Arial", sans-serif; /* Ganti dengan font yang diinginkan */
+}
+
+.typing-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
 }
