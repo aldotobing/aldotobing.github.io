@@ -1,0 +1,103 @@
+/* Dropdown button styles */
+.dropdown {
+  position: absolute; /* Posisi absolute agar bisa diposisikan di dalam header */
+  left: 20px; /* Jarak dari tepi kiri */
+  top: 50%; /* Posisikan di tengah vertikal */
+  transform: translateY(-50%); /* Center vertically */
+  flex-shrink: 0;
+  margin-right: 0;
+  flex-grow: 1;
+}
+
+.chat-header {
+  position: relative; /* Menjamin dropdown tetap berada di dalam header */
+  display: flex; /* Menggunakan flexbox untuk align item */
+  align-items: center; /* Vertikal align untuk semua item di header */
+  padding: 15px; /* Padding untuk header */
+  justify-content: space-between; /* Mengatur jarak antara elemen */
+}
+
+#loading-icon {
+  margin-right: 5px; /* Jarak antara ikon dan teks judul */
+}
+
+.selected-item {
+  margin-left: 0px; /* Jarak antara dropdown dan teks terpilih */
+  font-size: 18px; /* Ukuran font untuk teks terpilih */
+  color: var(--text-color); /* Warna teks terpilih */
+}
+
+.dropbtn {
+  background-color: transparent; /* Background transparan */
+  border: #000000; /* No border */
+  cursor: pointer; /* Cursor pointer */
+  font-size: 24px; /* Ukuran font untuk icon */
+  color: #3d7cd5; /* Sesuaikan dengan warna text yang ada */
+  transition: color 0.3s ease; /* Transisi warna saat hover */
+}
+
+.dropbtn:hover {
+  color: #6f7772; /* Ganti warna saat hover */
+}
+
+.dropdown-content {
+  display: none; /* Sembunyikan dropdown */
+  position: relative; /* Posisi absolut untuk dropdown */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  min-width: 160px; /* Lebar minimum dropdown */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
+  z-index: 1; /* Agar di depan */
+  border-radius: 8px; /* Membuat sudut bulat */
+  opacity: 0; /* Awalnya transparan */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transisi opacity dan transform */
+  transform: translateY(-10px); /* Sedikit mengangkat saat muncul */
+}
+
+.dropdown-content.show {
+  display: block; /* Tampilkan dropdown jika kelas show ditambahkan */
+  opacity: 1; /* Mengatur opacity ke 1 */
+  transform: translateY(0); /* Mengembalikan posisi ke normal */
+}
+
+.dropdown-content a {
+  color: var(--text-color); /* Warna text */
+  padding: 12px 16px; /* Padding untuk link */
+  text-decoration: none; /* Hilangkan underline */
+  display: block; /* Tampilkan sebagai block */
+  text-align: left; /* Rata kiri untuk text */
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1; /* Background saat hover */
+}
+
+/* Tambahan untuk mengatur header */
+.chat-header {
+  position: relative; /* Menjamin dropdown tetap berada di dalam header */
+  padding-left: 40px; /* Memberi ruang untuk dropdown */
+}
+
+.dropdown-content {
+  display: none; /* Sembunyikan dropdown */
+  position: absolute; /* Posisi absolut untuk dropdown */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  min-width: 160px; /* Lebar minimum dropdown */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
+  z-index: 1; /* Agar di depan */
+  border-radius: 8px; /* Membuat sudut bulat */
+  opacity: 0; /* Awalnya transparan */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transisi opacity dan transform */
+  transform: translateY(-10px); /* Sedikit mengangkat saat muncul */
+}
+
+.dropdown-content.show {
+  display: block; /* Tampilkan dropdown jika kelas show ditambahkan */
+  opacity: 1; /* Mengatur opacity ke 1 */
+  transform: translateY(0); /* Mengembalikan posisi ke normal */
+}
+
+.selected-item {
+  margin-left: 10px; /* Jarak antara dropdown dan teks terpilih */
+  font-size: 18px; /* Ukuran font untuk teks terpilih */
+  color: var(--text-color); /* Warna teks terpilih */
+}

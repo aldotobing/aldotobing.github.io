@@ -48,6 +48,7 @@
     <link href="../assets/img/favicon.png" rel="icon" />
 
     <link rel="stylesheet" href="../ai/asset/css/chat.css" />
+    <link rel="stylesheet" href="../ai/asset/css/drop-down.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -57,6 +58,18 @@
     <div class="chat-widget">
       <div id="chat-container" class="chat-container">
         <div class="chat-header">
+          <div class="dropdown">
+            <button class="dropbtn">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="#" class="dropdown-item" data-value="Chat">Chat</a>
+              <a href="#" class="dropdown-item" data-value="Image Gen"
+                >Image Gen</a
+              >
+            </div>
+          </div>
+          <span id="selected-item" class="selected-item">Chat</span>
           <h3 class="chat-header-title">
             <i class="fas fa-terminal" id="loading-icon"></i>
             <span id="title-text"></span>
@@ -71,6 +84,8 @@
         </div>
       </div>
     </div>
+
     <script src="../ai/asset/js/chat.js"></script>
+    <script src="../ai/asset/js/drop-down.js"></script>
   </body>
 </html>
