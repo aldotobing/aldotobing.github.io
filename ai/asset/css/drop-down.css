@@ -57,8 +57,9 @@
 .dropdown-content a {
   color: #e0e0e0; /* Warna teks link */
   padding: 5px 10px; /* Padding link */
-  text-decoration: solid; /* Hilangkan underline */
+  text-decoration: none; /* Hilangkan underline */
   display: block; /* Biar full height */
+  text-align: left; /* Rata kiri */
 }
 
 .dropdown-content a:hover {
