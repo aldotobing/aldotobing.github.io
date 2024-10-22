@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
           prompt: userInput, // Ambil prompt dari input user
         };
       }
-      console.log("Current Mode:", currentMode);
+      //console.log("Current Mode:", currentMode);
 
       const response = await fetch(endpointUrl, {
         method: "POST",
