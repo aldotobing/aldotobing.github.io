@@ -41,16 +41,17 @@
 }
 
 .dropdown-content {
-  display: none; /* Sembunyikan dropdown */
-  position: relative; /* Posisi absolut untuk dropdown */
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  min-width: 160px; /* Lebar minimum dropdown */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lebih lembut */
-  z-index: 1; /* Agar di depan */
-  border-radius: 8px; /* Membuat sudut bulat */
-  opacity: 0; /* Awalnya transparan */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Transisi opacity dan transform */
-  transform: translateY(-10px); /* Sedikit mengangkat saat muncul */
+  display: none; /* Hidden by default */
+  position: absolute; /* Positioning */
+  background-color: #f9f9f9;
+  min-width: 160px; /* Minimum width */
+  z-index: 1; /* Layering */
+}
+
+.dropdown-content.show {
+  display: block; /* Show the dropdown when class 'show' is added */
+  opacity: 1; /* Full opacity */
+  transform: translateY(0); /* Reset the position */
 }
 
 .dropdown-content.show {

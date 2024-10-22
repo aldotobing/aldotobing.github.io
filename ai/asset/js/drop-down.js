@@ -1,29 +1,36 @@
-// Ambil elemen dropdown dan tombol
 const dropdown = document.querySelector(".dropdown");
 const dropbtn = document.querySelector(".dropbtn");
 const dropdownContent = document.querySelector(".dropdown-content");
+const selectedItem = document.getElementById("selected-item");
 
-// Tambahkan event listener untuk klik pada tombol dropdown
-dropbtn.addEventListener("click", () => {
-  // Toggle class 'show' untuk menampilkan/menyembunyikan dropdown
+// Default mode
+let currentMode = "text";
+
+// Event listener for dropdown button click
+dropbtn.addEventListener("click", (event) => {
   dropdownContent.classList.toggle("show");
+  event.stopPropagation();
 });
 
-// Tutup dropdown jika klik di luar dropdown
+// Close dropdown if clicked outside
 window.addEventListener("click", (event) => {
   if (!dropdown.contains(event.target)) {
     dropdownContent.classList.remove("show");
   }
 });
 
-// Ambil semua item dropdown
+// Handle dropdown item clicks
 const dropdownItems = document.querySelectorAll(".dropdown-item");
-const selectedItem = document.getElementById("selected-item");
-
-// Tambahkan event listener untuk setiap item
 dropdownItems.forEach((item) => {
   item.addEventListener("click", function (e) {
-    e.preventDefault(); // Menghindari refresh halaman
-    selectedItem.textContent = this.dataset.value; // Update teks dengan value yang dipilih
+    e.preventDefault();
+    selectedItem.textContent = this.dataset.value;
+    dropdownContent.classList.remove("show");
+
+    if (this.id === "text-generation") {
+      currentMode = "text";
+    } else if (this.id === "image-generation") {
+      currentMode = "image";
+    }
   });
 });

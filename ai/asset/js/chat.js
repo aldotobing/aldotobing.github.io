@@ -79,26 +79,45 @@ document.addEventListener("DOMContentLoaded", function () {
     addMessage(userInput, "user-message");
 
     try {
-      const response = await fetch("https://ai.aldo-tobing.workers.dev/", {
+      let endpointUrl;
+      let requestBody;
+
+      if (currentMode === "text") {
+        endpointUrl = "https://ai.aldo-tobing.workers.dev/"; // Endpoint untuk text generation
+        requestBody = {
+          user_id: userId,
+          messages: [{ role: "user", content: userInput }],
+        };
+      } else if (currentMode === "image") {
+        endpointUrl = "https://image-gen.aldo-tobing.workers.dev/"; // Ganti dengan endpoint image generation
+        requestBody = {
+          prompt: userInput, // Ambil prompt dari input user
+        };
+      }
+      console.log("Current Mode:", currentMode);
+
+      const response = await fetch(endpointUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          user_id: userId,
-          messages: [{ role: "user", content: userInput }],
-        }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status}`);
       }
 
-      const data = await response.json();
-      const result = data?.content || "No response found!";
-      const htmlResult = convertMarkdownToHtml(result);
-
-      await typeWriterEffect(htmlResult); // Tunggu sampai typeWriterEffect selesai
+      if (currentMode === "text") {
+        const data = await response.json();
+        const result = data?.content || "No response found!";
+        const htmlResult = convertMarkdownToHtml(result);
+        await typeWriterEffect(htmlResult); // Tunggu sampai typeWriterEffect selesai
+      } else if (currentMode === "image") {
+        const imageBlob = await response.blob(); // Ambil blob dari response
+        const imageUrl = URL.createObjectURL(imageBlob); // Buat URL dari blob
+        addImageMessage(imageUrl); // Tambah fungsi untuk menampilkan gambar
+      }
     } catch (error) {
       console.error("Error:", error);
       addMessage(
@@ -106,6 +125,18 @@ document.addEventListener("DOMContentLoaded", function () {
         "bot-message"
       );
     }
+  }
+
+  function addImageMessage(imageUrl) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", "bot-message");
+    const imgElement = document.createElement("img");
+    imgElement.src = imageUrl;
+    imgElement.alt = "Generated Image"; // Deskripsi untuk gambar
+    imgElement.style.maxWidth = "100%"; // Responsif
+    messageElement.appendChild(imgElement);
+    aiChatMessages.appendChild(messageElement);
+    aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
   }
 
   function generateUniqueId() {
