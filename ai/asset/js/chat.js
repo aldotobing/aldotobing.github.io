@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function typeWriter(text, i) {
     if (i < text.length) {
       titleText.innerHTML += text.charAt(i);
-      setTimeout(() => typeWriter(text, i + 1), 100); // Kecepatan ketik
+      setTimeout(() => typeWriter(text, i + 1), 20); // Kecepatan ketik
     }
   }
 

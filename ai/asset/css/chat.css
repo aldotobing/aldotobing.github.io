@@ -304,10 +304,10 @@ body {
 
 .loading-message {
   display: inline-block;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: lighter;
   color: #808080; /* Sesuaikan dengan warna teks */
-  padding: 2px;
+  padding: 5px; /* Naikin padding untuk memberi ruang lebih */
   overflow: hidden;
   white-space: nowrap;
   font-family: "Arial", sans-serif; /* Ganti dengan font yang diinginkan */
