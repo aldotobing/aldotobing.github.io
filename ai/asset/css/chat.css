@@ -9,6 +9,14 @@
   --message-bot: #4d4d4d; /* Bot message background */
 }
 
+.bot-icon {
+  width: 30px; /* Atur lebar ikon sesuai kebutuhan */
+  height: 30px; /* Atur tinggi ikon */
+  vertical-align: middle; /* Rata tengah dengan teks */
+  margin-right: 5px; /* Spasi antara ikon dan teks */
+  border-radius: 50%; /* Membuat ikon bulat jika diinginkan */
+}
+
 #send-message {
   position: relative; /* Untuk positioning spinner */
 }
@@ -173,6 +181,27 @@ body {
   line-height: 1.4;
   font-size: 0.95em;
   animation: fadeIn 0.3s ease-out;
+  display: flex;
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-start; /* Align ke atas biar teks sejalan sama icon */
+  margin-left: 0px; /* Geser sedikit ke kiri */
+}
+
+.bot-icon {
+  width: 25px; /* Sedikit lebih kecil untuk kesesuaian layout */
+  height: 25px;
+  margin-right: 5px; /* Jarak dengan teks */
+  margin-left: -10px; /* Dorong lebih ke kiri */
+  border-radius: 50%; /* Bikin bulat */
+  object-fit: cover; /* Pastikan gambar proporsional */
+}
+
+.text-content {
+  max-width: 80%; /* Batasi lebar teks biar responsif */
+  word-wrap: break-word; /* Supaya teks gak keluar dari container */
 }
 
 @keyframes fadeIn {
@@ -202,9 +231,15 @@ body {
   align-self: flex-start; /* Tetap di sebelah kiri */
   border-bottom-left-radius: 4px;
   max-width: fit-content; /* Ukuran mengikuti konten */
-  padding: 10px 15px; /* Padding untuk memberi ruang di dalam pesan */
-  margin-left: 5px; /* Jarak dari tepi kiri */
+  padding: 8px 12px; /* Tambah sedikit padding biar lega */
+  margin-left: -10px;
   word-wrap: break-word; /* Untuk memecah kata yang panjang */
+  display: flex;
+
+  font-size: 1em; /* Ukuran font lebih besar */
+  line-height: 1.5; /* Biar lebih enak dibaca */
+  font-weight: 400; /* Berat font untuk kesan smooth */
+  color: #f0f0f0; /* Warna teks biar kontras */
 }
 
 .chat-input {
