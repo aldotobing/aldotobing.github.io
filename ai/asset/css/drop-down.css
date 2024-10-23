@@ -10,7 +10,7 @@
 }
 
 .chat-header {
-  /*  */
+  /* ad */
   position: relative; /* Menjamin dropdown tetap berada di dalam header */
   display: flex; /* Menggunakan flexbox untuk align item */
   align-items: center; /* Vertikal align untuk semua item di header */
