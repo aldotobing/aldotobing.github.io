@@ -1,109 +1,81 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kapal Lawd AI</title>
-    <meta
-      name="description"
-      content="AI Chat Assistant - Kapal Lawd Developed by Aldo Tobing"
-    />
-    <meta
-      name="keywords"
-      content="AI, Chat, Assistant, Kapal Lawd, Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer"
-    />
+    <title>Kapal Lawd Moved</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f4f8; /* Soft background color */
+        font-family: "Arial", sans-serif;
+        text-align: center;
+        margin: 0; /* Remove default margin */
+      }
+      .container {
+        padding: 40px;
+        background-color: #ffffff; /* White background for the message */
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow */
+      }
+      .message {
+        font-size: 28px; /* Larger font size for visibility */
+        margin-bottom: 10px;
+        color: #333; /* Darker text color */
+      }
+      .redirect-message {
+        font-size: 20px; /* Slightly smaller font */
+        color: #555; /* Medium grey for the link */
+        margin-bottom: 20px;
+      }
+      .countdown {
+        font-size: 16px; /* Smaller font for countdown */
+        color: #888; /* Lighter grey for the countdown */
+      }
+      a {
+        color: #007bff; /* Bootstrap blue */
+        text-decoration: none; /* No underline */
+        font-weight: bold; /* Bold text for the link */
+      }
+      a:hover {
+        text-decoration: underline; /* Underline on hover */
+      }
+    </style>
+    <script>
+      // Countdown and redirect
+      let countdown = 5; // Set countdown time in seconds
+      function startCountdown() {
+        const countdownElement = document.getElementById("countdown");
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Kapal Lawd AI" />
-    <meta
-      property="og:description"
-      content="AI Chat Assistant - Kapal Lawd Developed by Aldo Tobing"
-    />
-    <meta
-      property="og:image"
-      content="https://aldotobing.pages.dev/ai/asset/img/kapal-lawd.jpg"
-    />
-    <meta property="og:url" content="https://aldotobing.pages.dev/ai" />
-    <meta property="og:type" content="website" />
+        const interval = setInterval(() => {
+          if (countdown <= 0) {
+            clearInterval(interval);
+            window.location.href = "https://kapal-lawd-ai.pages.dev/";
+          } else {
+            countdownElement.innerText = countdown; // Update countdown display
+            countdown--;
+          }
+        }, 1000);
+      }
 
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Kapal Lawd - AI" />
-    <meta
-      name="twitter:description"
-      content="AI Chat Assistant - Kapal Lawd Developed by Aldo Tobing."
-    />
-    <meta
-      name="twitter:image"
-      content="https://aldotobing.pages.dev/ai/asset/img/kapal-lawd.jpg"
-    />
-    <meta name="twitter:url" content="https://aldotobing.pages.dev/ai" />
-
-    <meta
-      name="keywords"
-      content="Kapal Lawd, AI, Assistant, Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer"
-    />
-
-    <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon" />
-
-    <link rel="stylesheet" href="../ai/asset/css/chat.css" />
-    <link rel="stylesheet" href="../ai/asset/css/drop-down.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+      // Start the countdown when the window loads
+      window.onload = startCountdown;
+    </script>
   </head>
   <body>
-    <div class="chat-widget">
-      <div id="chat-container" class="chat-container">
-        <div class="chat-header">
-          <div class="dropdown">
-            <button class="dropbtn">
-              <i class="fas fa-bars"></i>
-            </button>
-            <div class="dropdown-content">
-              <a
-                href="#"
-                id="text-generation"
-                class="dropdown-item"
-                data-value="Chat"
-                >Chat</a
-              >
-              <a
-                href="#"
-                id="image-generation"
-                class="dropdown-item"
-                data-value="Image Gen"
-                >Image Gen</a
-              >
-            </div>
-          </div>
-          <span id="selected-item" class="selected-item">Chat</span>
-          <h3 class="chat-header-title">
-            <i class="fas fa-terminal" id="loading-icon"></i>
-            <span id="title-text"></span>
-          </h3>
-        </div>
-        <div id="chat-messages" class="chat-messages"></div>
-        <div class="chat-input">
-          <input
-            type="text"
-            id="user-input"
-            placeholder="Apa yang bisa saya bantu?
-          "
-          />
-          <button id="send-message" aria-label="Send message">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-        </div>
+    <div class="container">
+      <div class="message">Kapal Lawd has moved to:</div>
+      <div class="redirect-message">
+        <a href="https://kapal-lawd-ai.pages.dev/"
+          >https://kapal-lawd-ai.pages.dev/</a
+        >
+      </div>
+      <div class="countdown">
+        Redirecting you in <span id="countdown">5</span> seconds...
       </div>
     </div>
-    <script src="../ai/asset/js/chat.js"></script>
-    <script src="../ai/asset/js/drop-down.js"></script>
   </body>
 </html>
