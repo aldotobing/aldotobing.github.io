@@ -88,42 +88,57 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
+  // async function sendChatMessage(userInput) {
+  //   const userId = localStorage.getItem("user_id") || generateUniqueId();
+
+  //   addMessage(userInput, "user-message");
+
+  //   try {
+  //     const response = await fetch("https://ai.aldo-tobing.workers.dev/", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         user_id: userId,
+  //         messages: [{ role: "user", content: userInput }],
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`Network response was not ok: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     const result = data?.content || "The AI has been moved to: https://kapal-lawd-ai.pages.dev";
+
+  //     const htmlResult = convertMarkdownToHtml(result);
+  //     await typeWriterEffect(htmlResult, () => {
+  //       //console.log("Done");
+  //     });
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     addMessage(
+  //       "Sorry, there was an error processing your request.",
+  //       "bot-message"
+  //     );
+  //   }
+  // }
+
   async function sendChatMessage(userInput) {
-    const userId = localStorage.getItem("user_id") || generateUniqueId();
+  const userId = localStorage.getItem("user_id") || generateUniqueId();
 
-    addMessage(userInput, "user-message");
+  addMessage(userInput, "user-message");
 
-    try {
-      const response = await fetch("https://ai.aldo-tobing.workers.dev/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_id: userId,
-          messages: [{ role: "user", content: userInput }],
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const result = data?.content || "The AI has been moved to: https://kapal-lawd-ai.pages.dev";
-
-      const htmlResult = convertMarkdownToHtml(result);
-      await typeWriterEffect(htmlResult, () => {
-        //console.log("Done");
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      addMessage(
-        "Sorry, there was an error processing your request.",
-        "bot-message"
-      );
-    }
-  }
+  // Static bot response with a link
+  const staticResponse = 'The AI has been moved to: <a href="https://kapal-lawd-ai.pages.dev" target="_blank" rel="noopener noreferrer">https://kapal-lawd-ai.pages.dev</a>';
+  
+  // Use the typing effect with the static response
+  await typeWriterEffect(staticResponse, () => {
+    // Callback after typing effect is complete
+    sendMessage.disabled = false; // Re-enable the send button
+  });
+}
 
   function generateUniqueId() {
     const id = `user-${Math.random().toString(36).substring(2, 15)}`;
