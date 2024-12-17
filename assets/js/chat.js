@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
     chatContainer.style.display = "flex";
     chatToggle.style.display = "none";
 
-    addMessage(
-    'The AI has been moved to: <a href="https://kapal-lawd-ai.pages.dev" target="_blank" rel="noopener noreferrer">https://kapal-lawd-ai.pages.dev</a>',
-    "bot-message"
-      );
+    // addMessage(
+    // 'The AI has been moved to: <a href="https://kapal-lawd-ai.pages.dev" target="_blank" rel="noopener noreferrer">https://kapal-lawd-ai.pages.dev</a>',
+    // "bot-message"
+    //   );
   });
 
   document.addEventListener("click", (event) => {
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const data = await response.json();
-      const result = data?.content || "No response found!";
+      const result = data?.content || "The AI has been moved to: https://kapal-lawd-ai.pages.dev";
 
       const htmlResult = convertMarkdownToHtml(result);
       await typeWriterEffect(htmlResult, () => {
