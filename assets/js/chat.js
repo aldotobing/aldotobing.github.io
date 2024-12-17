@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
   chatToggle.addEventListener("click", () => {
     chatContainer.style.display = "flex";
     chatToggle.style.display = "none";
+
+    addMessage(
+    'The AI has been moved to: <a href="https://kapal-lawd-ai.pages.dev" target="_blank" rel="noopener noreferrer">https://kapal-lawd-ai.pages.dev</a>',
+    "bot-message"
+      );
   });
 
   document.addEventListener("click", (event) => {
