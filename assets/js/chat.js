@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
   addMessage(userInput, "user-message");
 
   // Static bot response with a link
-  const staticResponse = 'The AI has been moved to: <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">https://kapal-lawd-ai.pages.dev</a>';
+  const staticResponse = 'The AI has been moved to: <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">https://ai.aldotobing.online</a>';
   
   // Use the typing effect with the static response
   await typeWriterEffect(staticResponse, () => {
