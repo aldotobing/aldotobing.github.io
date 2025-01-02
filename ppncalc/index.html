@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPN Calculator</title>
+    <script src="app.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="dist/styles.css" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+      <h1 class="text-2xl font-semibold text-gray-800 text-center mb-4">
+        PPN Calculator
+      </h1>
+      <div class="space-y-4">
+        <!-- Price Input -->
+        <div>
+          <label class="block text-gray-600 font-medium">Price (in IDR):</label>
+          <input
+            id="price"
+            type="number"
+            class="w-full mt-1 p-2 border rounded-md"
+            placeholder="Enter price"
+          />
+        </div>
+
+        <!-- Basic Type -->
+        <div>
+          <label class="block text-gray-600 font-medium">Basic Type:</label>
+          <select
+            id="basicType"
+            class="w-full mt-1 p-2 border rounded-md"
+            aria-label="Type"
+          >
+            <option value="BASIC">Basic (Pokok)</option>
+            <option value="NON_BASIC">Non-Basic (Non-Pokok)</option>
+          </select>
+        </div>
+
+        <!-- Item Type -->
+        <div>
+          <label class="block text-gray-600 font-medium">Item Type:</label>
+          <select
+            id="itemType"
+            class="w-full mt-1 p-2 border rounded-md"
+            aria-label="Item Type"
+          >
+            <option value="LUXURY">Luxury (Mewah)</option>
+            <option value="NON_LUXURY">Non-Luxury (Non-Mewah)</option>
+          </select>
+        </div>
+
+        <!-- Transaction Date -->
+        <div>
+          <label class="block text-gray-600 font-medium"
+            >Transaction Date:</label
+          >
+          <input
+            id="transactionDate"
+            type="date"
+            class="w-full mt-1 p-2 border rounded-md"
+            title="Transaction Date"
+            placeholder="Select transaction date"
+          />
+        </div>
+
+        <!-- Calculate Button -->
+        <button
+          id="calculate"
+          class="w-full bg-blue-600 text-white font-medium py-2 rounded-md mt-4 hover:bg-blue-700"
+        >
+          Calculate PPN
+        </button>
+
+        <!-- Result -->
+        <div
+          id="result"
+          class="text-center mt-4 text-lg font-semibold text-gray-700"
+        ></div>
+      </div>
+    </div>
+  </body>
+</html>
