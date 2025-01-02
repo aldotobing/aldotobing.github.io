@@ -22,9 +22,9 @@
     />
     <meta
       property="og:image"
-      content="https://aldotobing.pages.dev/assets/img/profile-img.jpg"
+      content="https://aldotobing.online/assets/img/profile-img.jpg"
     />
-    <meta property="og:url" content="https://aldotobing.pages.dev" />
+    <meta property="og:url" content="https://aldotobing.online" />
     <meta property="og:type" content="website" />
 
     <!-- Twitter Card Meta Tags -->
@@ -36,13 +36,13 @@
     />
     <meta
       name="twitter:image"
-      content="https://aldotobing.pages.dev/assets/img/profile-img.jpg"
+      content="https://aldotobing.online/assets/img/profile-img.jpg"
     />
-    <meta name="twitter:url" content="https://aldotobing.pages.dev" />
+    <meta name="twitter:url" content="https://aldotobing.online" />
 
     <meta
       name="keywords"
-      content="Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer"
+      content="Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer, Kapal Lawd AI, AI"
     />
 
     <!-- Favicons -->
@@ -660,32 +660,39 @@
     <!-- Switch Dark Mode (Global) -->
 
     <div id="chat-widget" class="chat-widget">
-      <button id="chat-toggle" class="chat-toggle" aria-label="Toggle chat">
-        <i class="fas fa-comments"></i>
+  <button id="chat-toggle" class="chat-toggle" aria-label="Toggle chat">
+    <i class="fas fa-comments"></i>
+  </button>
+  <div id="chat-container" class="chat-container">
+    <div class="chat-header">
+      <h3>
+        <i class="fas fa-terminal" id="loading-icon"></i>
+        <span class="text-label">&nbsp;AI Assistant</span>
+      </h3>
+      <button id="chat-close" class="chat-close" aria-label="Close chat">
+        <i class="fas fa-times"></i>
       </button>
-      <div id="chat-container" class="chat-container">
-        <div class="chat-header">
-          <h3>
-            <i class="fas fa-terminal" id="loading-icon"></i>
-            <span class="text-label">&nbsp;Kapal Lawd</span>
-          </h3>
-          <button id="chat-close" class="chat-close" aria-label="Close chat">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div id="chat-messages" class="chat-messages"></div>
-        <div class="chat-input">
-          <input
-            type="text"
-            id="user-input"
-            placeholder="Ask Anything..."
-          />
-          <button id="send-message" aria-label="Send message">
-            <i class="fas fa-arrow-up"></i>
-          </button>
-        </div>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="chat-message">
+        The AI has been moved to:
+        <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">
+          https://ai.aldotobing.online
+        </a>
       </div>
     </div>
+    <div class="chat-input">
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Type a message..."
+      />
+      <button id="send-message" aria-label="Send message">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </div>
+  </div>
+</div>
     <!-- <script src="assets/js/container-open.js"></script> -->
   </body>
 </html>
