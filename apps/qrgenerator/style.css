@@ -34,13 +34,13 @@ body {
   width: 80%;
   padding: 12px;
   border: none;
-  border-bottom: 2px solid #fff;
   outline: none;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
+  transform-origin: center;
 }
 
 .input::placeholder {
@@ -48,9 +48,10 @@ body {
 }
 
 .input:focus {
-  width: 100%;
+  width: 90%;
   border-color: #ffcc00;
   background: rgba(255, 255, 255, 0.3);
+  transform: translateX(0);
 }
 
 /* Style the qr-code element */

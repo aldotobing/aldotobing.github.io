@@ -28,9 +28,13 @@ qrCode.append(qrcode_elm);
 
 // QR-Code generator
 const generateQrCode = (value) => {
-  if (!value) {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
     qrcode_elm.innerHTML = ""; // Clear the QR code
-    downloadBtn.disabled = true; // Disable download button
+    qrCode.update({
+      data: "", // Set empty data
+    });
     return;
   }
 
@@ -39,13 +43,12 @@ const generateQrCode = (value) => {
 
   // Update QR code data
   qrCode.update({
-    data: value,
+    data: trimmedValue,
   });
 
-  // Remove loading message and enable download button
+  // Remove loading message
   setTimeout(() => {
     qrcode_elm.querySelector(".loading")?.remove();
-    downloadBtn.disabled = false; // Enable download button
   }, 500);
 };
 
@@ -57,36 +60,41 @@ styleButtons.forEach((button) => {
     // Add active class to the clicked button
     button.classList.add("active");
 
+    // Base options that reset any previous gradient
+    const baseOptions = {
+      dotsOptions: {
+        color: "#000000",
+        type: "square",
+        gradient: null, // This explicitly removes any gradient
+      },
+    };
+
     // Update QR code style based on the selected button
     switch (button.id) {
       case "style-default":
-        qrCode.update({
-          dotsOptions: {
-            color: "#000000", // Solid black color
-            type: "square", // Square dots
-          },
-        });
+        qrCode.update(baseOptions);
         break;
       case "style-rounded":
         qrCode.update({
+          ...baseOptions,
           dotsOptions: {
-            color: "#000000", // Solid black color
-            type: "rounded", // Rounded dots
+            ...baseOptions.dotsOptions,
+            type: "rounded",
           },
         });
         break;
       case "style-gradient":
         qrCode.update({
           dotsOptions: {
+            type: "square",
             gradient: {
-              type: "linear", // Linear gradient
-              rotation: 45, // Gradient rotation angle
+              type: "linear",
+              rotation: 45,
               colorStops: [
-                { offset: 0, color: "#6a11cb" }, // Start color
-                { offset: 1, color: "#2575fc" }, // End color
+                { offset: 0, color: "#6a11cb" },
+                { offset: 1, color: "#2575fc" },
               ],
             },
-            type: "square", // Square dots
           },
         });
         break;
@@ -97,6 +105,13 @@ styleButtons.forEach((button) => {
 // Download QR Code
 downloadBtn.addEventListener("click", () => {
   const inputValue = qrdata_elm.value.trim(); // Get the input value
+
+  // Prevent download if input is empty
+  if (!inputValue) {
+    downloadBtn.disabled = true;
+    return;
+  }
+
   let fileName = "qrcode"; // Default base name
 
   // Use the input value as part of the file name (if available)
@@ -115,7 +130,31 @@ downloadBtn.addEventListener("click", () => {
   qrCode.download({ name: fileName, extension: "png" });
 });
 
-// Events
-qrdata_elm.addEventListener("input", () => {
-  generateQrCode(qrdata_elm.value);
+// Events - Update input event listener to handle all input cases
+qrdata_elm.addEventListener("input", (e) => {
+  const value = e.target.value.trim(); // Trim the input value
+  generateQrCode(value); // Generate or clear QR code based on input
+  downloadBtn.disabled = value === ""; // Correctly set the disabled state
+});
+
+// Update the focus/blur events to handle button state
+qrdata_elm.addEventListener("blur", (e) => {
+  const value = e.target.value.trim();
+  downloadBtn.disabled = value === ""; // Disable the button if input is empty
+});
+
+// Remove the duplicate generateQRCode function and update style button handlers
+styleButtons.forEach((button) => {
+  button.addEventListener("click", function () {
+    // Remove active class from all buttons
+    styleButtons.forEach((btn) => btn.classList.remove("active"));
+    // Add active class to clicked button
+    this.classList.add("active");
+
+    // Generate QR code with current input value
+    const text = qrdata_elm.value;
+    if (text) {
+      generateQrCode(text);
+    }
+  });
 });
