@@ -8,20 +8,35 @@
       href="https://aldotobing.github.io/assets/img/favicon.png"
       rel="icon"
     />
-    <!-- Add a link to a CSS file -->
-    <link rel="stylesheet" href="/qrgenerator/style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
-    <!-- Add some classes to your elements -->
-    <input
-      type="text"
-      id="qr-data"
-      class="input"
-      placeholder="Paste the URL or TEXT"
-    />
-    <div id="qr-code" class="qr"></div>
+    <div class="container">
+      <h1>QR Code Generator</h1>
+      <p>Paste your URL or text below to generate a QR code!</p>
+      <input
+        type="text"
+        id="qr-data"
+        class="input"
+        placeholder="Paste the URL or TEXT"
+      />
+      <div id="qr-code" class="qr"></div>
+      <div class="style-buttons">
+        <button id="style-default" class="style-btn active">Default</button>
+        <button id="style-rounded" class="style-btn">Rounded</button>
+        <button id="style-gradient" class="style-btn">Gradient</button>
+      </div>
+      <button id="download-btn" class="btn" disabled>
+        <i class="fas fa-download"></i> Download QR Code
+      </button>
+    </div>
 
-    <script type="text/javascript" src="/qrgenerator/qrcode.min.js"></script>
-    <script type="text/javascript" src="/qrgenerator/script.js"></script>
+    <!-- Include qr-code-styling library -->
+    <script src="https://unpkg.com/qr-code-styling@1.6.0/lib/qr-code-styling.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
