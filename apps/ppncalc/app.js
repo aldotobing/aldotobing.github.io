@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultDiv = document.getElementById("result");
   const errorDiv = document.getElementById("error");
 
+  // Formatting input for "Price (IDR)"
+  document.getElementById("formattedPrice").addEventListener("input", (e) => {
+    const rawValue = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+    const formattedValue = new Intl.NumberFormat("id-ID").format(rawValue); // Format as IDR
+    e.target.value = formattedValue;
+
+    // Update the hidden input with the raw value
+    document.getElementById("price").value = rawValue;
+  });
+
   // Initialize Flatpickr with Indonesian locale
   const fp = flatpickr("#date", {
     dateFormat: "d/m/Y",
