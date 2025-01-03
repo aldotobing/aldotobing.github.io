@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PPN Calculator</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="background-pattern min-h-screen flex items-center justify-center p-4"
+  >
+    <div class="glassmorphism rounded-2xl shadow-xl max-w-xl w-full p-8">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">PPN Calculator</h1>
+        <p class="text-gray-600 italic text-sm">
+          * This tax calculation is based on the new regulations issued by the
+          Indonesian government, effective January 1, 2025.
+          <a
+            href="https://jdih.kemenkeu.go.id/api/download/ad276b82-94bd-4197-b409-af33e2842cd6/2024pmkeuangan131.pdf"
+            target="_blank"
+            class="text-indigo-600 hover:text-indigo-800 underline"
+          >
+            View the official document
+          </a>
+          and
+          <a
+            href="https://x.com/aria_ghora/status/1874439397648764949"
+            target="_blank"
+            class="text-indigo-600 hover:text-indigo-800 underline"
+          >
+            related reference </a
+          >.
+        </p>
+      </div>
+
+      <form id="taxForm" class="space-y-6">
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700"
+            >Price (IDR)</label
+          >
+          <div class="relative">
+            <span
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              >Rp</span
+            >
+            <input
+              inputmode="numeric"
+              pattern="[0-9]*"
+              type="text"
+              id="price"
+              class="number-input pl-12 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              placeholder="Masukkan harga"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Type</label
+          >
+          <div class="custom-radio grid grid-cols-2 gap-4">
+            <div>
+              <input
+                type="radio"
+                id="basic"
+                name="basicType"
+                value="BASIC"
+                checked
+              />
+              <label for="basic" class="block w-full text-center">Basic</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="nonBasic"
+                name="basicType"
+                value="NON_BASIC"
+              />
+              <label for="nonBasic" class="block w-full text-center"
+                >Non-Basic</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Item Type</label
+          >
+          <div class="custom-radio grid grid-cols-2 gap-4">
+            <div>
+              <input
+                type="radio"
+                id="luxury"
+                name="itemType"
+                value="LUXURY"
+                checked
+              />
+              <label for="luxury" class="block w-full text-center"
+                >Luxury</label
+              >
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="nonLuxury"
+                name="itemType"
+                value="NON_LUXURY"
+              />
+              <label for="nonLuxury" class="block w-full text-center"
+                >Non-Luxury</label
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label for="date" class="block text-sm font-medium text-gray-700"
+            >Transaction Date</label
+          >
+          <div class="relative">
+            <input
+              type="text"
+              id="date"
+              class="datepicker w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all pr-10"
+              required
+              readonly
+            />
+            <span
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition-colors duration-200 flex items-center justify-center gap-2 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          Hitung PPN
+        </button>
+      </form>
+
+      <div class="mt-8 p-4 bg-gray-50 rounded-lg">
+        <div
+          id="result"
+          class="text-center text-lg font-semibold text-gray-800"
+        >
+          PPN: Rp 0
+        </div>
+        <div id="error" class="text-center text-sm text-red-600 mt-2"></div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/id.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
