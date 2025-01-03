@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        color: white;
+        text-align: center;
+      }
+
+      .container {
+        animation: fadeIn 1s ease-out;
+      }
+
+      .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top: 5px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 20px auto;
+      }
+
+      .status-list {
+        text-align: left;
+        max-width: 300px;
+        margin: 20px auto;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .status-item {
+        display: flex;
+        align-items: center;
+      }
+
+      .status-check {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .status-check.done {
+        border-color: #00e676;
+        background-color: #00e676;
+        color: white;
+      }
+
+      a {
+        color: #ffeaa7;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        color: #dfe6e9;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Validating Request...</h1>
+      <div class="spinner"></div>
+      <ul class="status-list">
+        <li class="status-item">
+          <span class="status-check" id="check-javascript"></span> Checking
+          JavaScript Support
+        </li>
+        <li class="status-item">
+          <span class="status-check" id="check-user-agent"></span> Verifying
+          User Agent
+        </li>
+        <li class="status-item">
+          <span class="status-check" id="check-human"></span> Confirming Human
+          Interaction
+        </li>
+      </ul>
+      <p>
+        If you are not redirected automatically, click
+        <a href="https://aldotobing.online/apps/qrgenerator">here</a>.
+      </p>
+    </div>
+
+    <script>
+      const statusList = [
+        { id: "check-javascript", message: "JavaScript Enabled" },
+        { id: "check-user-agent", message: "User Agent Verified" },
+        { id: "check-human", message: "Human Interaction Detected" },
+      ];
+
+      const userAgent = navigator.userAgent.toLowerCase();
+      const botPatterns = ["bot", "crawl", "spider", "slurp", "mediapartners"];
+
+      const isBot = botPatterns.some((pattern) => userAgent.includes(pattern));
+
+      const validateSteps = async () => {
+        for (let i = 0; i < statusList.length; i++) {
+          const step = statusList[i];
+          const checkEl = document.getElementById(step.id);
+
+          if (step.id === "check-javascript") {
+            // JavaScript check always passes if script runs
+            checkEl.classList.add("done");
+            checkEl.textContent = "✔";
+          } else if (step.id === "check-user-agent") {
+            if (!isBot) {
+              checkEl.classList.add("done");
+              checkEl.textContent = "✔";
+            } else {
+              checkEl.textContent = "✖";
+              alert("Access denied: bot detected");
+              return;
+            }
+          } else if (step.id === "check-human") {
+            // Simulate a user interaction check
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            checkEl.classList.add("done");
+            checkEl.textContent = "✔";
+          }
+
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+
+        // Redirect after all checks
+        window.location.href = "https://aldotobing.online/apps/qrgenerator";
+      };
+
+      validateSteps();
+    </script>
+  </body>
+</html>
