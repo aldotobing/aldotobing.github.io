@@ -138,11 +138,11 @@
           if (step.id === "check-javascript") {
             // JavaScript check always passes if script runs
             checkEl.classList.add("done");
-            checkEl.textContent = "✅";
+            checkEl.textContent = "✔";
           } else if (step.id === "check-user-agent") {
             if (!isBot) {
               checkEl.classList.add("done");
-              checkEl.textContent = "✅";
+              checkEl.textContent = "✔";
             } else {
               checkEl.textContent = "✖";
               alert("Access denied: bot detected");
@@ -152,7 +152,7 @@
             // Simulate a user interaction check
             await new Promise((resolve) => setTimeout(resolve, 1000));
             checkEl.classList.add("done");
-            checkEl.textContent = "✅";
+            checkEl.textContent = "✔";
           }
 
           await new Promise((resolve) => setTimeout(resolve, 1000));
