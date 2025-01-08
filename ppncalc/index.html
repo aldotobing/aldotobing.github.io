@@ -20,6 +20,7 @@
 
       .container {
         background: rgba(255, 255, 255, 0.1);
+        -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         padding: 2.5rem;
         border-radius: 16px;
@@ -156,9 +157,62 @@
         width: 0%;
         transition: width 0.5s ease;
       }
+
+      .error-message {
+        background: rgba(248, 113, 113, 0.2);
+        border-left: 3px solid #f87171;
+        padding: 0.75rem 1rem;
+        margin-top: 1rem;
+        border-radius: 8px;
+        text-align: left;
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .error-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .error-description {
+        opacity: 0.9;
+      }
+
+      .retry-button {
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background: rgba(248, 113, 113, 0.3);
+        border-radius: 6px;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+      }
+
+      .retry-button:hover {
+        background: rgba(248, 113, 113, 0.4);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- Previous HTML structure remains the same until the status-list -->
     <div class="container">
       <h1>Validating Request...</h1>
       <div class="progress-bar">
@@ -179,6 +233,13 @@
           Confirming Human Interaction
         </li>
       </ul>
+      <div class="error-message" id="error-message">
+        <div class="error-title">Validation Failed</div>
+        <div class="error-description" id="error-description"></div>
+        <a href="javascript:void(0)" class="retry-button" id="retry-button">
+          Try Again
+        </a>
+      </div>
       <div class="redirect-info">
         <p class="redirect-text" id="status-text">
           Completing security checks...
@@ -199,15 +260,59 @@
 
     <script>
       const statusList = [
-        { id: "check-javascript", message: "JavaScript Support" },
-        { id: "check-user-agent", message: "Browser Verification" },
-        { id: "check-human", message: "Human Interaction" },
+        {
+          id: "check-javascript",
+          message: "JavaScript Support",
+          errorMessage:
+            "JavaScript is not enabled in your browser. Please enable JavaScript and refresh the page.",
+        },
+        {
+          id: "check-user-agent",
+          message: "Browser Verification",
+          errorMessage:
+            "Access denied: Your browser appears to be using automated requests. If you're a real user, please try a different browser or disable any automation tools.",
+        },
+        {
+          id: "check-human",
+          message: "Human Interaction",
+          errorMessage:
+            "No user interaction detected. Please move your mouse or interact with the page to confirm you're human.",
+        },
       ];
 
       const progress = document.getElementById("progress");
       const redirectLink = document.getElementById("redirect-link");
       const statusText = document.getElementById("status-text");
       const redirectNote = document.getElementById("redirect-note");
+      const errorMessage = document.getElementById("error-message");
+      const errorDescription = document.getElementById("error-description");
+      const retryButton = document.getElementById("retry-button");
+
+      const showError = (message) => {
+        errorDescription.textContent = message;
+        errorMessage.classList.add("show");
+        progress.style.background = "#f87171";
+      };
+
+      const hideError = () => {
+        errorMessage.classList.remove("show");
+        progress.style.background = "#34d399";
+      };
+
+      const resetValidation = () => {
+        hideError();
+        progress.style.width = "0%";
+        statusText.textContent = "Completing security checks...";
+        redirectLink.style.display = "none";
+        redirectNote.style.display = "none";
+        document.querySelectorAll(".status-check").forEach((check) => {
+          check.classList.remove("done", "error");
+          check.textContent = "";
+        });
+        validateSteps();
+      };
+
+      retryButton.addEventListener("click", resetValidation);
 
       const detectBot = () => {
         const userAgent = navigator.userAgent.toLowerCase();
@@ -235,46 +340,50 @@
           const checkEl = document.getElementById(step.id);
           updateProgress(i);
 
-          switch (step.id) {
-            case "check-javascript":
-              checkEl.classList.add("done");
-              checkEl.textContent = "✓";
-              break;
-
-            case "check-user-agent":
-              await new Promise((resolve) => setTimeout(resolve, 800));
-              if (!detectBot()) {
+          try {
+            switch (step.id) {
+              case "check-javascript":
                 checkEl.classList.add("done");
                 checkEl.textContent = "✓";
-              } else {
-                checkEl.classList.add("error");
-                checkEl.textContent = "×";
-                return;
-              }
-              break;
+                break;
 
-            case "check-human":
-              await new Promise((resolve) => setTimeout(resolve, 1000));
-              if (mouseMovements > 2) {
-                checkEl.classList.add("done");
-                checkEl.textContent = "✓";
-              } else {
-                await new Promise((resolve) => setTimeout(resolve, 1000));
-                if (mouseMovements > 0) {
+              case "check-user-agent":
+                await new Promise((resolve) => setTimeout(resolve, 800));
+                if (!detectBot()) {
                   checkEl.classList.add("done");
                   checkEl.textContent = "✓";
                 } else {
-                  checkEl.classList.add("error");
-                  checkEl.textContent = "×";
-                  return;
+                  throw new Error(step.errorMessage);
                 }
-              }
-              break;
+                break;
+
+              case "check-human":
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                if (mouseMovements > 2) {
+                  checkEl.classList.add("done");
+                  checkEl.textContent = "✓";
+                } else {
+                  await new Promise((resolve) => setTimeout(resolve, 1000));
+                  if (mouseMovements > 0) {
+                    checkEl.classList.add("done");
+                    checkEl.textContent = "✓";
+                  } else {
+                    throw new Error(step.errorMessage);
+                  }
+                }
+                break;
+            }
+          } catch (error) {
+            checkEl.classList.add("error");
+            checkEl.textContent = "×";
+            showError(error.message);
+            return;
           }
 
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
 
+        // All checks passed
         statusText.textContent = "Verification complete!";
         redirectLink.style.display = "inline-block";
         redirectNote.style.display = "block";
