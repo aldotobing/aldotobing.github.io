@@ -34,7 +34,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
         background: linear-gradient(135deg, #60a5fa, #818cf8);
         color: white;
         text-align: center;
@@ -49,6 +49,7 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         max-width: 90%;
         width: 400px;
+        margin: 1rem;
         animation: slideIn 0.6s ease-out;
       }
 
@@ -234,7 +235,6 @@
     </style>
   </head>
   <body>
-    <!-- Previous HTML structure remains the same until the status-list -->
     <div class="container">
       <h1>Validating Request...</h1>
       <div class="progress-bar">
@@ -298,7 +298,7 @@
           id: "check-human",
           message: "Human Interaction",
           errorMessage:
-            "No user interaction detected. Please move your mouse or interact with the page to confirm you're human.",
+            "No user interaction detected. Please tap, click, scroll, or interact with the page to continue.",
         },
       ];
 
@@ -309,6 +309,21 @@
       const errorMessage = document.getElementById("error-message");
       const errorDescription = document.getElementById("error-description");
       const retryButton = document.getElementById("retry-button");
+
+      let interactionCount = 0;
+      const requiredInteractions = 1; // Reduced from previous value
+
+      // Track various types of interactions
+      const trackInteraction = () => {
+        interactionCount++;
+      };
+
+      // Add multiple event listeners for different types of interactions
+      ["touchstart", "touchmove", "mousemove", "click", "scroll"].forEach(
+        (event) => {
+          document.addEventListener(event, trackInteraction, { passive: true });
+        }
+      );
 
       const showError = (message) => {
         errorDescription.textContent = message;
@@ -327,6 +342,7 @@
         statusText.textContent = "Completing security checks...";
         redirectLink.style.display = "none";
         redirectNote.style.display = "none";
+        interactionCount = 0;
         document.querySelectorAll(".status-check").forEach((check) => {
           check.classList.remove("done", "error");
           check.textContent = "";
@@ -354,9 +370,6 @@
       };
 
       const validateSteps = async () => {
-        let mouseMovements = 0;
-        document.addEventListener("mousemove", () => mouseMovements++);
-
         for (let i = 0; i < statusList.length; i++) {
           const step = statusList[i];
           const checkEl = document.getElementById(step.id);
@@ -381,12 +394,13 @@
 
               case "check-human":
                 await new Promise((resolve) => setTimeout(resolve, 1000));
-                if (mouseMovements > 2) {
+                if (interactionCount >= requiredInteractions) {
                   checkEl.classList.add("done");
                   checkEl.textContent = "✓";
                 } else {
-                  await new Promise((resolve) => setTimeout(resolve, 1000));
-                  if (mouseMovements > 0) {
+                  // Give more time for interaction on mobile
+                  await new Promise((resolve) => setTimeout(resolve, 2000));
+                  if (interactionCount >= requiredInteractions) {
                     checkEl.classList.add("done");
                     checkEl.textContent = "✓";
                   } else {
