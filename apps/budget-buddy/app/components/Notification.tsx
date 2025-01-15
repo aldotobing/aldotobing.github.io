@@ -1,28 +1,37 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { X } from 'lucide-react'
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 interface NotificationProps {
-  message: string
-  type: 'success' | 'error' | 'warning'
-  onClose: () => void
+  message: string;
+  type: "success" | "error" | "warning";
+  onClose: () => void;
 }
 
-export default function Notification({ message, type, onClose }: NotificationProps) {
-  const [isVisible, setIsVisible] = useState(true)
+export default function Notification({
+  message,
+  type,
+  onClose,
+}: NotificationProps) {
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(false)
-      onClose()
-    }, 5000)
+      setIsVisible(false);
+      onClose();
+    }, 5000);
 
-    return () => clearTimeout(timer)
-  }, [onClose])
+    return () => clearTimeout(timer);
+  }, [onClose]);
 
-  const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-yellow-500'
+  const bgColor =
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+      ? "bg-red-500"
+      : "bg-yellow-500";
 
   return (
     <AnimatePresence>
@@ -35,13 +44,16 @@ export default function Notification({ message, type, onClose }: NotificationPro
         >
           <div className="flex items-center">
             <p className="mr-4">{message}</p>
-            <button onClick={() => setIsVisible(false)} className="text-white hover:text-gray-200">
+            <button
+              title="Close notification"
+              onClick={() => setIsVisible(false)}
+              className="text-white hover:text-gray-200"
+            >
               <X size={18} />
             </button>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }
-

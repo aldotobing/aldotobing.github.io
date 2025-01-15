@@ -1,51 +1,63 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { LogIn, UserPlus, ChevronLeft, ChevronRight } from 'lucide-react'
-import Notification from '../components/Notification'
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { LogIn, UserPlus, ChevronLeft, ChevronRight } from "lucide-react";
+import Notification from "../components/Notification";
 
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' | 'warning' } | null>(null)
-  const router = useRouter()
+  const [isLogin, setIsLogin] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error" | "warning";
+  } | null>(null);
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (isLogin) {
-      handleLogin()
+      handleLogin();
     } else {
-      handleRegister()
+      handleRegister();
     }
-  }
+  };
 
   const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
-    const user = users.find((u: any) => u.username === username && u.password === password)
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const user = users.find(
+      (u: any) => u.username === username && u.password === password
+    );
     if (user) {
-      localStorage.setItem('currentUser', JSON.stringify(user))
-      router.push('/dashboard')
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      router.push("/dashboard");
     } else {
-      setNotification({ message: 'Invalid username or password', type: 'error' })
+      setNotification({
+        message: "Invalid username or password",
+        type: "error",
+      });
     }
-  }
+  };
 
   const handleRegister = () => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]')
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
     if (users.some((u: any) => u.username === username)) {
-      setNotification({ message: 'Username already exists', type: 'error' })
-      return
+      setNotification({ message: "Username already exists", type: "error" });
+      return;
     }
-    const newUser = { username, password, budget: { expenses: [], income: [], savings: [] } }
-    users.push(newUser)
-    localStorage.setItem('users', JSON.stringify(users))
-    localStorage.setItem('currentUser', JSON.stringify(newUser))
-    setNotification({ message: 'Registration successful!', type: 'success' })
-    router.push('/dashboard')
-  }
+    const newUser = {
+      username,
+      password,
+      budget: { expenses: [], income: [], savings: [] },
+    };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.setItem("currentUser", JSON.stringify(newUser));
+    setNotification({ message: "Registration successful!", type: "success" });
+    router.push("/dashboard");
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-purple-500 to-pink-500 flex items-center justify-center p-4">
@@ -57,18 +69,21 @@ export default function Auth() {
       >
         <AnimatePresence mode="wait">
           <motion.div
-            key={isLogin ? 'login' : 'register'}
+            key={isLogin ? "login" : "register"}
             initial={{ opacity: 0, x: isLogin ? -100 : 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: isLogin ? 100 : -100 }}
             transition={{ duration: 0.3 }}
           >
             <h1 className="text-3xl font-bold mb-6 text-white text-center">
-              {isLogin ? 'Welcome Back!' : 'Join BudgetBuddy'}
+              {isLogin ? "Welcome Back!" : "Join BudgetBuddy"}
             </h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-white text-sm font-bold mb-2" htmlFor="username">
+                <label
+                  className="block text-white text-sm font-bold mb-2"
+                  htmlFor="username"
+                >
                   Username
                 </label>
                 <input
@@ -82,7 +97,10 @@ export default function Auth() {
                 />
               </div>
               <div>
-                <label className="block text-white text-sm font-bold mb-2" htmlFor="password">
+                <label
+                  className="block text-white text-sm font-bold mb-2"
+                  htmlFor="password"
+                >
                   Password
                 </label>
                 <input
@@ -98,7 +116,9 @@ export default function Auth() {
               <div>
                 <button
                   className={`${
-                    isLogin ? 'bg-blue-500 hover:bg-blue-600' : 'bg-green-500 hover:bg-green-600'
+                    isLogin
+                      ? "bg-blue-500 hover:bg-blue-600"
+                      : "bg-green-500 hover:bg-green-600"
                   } text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline w-full transition-colors duration-300 flex items-center justify-center`}
                   type="submit"
                 >
@@ -145,6 +165,5 @@ export default function Auth() {
         />
       )}
     </div>
-  )
+  );
 }
-

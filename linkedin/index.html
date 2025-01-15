@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn Bio Generator</title>
+    <link
+      rel="icon"
+      href="https://aldotobing.github.io/assets/img/favicon.png"
+    />
+    <meta
+      name="description"
+      content="LinkedIn Bio Generator - Generate professional LinkedIn bios effortlessly."
+    />
+    <meta property="og:title" content="LinkedIn Bio Generator" />
+    <meta
+      property="og:description"
+      content="Generate professional LinkedIn bios effortlessly."
+    />
+    <meta
+      property="og:image"
+      content="https://aldotobing.github.io/assets/img/preview.svg"
+    />
+    <meta
+      property="og:url"
+      content="https://aldotobing.github.io/linkedin-bio-generator"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #60a5fa, #818cf8);
+        color: white;
+        text-align: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.1);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        padding: 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        max-width: 90%;
+        width: 400px;
+        animation: slideIn 0.6s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1 {
+        margin: 0 0 1.5rem 0;
+        font-weight: 600;
+        font-size: 1.75rem;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        margin: 20px auto;
+        animation: spin 1s linear infinite;
+      }
+
+      .status-list {
+        text-align: left;
+        margin: 1.5rem auto;
+        padding: 0;
+        list-style: none;
+      }
+
+      .status-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        margin: 0.75rem 0;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        transition: transform 0.2s;
+      }
+
+      .status-item:hover {
+        transform: translateX(5px);
+      }
+
+      .status-check {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .status-check.done {
+        background-color: #34d399;
+        border-color: #34d399;
+      }
+
+      .status-check.error {
+        background-color: #f87171;
+        border-color: #f87171;
+      }
+
+      .redirect-info {
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        opacity: 0.9;
+      }
+
+      .redirect-text {
+        margin-bottom: 0.5rem;
+      }
+
+      .redirect-note {
+        font-size: 0.85rem;
+        opacity: 0.8;
+        margin-top: 0.5rem;
+      }
+
+      .redirect-link {
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+
+      .redirect-link:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 1rem 0;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: #34d399;
+        width: 0%;
+        transition: width 0.5s ease;
+      }
+
+      .error-message {
+        background: rgba(248, 113, 113, 0.2);
+        border-left: 3px solid #f87171;
+        padding: 0.75rem 1rem;
+        margin-top: 1rem;
+        border-radius: 8px;
+        text-align: left;
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .error-message.show {
+        display: block;
+        animation: fadeIn 0.3s ease-out;
+      }
+
+      .error-title {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .error-description {
+        opacity: 0.9;
+      }
+
+      .retry-button {
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        background: rgba(248, 113, 113, 0.3);
+        border-radius: 6px;
+        transition: all 0.2s;
+        font-size: 0.9rem;
+      }
+
+      .retry-button:hover {
+        background: rgba(248, 113, 113, 0.4);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Previous HTML structure remains the same until the status-list -->
+    <div class="container">
+      <h1>Validating Request...</h1>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+      <div class="spinner"></div>
+      <ul class="status-list">
+        <li class="status-item">
+          <span class="status-check" id="check-javascript"></span>
+          Checking JavaScript Support
+        </li>
+        <li class="status-item">
+          <span class="status-check" id="check-user-agent"></span>
+          Verifying Browser
+        </li>
+        <li class="status-item">
+          <span class="status-check" id="check-human"></span>
+          Confirming Human Interaction
+        </li>
+      </ul>
+      <div class="error-message" id="error-message">
+        <div class="error-title">Validation Failed</div>
+        <div class="error-description" id="error-description"></div>
+        <a href="javascript:void(0)" class="retry-button" id="retry-button">
+          Try Again
+        </a>
+      </div>
+      <div class="redirect-info">
+        <p class="redirect-text" id="status-text">
+          Completing security checks...
+        </p>
+        <a
+          href="https://aldotobing.github.io/linkedin-bio-generator/"
+          class="redirect-link"
+          id="redirect-link"
+          style="display: none"
+        >
+          Continue →
+        </a>
+        <p class="redirect-note" id="redirect-note" style="display: none">
+          If not redirected automatically, click the button above
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const statusList = [
+        {
+          id: "check-javascript",
+          message: "JavaScript Support",
+          errorMessage:
+            "JavaScript is not enabled in your browser. Please enable JavaScript and refresh the page.",
+        },
+        {
+          id: "check-user-agent",
+          message: "Browser Verification",
+          errorMessage:
+            "Access denied: Your browser appears to be using automated requests. If you're a real user, please try a different browser or disable any automation tools.",
+        },
+        {
+          id: "check-human",
+          message: "Human Interaction",
+          errorMessage:
+            "No user interaction detected. Please move your mouse or interact with the page to confirm you're human.",
+        },
+      ];
+
+      const progress = document.getElementById("progress");
+      const redirectLink = document.getElementById("redirect-link");
+      const statusText = document.getElementById("status-text");
+      const redirectNote = document.getElementById("redirect-note");
+      const errorMessage = document.getElementById("error-message");
+      const errorDescription = document.getElementById("error-description");
+      const retryButton = document.getElementById("retry-button");
+
+      const showError = (message) => {
+        errorDescription.textContent = message;
+        errorMessage.classList.add("show");
+        progress.style.background = "#f87171";
+      };
+
+      const hideError = () => {
+        errorMessage.classList.remove("show");
+        progress.style.background = "#34d399";
+      };
+
+      const resetValidation = () => {
+        hideError();
+        progress.style.width = "0%";
+        statusText.textContent = "Completing security checks...";
+        redirectLink.style.display = "none";
+        redirectNote.style.display = "none";
+        document.querySelectorAll(".status-check").forEach((check) => {
+          check.classList.remove("done", "error");
+          check.textContent = "";
+        });
+        validateSteps();
+      };
+
+      retryButton.addEventListener("click", resetValidation);
+
+      const detectBot = () => {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const botPatterns = [
+          "bot",
+          "crawl",
+          "spider",
+          "slurp",
+          "mediapartners",
+        ];
+        return botPatterns.some((pattern) => userAgent.includes(pattern));
+      };
+
+      const updateProgress = (step) => {
+        const progressPercentage = ((step + 1) / statusList.length) * 100;
+        progress.style.width = `${progressPercentage}%`;
+      };
+
+      const validateSteps = async () => {
+        let mouseMovements = 0;
+        document.addEventListener("mousemove", () => mouseMovements++);
+
+        for (let i = 0; i < statusList.length; i++) {
+          const step = statusList[i];
+          const checkEl = document.getElementById(step.id);
+          updateProgress(i);
+
+          try {
+            switch (step.id) {
+              case "check-javascript":
+                checkEl.classList.add("done");
+                checkEl.textContent = "✓";
+                break;
+
+              case "check-user-agent":
+                await new Promise((resolve) => setTimeout(resolve, 800));
+                if (!detectBot()) {
+                  checkEl.classList.add("done");
+                  checkEl.textContent = "✓";
+                } else {
+                  throw new Error(step.errorMessage);
+                }
+                break;
+
+              case "check-human":
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                if (mouseMovements > 2) {
+                  checkEl.classList.add("done");
+                  checkEl.textContent = "✓";
+                } else {
+                  await new Promise((resolve) => setTimeout(resolve, 1000));
+                  if (mouseMovements > 0) {
+                    checkEl.classList.add("done");
+                    checkEl.textContent = "✓";
+                  } else {
+                    throw new Error(step.errorMessage);
+                  }
+                }
+                break;
+            }
+          } catch (error) {
+            checkEl.classList.add("error");
+            checkEl.textContent = "×";
+            showError(error.message);
+            return;
+          }
+
+          await new Promise((resolve) => setTimeout(resolve, 500));
+        }
+
+        // All checks passed
+        statusText.textContent = "Verification complete!";
+        redirectLink.style.display = "inline-block";
+        redirectNote.style.display = "block";
+
+        setTimeout(() => {
+          window.location.href =
+            "https://aldotobing.github.io/linkedin-bio-generator/";
+        }, 2000);
+      };
+
+      window.addEventListener("load", validateSteps);
+    </script>
+  </body>
+</html>
