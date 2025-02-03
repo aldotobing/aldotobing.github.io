@@ -1,6 +1,6 @@
 # aldotobing.github.io
 
-This repository contains various projects and applications. Below is a brief overview of each project:
+This repository contains various projects and applications, including my personal static page hosted at the domain root `aldotobing.github.io`. Below is a brief overview of each project:
 
 ## Projects
 
