@@ -51,6 +51,7 @@
             animation: fadeInOut 2s forwards;
             position: relative;
             z-index: 2;
+            cursor: pointer;
         }
 
         @keyframes fadeInOut {
@@ -73,15 +74,26 @@
 
     <div class="container">
         <button class="btn" onclick="showText()">Klik</button>
-        <div class="text">SILIT</div>
+        <div class="text" onclick="resetPage()">SILIT</div>
         <canvas id="fireworks"></canvas>
     </div>
 
     <script>
+        let fireworksInterval;
+
         function showText() {
             document.querySelector('.btn').style.display = 'none';
             document.querySelector('.text').style.opacity = '1';
             startFireworks();
+        }
+
+        function resetPage() {
+            document.querySelector('.btn').style.display = 'block';
+            document.querySelector('.text').style.opacity = '0';
+            clearInterval(fireworksInterval);
+            const canvas = document.getElementById("fireworks");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
         function startFireworks() {
@@ -143,7 +155,7 @@
                     fw.draw();
                 });
 
-                requestAnimationFrame(animate);
+                fireworksInterval = requestAnimationFrame(animate);
             }
 
             animate();
