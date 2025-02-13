@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine's Day Messages</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="❤️ Valentine's Messages" />
+    <meta
+      property="og:description"
+      content="Create and share special messages with your Valentine"
+    />
+    <meta
+      property="og:image"
+      content="https://via.placeholder.com/1200x630.png?text=Valentine%27s+Messages"
+    />
+    <!-- Update OG URL to reflect deployment directory -->
+    <meta property="og:url" content="https://aldotobing.github.io/val/" />
+    <style>
+      :root {
+        --primary: #ff1493;
+        --secondary: #ff69b4;
+        --accent: #ff6b6b;
+        --background: #ffe6e6;
+        --white: #ffffff;
+        --text: #333333;
+        --shadow: rgba(0, 0, 0, 0.1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, var(--background), var(--accent));
+        min-height: 100vh;
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .app-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px var(--shadow);
+      }
+      .header h1 {
+        color: var(--primary);
+        font-size: clamp(24px, 5vw, 36px);
+        margin-bottom: 10px;
+      }
+      .message-card {
+        background: var(--white);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px var(--shadow);
+      }
+      .button-container {
+        display: flex;
+        gap: 15px;
+        margin: 20px 0;
+        flex-wrap: wrap;
+      }
+      .button {
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: transform 0.2s, background-color 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+        justify-content: center;
+        min-width: 200px;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        background: var(--secondary);
+      }
+      .button.twitter {
+        background: #1da1f2;
+      }
+      .button.twitter:hover {
+        background: #1a91da;
+      }
+      .message-display {
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px dashed var(--secondary);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: center;
+        font-size: 18px;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .preview-card {
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+        border-radius: 12px;
+        padding: 25px;
+        margin: 20px 0;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+      .preview-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E")
+          repeat;
+        opacity: 0.2;
+      }
+      .preview-message {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+      }
+      .preview-footer {
+        text-align: center;
+        font-size: 14px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+      }
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: var(--white);
+        padding: 12px 24px;
+        border-radius: 25px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+      }
+      canvas {
+        display: none;
+      }
+      @media (max-width: 600px) {
+        .app-container {
+          padding: 15px;
+        }
+        .button-container {
+          flex-direction: column;
+        }
+        .button {
+          width: 100%;
+        }
+        .message-display {
+          font-size: 16px;
+          padding: 15px;
+        }
+        .preview-card {
+          padding: 20px;
+        }
+        .preview-message {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <header class="header">
+        <h1>❤️ Valentine's Messages</h1>
+        <p>Create and share special messages with your Valentine</p>
+      </header>
+      <main class="message-card">
+        <div class="button-container">
+          <button class="button" id="generateBtn">Generate Message 💝</button>
+          <button class="button twitter" id="shareBtn">Share on X 🐦</button>
+        </div>
+        <div class="message-display" id="messageDisplay">
+          Click "Generate Message" to create your Valentine's message! ✨
+        </div>
+        <div class="preview-card">
+          <div class="preview-message" id="previewMessage"></div>
+          <div class="preview-footer">
+            Create your own Valentine's message ❤️
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <canvas id="shareCanvas"></canvas>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        // List of messages
+        const messages = [
+          "Every moment with you feels like a Valentine's Day! 💖",
+          "You make my heart skip a beat whenever I see you! 💓",
+          "My love for you grows stronger with each passing day! 💝",
+          "You're the sweetness that makes my life complete! 🍫",
+          "Together is my favorite place to be with you! 🥰",
+          "Your love lights up my world in the most beautiful way! ✨",
+          "You're the missing piece to my heart's puzzle! ❤️",
+          "With you, every day feels like a romantic adventure! 🌹",
+          "You're the love story I never want to end! 📖",
+          "My heart belongs to you, today and always! 💘",
+        ];
+
+        let currentMessage = "";
+        const generateBtn = document.getElementById("generateBtn");
+        const shareBtn = document.getElementById("shareBtn");
+        const messageDisplay = document.getElementById("messageDisplay");
+        const previewMessage = document.getElementById("previewMessage");
+        const toast = document.getElementById("toast");
+        const canvas = document.getElementById("shareCanvas");
+
+        // Check for query parameter "msg"
+        const urlParams = new URLSearchParams(window.location.search);
+        const msgFromUrl = urlParams.get("msg");
+        if (msgFromUrl) {
+          currentMessage = msgFromUrl;
+          messageDisplay.textContent = currentMessage;
+          previewMessage.textContent = currentMessage;
+          const imageDataUrl = await generateShareImage();
+          updateMetaTags(currentMessage, imageDataUrl);
+        }
+
+        generateBtn.addEventListener("click", async function () {
+          // Randomly select a message
+          const i = Math.floor(Math.random() * messages.length);
+          currentMessage = messages[i];
+          messageDisplay.textContent = currentMessage;
+          previewMessage.textContent = currentMessage;
+
+          // Update URL with query parameter (this will include "/val/" if deployed there)
+          const newUrl =
+            window.location.origin +
+            window.location.pathname +
+            "?msg=" +
+            encodeURIComponent(currentMessage);
+          window.history.replaceState({}, "", newUrl);
+
+          const imageDataUrl = await generateShareImage();
+          updateMetaTags(currentMessage, imageDataUrl);
+        });
+
+        // Simplified share function: just share the link via Twitter
+        shareBtn.addEventListener("click", function shareMessage() {
+          if (!currentMessage) {
+            currentMessage = "Share love this Valentine's Day! ❤️";
+          }
+          const shareUrl =
+            window.location.origin +
+            window.location.pathname +
+            "?msg=" +
+            encodeURIComponent(currentMessage);
+          const tweetText = encodeURIComponent(
+            currentMessage + "\n" + shareUrl
+          );
+          window.open(
+            `https://twitter.com/intent/tweet?text=${tweetText}`,
+            "_blank"
+          );
+        });
+
+        async function generateShareImage() {
+          const W = 1200,
+            H = 630;
+          canvas.width = W;
+          canvas.height = H;
+          const ctx = canvas.getContext("2d");
+
+          // Background gradient
+          const gradient = ctx.createLinearGradient(0, 0, W, H);
+          gradient.addColorStop(0, "#ff6b6b");
+          gradient.addColorStop(1, "#ff8787");
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, W, H);
+
+          // Render message text
+          ctx.font = "bold 48px -apple-system, BlinkMacSystemFont, sans-serif";
+          ctx.fillStyle = "white";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+
+          const maxWidth = W - 100;
+          const words = currentMessage.split(" ");
+          let lines = [];
+          let currentLine = words[0];
+
+          for (let j = 1; j < words.length; j++) {
+            const testLine = currentLine + " " + words[j];
+            if (ctx.measureText(testLine).width < maxWidth) {
+              currentLine = testLine;
+            } else {
+              lines.push(currentLine);
+              currentLine = words[j];
+            }
+          }
+          lines.push(currentLine);
+
+          const lineHeight = 60;
+          const startY = H / 2 - ((lines.length - 1) * lineHeight) / 2;
+          lines.forEach((line, index) => {
+            const y = startY + index * lineHeight;
+            ctx.fillText(line, W / 2, y);
+          });
+
+          // Footer text
+          ctx.font = "32px -apple-system, BlinkMacSystemFont, sans-serif";
+          ctx.fillText("Create your own Valentine's message ❤️", W / 2, H - 50);
+
+          return canvas.toDataURL("image/png");
+        }
+
+        function updateMetaTags(message, imageDataUrl) {
+          function setMeta(property, content) {
+            let metaTag = document.querySelector(
+              `meta[property="${property}"]`
+            );
+            if (!metaTag) {
+              metaTag = document.createElement("meta");
+              metaTag.setAttribute("property", property);
+              document.head.appendChild(metaTag);
+            }
+            metaTag.content = content;
+          }
+          setMeta("og:title", message);
+          setMeta("og:description", message);
+          setMeta("og:image", imageDataUrl);
+          setMeta("og:url", window.location.href);
+        }
+
+        function showToast(message, duration = 3000) {
+          toast.textContent = message;
+          toast.classList.add("show");
+          setTimeout(() => {
+            toast.classList.remove("show");
+          }, duration);
+        }
+      });
+    </script>
+  </body>
+</html>
