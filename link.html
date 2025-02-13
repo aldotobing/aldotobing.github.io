@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            font-weight: bold;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .text {
+            font-size: 50px;
+            font-weight: bold;
+            opacity: 0;
+            transform: scale(0);
+            animation: fadeInOut 2s forwards;
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="btn" onclick="showText()">Klik</button>
+        <div class="text" onclick="resetPage()">SILIT</div>
+        <canvas id="fireworks"></canvas>
+    </div>
+
+    <script>
+        let fireworksInterval;
+
+        function showText() {
+            document.querySelector('.btn').style.display = 'none';
+            document.querySelector('.text').style.opacity = '1';
+            startFireworks();
+        }
+
+        function resetPage() {
+            document.querySelector('.btn').style.display = 'block';
+            document.querySelector('.text').style.opacity = '0';
+            clearInterval(fireworksInterval);
+            const canvas = document.getElementById("fireworks");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function startFireworks() {
+            const canvas = document.getElementById("fireworks");
+            const ctx = canvas.getContext("2d");
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const fireworks = [];
+
+            class Firework {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.particles = [];
+
+                    for (let i = 0; i < 50; i++) {
+                        this.particles.push({
+                            x: this.x,
+                            y: this.y,
+                            angle: Math.random() * 2 * Math.PI,
+                            speed: Math.random() * 4 + 2,
+                            radius: Math.random() * 3 + 1,
+                            alpha: 1
+                        });
+                    }
+                }
+
+                update() {
+                    this.particles.forEach(p => {
+                        p.x += Math.cos(p.angle) * p.speed;
+                        p.y += Math.sin(p.angle) * p.speed;
+                        p.alpha -= 0.02;
+                    });
+
+                    this.particles = this.particles.filter(p => p.alpha > 0);
+                }
+
+                draw() {
+                    this.particles.forEach(p => {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${p.alpha})`;
+                        ctx.fill();
+                    });
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                if (fireworks.length < 5) {
+                    fireworks.push(new Firework(canvas.width / 2, canvas.height / 2));
+                }
+
+                fireworks.forEach(fw => {
+                    fw.update();
+                    fw.draw();
+                });
+
+                fireworksInterval = requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+    </script>
+
+</body>
+</html>
