@@ -2,20 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Aldo Tobing</title>
+    <title>Aldo Tobing - Software Engineer</title>
     <meta
       name="description"
       content="Aldo Tobing - a versatile Software Engineer specializing in Java-based development, with extensive experience in Computer Network Operations."
     />
     <meta
       name="keywords"
-      content="Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer"
+      content="Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer, Kapal Lawd AI, AI"
     />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Aldo Tobing" />
+    <link rel="canonical" href="https://aldotobing.online" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aldo Tobing",
+        "jobTitle": "Software Engineer",
+        "url": "https://aldotobing.online",
+        "image": "https://aldotobing.online/assets/img/profile-img.jpg",
+        "sameAs": [
+          "https://twitter.com/aldo_tobing",
+          "https://linkedin.com/in/aldo-tobing-dev"
+        ]
+      }
+    </script>
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Aldo Tobing" />
+    <meta property="og:title" content="Aldo Tobing - Software Engineer" />
     <meta
       property="og:description"
       content="Aldo Tobing - a versatile Software Engineer specializing in Java-based development, with extensive experience in Computer Network Operations."
@@ -29,7 +48,7 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Aldo Tobing" />
+    <meta name="twitter:title" content="Aldo Tobing - Software Engineer" />
     <meta
       name="twitter:description"
       content="Aldo Tobing - a versatile Software Engineer specializing in Java-based development, with extensive experience in Computer Network Operations."
@@ -39,11 +58,6 @@
       content="https://aldotobing.online/assets/img/profile-img.jpg"
     />
     <meta name="twitter:url" content="https://aldotobing.online" />
-
-    <meta
-      name="keywords"
-      content="Aldo Tobing, Java, Golang, PostgreSQL, DevOps, Software Engineer, Docker, Backend Developer, Kapal Lawd AI, AI"
-    />
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon" />
@@ -84,37 +98,30 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap"
       rel="stylesheet"
@@ -660,39 +667,39 @@
     <!-- Switch Dark Mode (Global) -->
 
     <div id="chat-widget" class="chat-widget">
-  <button id="chat-toggle" class="chat-toggle" aria-label="Toggle chat">
-    <i class="fas fa-comments"></i>
-  </button>
-  <div id="chat-container" class="chat-container">
-    <div class="chat-header">
-      <h3>
-        <i class="fas fa-terminal" id="loading-icon"></i>
-        <span class="text-label">&nbsp;AI Assistant</span>
-      </h3>
-      <button id="chat-close" class="chat-close" aria-label="Close chat">
-        <i class="fas fa-times"></i>
+      <button id="chat-toggle" class="chat-toggle" aria-label="Toggle chat">
+        <i class="fas fa-comments"></i>
       </button>
-    </div>
-    <div id="chat-messages" class="chat-messages">
-      <div class="chat-message">
-        The AI has been moved to:
-        <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">
-          https://ai.aldotobing.online
-        </a>
+      <div id="chat-container" class="chat-container">
+        <div class="chat-header">
+          <h3>
+            <i class="fas fa-terminal" id="loading-icon"></i>
+            <span class="text-label">&nbsp;AI Assistant</span>
+          </h3>
+          <button id="chat-close" class="chat-close" aria-label="Close chat">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div id="chat-messages" class="chat-messages">
+          <div class="chat-message">
+            The AI has been moved to:
+            <a
+              href="https://ai.aldotobing.online"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://ai.aldotobing.online
+            </a>
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="user-input" placeholder="Type a message..." />
+          <button id="send-message" aria-label="Send message">
+            <i class="fas fa-arrow-up"></i>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="chat-input">
-      <input
-        type="text"
-        id="user-input"
-        placeholder="Type a message..."
-      />
-      <button id="send-message" aria-label="Send message">
-        <i class="fas fa-arrow-up"></i>
-      </button>
-    </div>
-  </div>
-</div>
     <!-- <script src="assets/js/container-open.js"></script> -->
   </body>
 </html>
