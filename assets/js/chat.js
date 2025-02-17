@@ -126,19 +126,46 @@ document.addEventListener("DOMContentLoaded", function () {
   // }
 
   async function sendChatMessage(userInput) {
-  const userId = localStorage.getItem("user_id") || generateUniqueId();
+    const userId = localStorage.getItem("user_id") || generateUniqueId();
 
-  addMessage(userInput, "user-message");
+    addMessage(userInput, "user-message");
 
-  // Static bot response with a link
-  const staticResponse = 'The AI has been moved to: <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">https://ai.aldotobing.online</a>';
+    // Static bot response with a link
+    const staticResponse = `
+  The AI has been relocated to: 
+  <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">ai.aldotobing.online</a>.<br><br>
   
-  // Use the typing effect with the static response
-  await typeWriterEffect(staticResponse, () => {
-    // Callback after typing effect is complete
-    sendMessage.disabled = false; // Re-enable the send button
-  });
-}
+  Explore my personal projects:<br>
+  <ul>
+    <li>
+      <a href="https://nginx.aldotobing.online" target="_blank" rel="noopener noreferrer">
+        HTTP Log Analyzer
+      </a> – Analyze and visualize Nginx and Apache logs efficiently.
+    </li>
+    <li>
+      <a href="https://ai.aldotobing.online" target="_blank" rel="noopener noreferrer">
+        AI Assistant & Image Generator
+      </a> – Chat with AI and generate images.
+    </li>
+    <li>
+      <a href="https://linkedin.aldotobing.online" target="_blank" rel="noopener noreferrer">
+        AI Bio Generator
+      </a> – Create engaging LinkedIn and personal page bios effortlessly.
+    </li>
+    <li>
+      <a href="https://pdf-compress.aldotobing.online" target="_blank" rel="noopener noreferrer">
+        PDF Utility
+      </a> – Compress and manage PDFs with ease.
+    </li>
+  </ul>
+`;
+
+    // Use the typing effect with the static response
+    await typeWriterEffect(staticResponse, () => {
+      // Callback after typing effect is complete
+      sendMessage.disabled = false; // Re-enable the send button
+    });
+  }
 
   function generateUniqueId() {
     const id = `user-${Math.random().toString(36).substring(2, 15)}`;
