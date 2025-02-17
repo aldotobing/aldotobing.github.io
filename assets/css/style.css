@@ -139,17 +139,17 @@ body {
 }
 
 .logo-grid .logo {
-  width: 80px; /* Set a fixed width for the circular shape */
-  height: 80px; /* Set a fixed height for the circular shape */
-  border-radius: 50%; /* Make it circular */
-  background-color: white; /* White background */
-  display: flex; /* Use flexbox to center content */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  margin: 10px; /* Space between logos */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  overflow: hidden; /* Hide overflow to keep it circular */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures nothing overflows the circular boundary */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo-grid .logo:hover {
@@ -158,13 +158,17 @@ body {
 }
 
 .logo-grid img {
-  width: 70%; /* Make the image fill most of the circle */
-  height: auto; /* Maintain aspect ratio */
-  transition: transform 0.3s ease; /* Smooth transition for image scaling */
+  width: 80%;
+  height: 80%;
+  object-fit: contain; /* Fills the circle without stretching */
+  transition: transform 0.3s ease;
 }
 
 .logo-grid .logo:hover img {
-  transform: scale(1.1); /* Slightly enlarge the image on hover */
+  transform: scale(1.1);
+  clip-path: circle(
+    50%
+  ); /* Ensures the image stays within bounds when scaling */
 }
 
 /*--------------------------------------------------------------
