@@ -2,35 +2,85 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="Cache-control" content="public" />
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <meta name="description" content="A minimal game to waste your time." />
-    <meta name="keywords" content="minimal game, html5 game, svg game" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="Looptap" />
-    <meta name="application-name" content="Looptap" />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta
+      name="description"
+      content="Looptap - A minimal and addictive game to waste your time! Challenge yourself with every tap."
+    />
+    <meta
+      name="keywords"
+      content="Looptap, minimal game, HTML5 game, SVG game, addictive game, browser game"
+    />
+    <meta name="author" content="Aldo Tobing" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aldotobing.online/apps/lazyloop" />
+    <meta
+      property="og:title"
+      content="Looptap - A minimal game to waste your time"
+    />
+    <meta
+      property="og:description"
+      content="Challenge your reflexes and beat your best score in Looptap, a minimalist HTML5 game."
+    />
     <meta
       property="og:image"
       content="https://aldotobing.online/apps/lazyloop/banner.png"
     />
-    <meta property="og:title" content="Looptap" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
     <meta
-      property="og:description"
-      content="A minimal game to waste your time."
+      name="twitter:url"
+      content="https://aldotobing.online/apps/lazyloop"
     />
+    <meta
+      name="twitter:title"
+      content="Looptap - A minimal game to waste your time"
+    />
+    <meta
+      name="twitter:description"
+      content="Challenge your reflexes and beat your best score in Looptap, a minimalist HTML5 game."
+    />
+    <meta
+      name="twitter:image"
+      content="https://aldotobing.online/apps/lazyloop/banner.png"
+    />
+
+    <!-- PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Looptap" />
+    <meta name="application-name" content="Looptap" />
+    <meta name="theme-color" content="#FFFFFF" />
+
+    <!-- Icons -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/lazyloop/apple-touch-icon.png"
     />
-    <link rel="icon" href="/lazyloop/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/lazyloop/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/lazyloop/favicon-16x16.png"
+    />
     <link rel="manifest" href="/lazyloop/manifest.json" />
     <link
       rel="mask-icon"
@@ -39,6 +89,7 @@
     />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
+
     <title>Looptap - A minimal game to waste your time</title>
 
     <link href="/lazyloop/style.css" rel="stylesheet" />
@@ -199,16 +250,14 @@
 
       <div id="about" v-if="state === 'init'">
         <a
-          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+          href="https://twitter.com/intent/tweet?text=Looptap%20-%20a%20minimal%20game%20to%20waste%20your%20time.&url=https%3A%2F%2Faldotobing.online%2Fapps%2Flazyloop&via=aldo_tobing&hashtags=looptap"
           class="twitter-share-button"
-          data-text="Looptap - a minimal game to waste your time."
-          data-url="https://aldotobing.online/apps/lazyloop"
-          data-via="aldo_tobing"
-          data-hashtags="looptap"
-          data-show-count="false"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Tweet
         </a>
+
         <script
           async
           src="https://platform.twitter.com/widgets.js"
