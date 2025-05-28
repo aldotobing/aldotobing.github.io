@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Credentials | Space Authentication</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(125deg, #000428, #004e92, #0f0c29, #302b63);
+            background-size: 400% 400%;
+            animation: cosmicBackground 25s ease infinite;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+            color: #fff;
+            perspective: 1000px;
+        }
+
+        @keyframes cosmicBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration, 4s) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .cosmic-card {
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 200, 255, 0.3),
+                        0 0 100px rgba(100, 0, 255, 0.2),
+                        inset 0 0 20px rgba(173, 216, 230, 0.1);
+            width: 90%;
+            max-width: 500px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .cosmic-card:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ff00cc, #3333ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 0, 204, 0.3);
+            letter-spacing: 3px;
+            position: relative;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #ff00cc, #3333ff);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            color: #a0d2eb;
+            font-weight: 300;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(0, 20, 40, 0.5);
+            border: 2px solid rgba(100, 200, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: #ff00cc;
+            box-shadow: 0 0 15px rgba(255, 0, 204, 0.5);
+        }
+
+        .form-input::placeholder {
+            color: rgba(173, 216, 230, 0.5);
+        }
+
+        .password-strength {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #ff0000, #ff9900, #ffff00, #00ff00);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .strength-label {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: #a0d2eb;
+            text-align: right;
+        }
+
+        .alien-check {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .alien-check input {
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
+            accent-color: #ff00cc;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff00cc, #3333ff);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 30px rgba(255, 0, 204, 0.8);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20px;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(25deg);
+            transition: all 0.7s;
+        }
+
+        .btn:hover::after {
+            left: 120%;
+        }
+
+        .toggle-form {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 1.1rem;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: #00ffff;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 5px;
+        }
+
+        .toggle-btn:hover {
+            color: #ff00cc;
+            text-shadow: 0 0 10px rgba(255, 0, 204, 0.5);
+        }
+
+        .ufo {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: radial-gradient(circle, #00ffcc, #00aaff);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #00aaff;
+            top: -20px;
+            right: 50px;
+            animation: ufoFloat 8s infinite ease-in-out;
+            z-index: 10;
+        }
+
+        .ufo::before {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            background: rgba(0, 50, 100, 0.8);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+        }
+
+        .ufo::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 10px;
+            background: rgba(0, 200, 255, 0.2);
+            border-radius: 50%;
+            top: 35px;
+            left: -20px;
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        @keyframes ufoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(20px) rotate(-5deg); }
+        }
+
+        .alien {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse at center, #00ff00, #007700);
+            border-radius: 50% 50% 40% 40%;
+            bottom: -30px;
+            left: 30px;
+            animation: alienBounce 6s infinite ease-in-out;
+            z-index: 10;
+        }
+
+        .alien::before, .alien::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            background: #00ff00;
+            top: 15px;
+        }
+
+        .alien::before {
+            left: 10px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .alien::after {
+            right: 10px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .alien .eye {
+            position: absolute;
+            width: 20px;
+            height: 30px;
+            background: black;
+            border-radius: 50%;
+            top: 25px;
+            left: 20px;
+        }
+
+        .alien .eye::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #00ffff;
+            border-radius: 50%;
+            top: 5px;
+            left: 5px;
+        }
+
+        @keyframes alienBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .planet {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #ff9966, #ff5e62);
+            box-shadow: 0 0 50px rgba(255, 94, 98, 0.5);
+            top: 50px;
+            right: -60px;
+            z-index: 5;
+            animation: planetRotate 50s infinite linear;
+        }
+
+        .planet::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 10px;
+            background: rgba(150, 50, 0, 0.6);
+            border-radius: 5px;
+            top: 40px;
+            left: 20px;
+        }
+
+        .planet::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            background: rgba(150, 50, 0, 0.6);
+            border-radius: 10px;
+            bottom: 30px;
+            right: 20px;
+        }
+
+        @keyframes planetRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 30, 60, 0.9);
+            color: #00ffff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 100;
+            font-family: 'Orbitron', sans-serif;
+            border-left: 4px solid #00ffff;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .comet {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+            z-index: 1;
+        }
+
+        .comet::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, white);
+            top: 3px;
+            left: 4px;
+        }
+
+        .humor-message {
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: #a0d2eb;
+            font-size: 1.1rem;
+            min-height: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .cosmic-card {
+                padding: 30px 20px;
+            }
+            
+            .card-title {
+                font-size: 2.2rem;
+            }
+            
+            .ufo, .alien {
+                transform: scale(0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <div class="cosmic-card">
+            <div class="ufo"></div>
+            <div class="alien">
+                <div class="eye"></div>
+            </div>
+            <div class="planet"></div>
+            
+            <h1 class="card-title" id="form-title">SPACE LOGIN</h1>
+            
+            <div id="login-form">
+                <div class="form-group">
+                    <label class="form-label">Galactic ID:</label>
+                    <input type="text" class="form-input" placeholder="Your cosmic username">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Wormhole Password:</label>
+                    <input type="password" class="form-input" id="password" placeholder="Your secret code">
+                    <div class="password-strength">
+                        <div class="strength-meter" id="strength-meter"></div>
+                    </div>
+                    <div class="strength-label" id="strength-label">Password Strength: Vacuum</div>
+                </div>
+                
+                <div class="alien-check">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Remember me across parallel universes</label>
+                </div>
+                
+                <button class="btn" id="login-btn">BEAM ME UP</button>
+                
+                <div class="humor-message" id="login-humor">Warning: Failing to login may cause spontaneous black holes</div>
+                
+                <div class="toggle-form">
+                    <span>New space traveler?</span>
+                    <button class="toggle-btn" id="show-register">Create Cosmic Account</button>
+                </div>
+            </div>
+            
+            <div id="register-form" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">Astronaut Name:</label>
+                    <input type="text" class="form-input" placeholder="Your earthly designation">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Interstellar Email:</label>
+                    <input type="email" class="form-input" placeholder="your.name@galaxy.milkyway">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Create Wormhole Password:</label>
+                    <input type="password" class="form-input" id="reg-password" placeholder="Something you'll remember in 5 dimensions">
+                    <div class="password-strength">
+                        <div class="strength-meter" id="reg-strength-meter"></div>
+                    </div>
+                    <div class="strength-label" id="reg-strength-label">Password Strength: Vacuum</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm Wormhole Password:</label>
+                    <input type="password" class="form-input" placeholder="Repeat your secret code">
+                </div>
+                
+                <div class="alien-check">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">I agree to be probed by aliens (required for security)</label>
+                </div>
+                
+                <button class="btn" id="register-btn">LAUNCH ACCOUNT</button>
+                
+                <div class="humor-message" id="register-humor">By registering, you consent to occasional teleportation mishaps</div>
+                
+                <div class="toggle-form">
+                    <span>Already have cosmic credentials?</span>
+                    <button class="toggle-btn" id="show-login">Engage Login Sequence</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">Welcome to the cosmos, traveler!</div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            starsContainer.appendChild(star);
+        }
+        
+        // Create comets
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                createComet();
+            }, i * 5000);
+        }
+        
+        function createComet() {
+            const comet = document.createElement('div');
+            comet.classList.add('comet');
+            comet.style.top = `${Math.random() * 30}%`;
+            comet.style.left = `${Math.random() * 10}%`;
+            document.body.appendChild(comet);
+            
+            setTimeout(() => {
+                comet.remove();
+                createComet();
+            }, 10000);
+        }
+        
+        // Form toggle
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const showRegister = document.getElementById('show-register');
+        const showLogin = document.getElementById('show-login');
+        const formTitle = document.getElementById('form-title');
+        
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            formTitle.textContent = 'SPACE REGISTRATION';
+            showNotification("Prepare for launch sequence!");
+        });
+        
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            formTitle.textContent = 'SPACE LOGIN';
+            showNotification("Welcome back, space ranger!");
+        });
+        
+        // Password strength meter
+        const passwordInput = document.getElementById('password');
+        const strengthMeter = document.getElementById('strength-meter');
+        const strengthLabel = document.getElementById('strength-label');
+        
+        const regPasswordInput = document.getElementById('reg-password');
+        const regStrengthMeter = document.getElementById('reg-strength-meter');
+        const regStrengthLabel = document.getElementById('reg-strength-label');
+        
+        function updatePasswordStrength(input, meter, label) {
+            const password = input.value;
+            let strength = 0;
+            
+            if (password.length > 0) strength += 25;
+            if (password.length > 6) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9!@#$%^&*]/.test(password)) strength += 25;
+            
+            meter.style.width = `${strength}%`;
+            
+            const labels = [
+                "Vacuum - Even aliens can guess this",
+                "Meteor Shower - Could be better",
+                "Solar Flare - Not bad, earthling!",
+                "Black Hole - Now we're talking!"
+            ];
+            
+            label.textContent = `Password Strength: ${labels[Math.floor(strength / 25)]}`;
+        }
+        
+        passwordInput.addEventListener('input', () => {
+            updatePasswordStrength(passwordInput, strengthMeter, strengthLabel);
+        });
+        
+        regPasswordInput.addEventListener('input', () => {
+            updatePasswordStrength(regPasswordInput, regStrengthMeter, regStrengthLabel);
+        });
+        
+        // Humor messages
+        const loginHumor = document.getElementById('login-humor');
+        const registerHumor = document.getElementById('register-humor');
+        
+        const loginMessages = [
+            "Warning: Failing to login may cause spontaneous black holes",
+            "Did you know? 73% of astronauts forget their passwords in space",
+            "Entering correct password increases chances of meeting aliens by 42%",
+            "Pro tip: Avoid using 'password' as your password. Again."
+        ];
+        
+        const registerMessages = [
+            "By registering, you consent to occasional teleportation mishaps",
+            "Fun fact: Our servers are powered by a miniature sun",
+            "Your data is safer with us than in Area 51. Probably.",
+            "Register now and get a free virtual moon rock! (while supplies last)"
+        ];
+        
+        setInterval(() => {
+            loginHumor.textContent = loginMessages[Math.floor(Math.random() * loginMessages.length)];
+        }, 5000);
+        
+        setInterval(() => {
+            registerHumor.textContent = registerMessages[Math.floor(Math.random() * registerMessages.length)];
+        }, 5000);
+        
+        // Notification system
+        const notification = document.getElementById('notification');
+        
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Button interactions
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        
+        loginBtn.addEventListener('click', () => {
+            if (passwordInput.value.length < 6) {
+                showNotification("Password must be at least 6 light-years long!");
+                return;
+            }
+            
+            loginBtn.textContent = "WARPING...";
+            setTimeout(() => {
+                showNotification("Login successful! Engaging hyperdrive...");
+                loginBtn.textContent = "BEAM ME UP";
+            }, 2000);
+        });
+        
+        registerBtn.addEventListener('click', () => {
+            if (!document.getElementById('terms').checked) {
+                showNotification("You must agree to alien probing to continue!");
+                return;
+            }
+            
+            registerBtn.textContent = "LAUNCHING...";
+            setTimeout(() => {
+                showNotification("Welcome to the cosmos! Your spacesuit is in the mail.");
+                registerBtn.textContent = "LAUNCH ACCOUNT";
+            }, 2000);
+        });
+        
+        // Initial notification
+        setTimeout(() => {
+            showNotification("Welcome to the cosmos, traveler!");
+        }, 1000);
+    </script>
+</body>
+</html>
