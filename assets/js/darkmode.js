@@ -2,11 +2,12 @@ const modeSwitch = document.getElementById("mode-switch");
 const body = document.body;
 const frameContact = document.querySelector(".frame-contact"); // Ambil elemen frame-contact
 
-// Check saved theme preference
-if (localStorage.getItem("theme") === "dark") {
+// Check saved theme preference (default to dark if no preference set)
+if (localStorage.getItem("theme") !== "light") {
   body.classList.add("dark-mode");
-  frameContact.classList.add("dark-mode"); // Tambahkan dark-mode ke frame-contact
+  frameContact.classList.add("dark-mode");
   modeSwitch.checked = true;
+  localStorage.setItem("theme", "dark");
 }
 
 // Handle theme switch and update chart if it exists

@@ -12,6 +12,10 @@
     <meta property="og:description" content="Backend Engineer | Java & Go Specialist | 5+ Years Experience | Expert in API Development, CI/CD & Server Infrastructure">
     <meta property="og:type" content="website">
     
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/profile-img.jpg" rel="apple-touch-icon" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +28,7 @@
     
     
 </head>
-<body>
+<body class="dark-mode">
     <!-- Navigation -->
     <nav>
         <ul>
@@ -496,6 +500,11 @@
 
     <!-- WakaTime Chart Script -->
     <script>
+    // Set dark mode as default if no preference is set
+    if (localStorage.getItem('theme') === null) {
+        localStorage.setItem('theme', 'dark');
+    }
+    
     document.addEventListener('DOMContentLoaded', function() {
         // Custom color palette that works well with both light/dark themes
         const colorPalette = [
