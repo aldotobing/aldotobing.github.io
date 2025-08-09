@@ -174,11 +174,18 @@ nav a.active::after {
 }
 
 .hero-content {
-    margin-top: 8rem; /* Adjust this value based on your navbar height */
+    margin-top: 6rem; /* Reduced from 8rem */
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
     text-align: center;
+}
+
+/* Adjust for mobile devices */
+@media (max-width: 768px) {
+    .hero-content {
+        margin-top: 2.5rem; /* Further reduced from 4rem */
+    }
 }
 
 .hero-bg {
