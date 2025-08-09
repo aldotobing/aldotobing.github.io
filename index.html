@@ -505,6 +505,27 @@
         localStorage.setItem('theme', 'dark');
     }
     
+    // Add loaded class to body when page is fully loaded
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // Handle home link click to ensure smooth scroll to top
+        const homeLink = document.querySelector('a[href="#home"]');
+        if (homeLink) {
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Scroll to top with smooth behavior
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                // Update URL without adding to history
+                history.replaceState(null, null, ' ');
+            });
+        }
+    });
+
+    // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
         // Custom color palette that works well with both light/dark themes
         const colorPalette = [

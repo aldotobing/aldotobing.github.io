@@ -36,6 +36,7 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    scroll-padding-top: 6rem; /* Height of your navbar */
 }
 
 body {
@@ -55,9 +56,21 @@ body {
 }
 
 /* Navigation */
+/* Hide content until page is fully loaded */
+body:not(.loaded) {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+body.loaded {
+    visibility: visible;
+    opacity: 1;
+}
+
 nav {
     position: fixed;
-    top: 2rem;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
@@ -65,13 +78,15 @@ nav {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 50px;
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
     box-shadow: var(--shadow-soft);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    width: auto;
-    max-width: 90%;
+    min-width: 300px;
+    width: fit-content;
+    max-width: calc(100% - 2rem);
     margin: 0 auto;
     box-sizing: border-box;
+    pointer-events: auto;
 }
 
 /* Navbar when scrolled down */
@@ -84,8 +99,12 @@ nav.hide-nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
 }
 
 nav a {
@@ -144,10 +163,22 @@ nav a.active::after {
 .hero {
     min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Changed from center to flex-start */
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-margin-top: 0;
+}
+
+.hero-content {
+    margin-top: 8rem; /* Adjust this value based on your navbar height */
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
+    text-align: center;
 }
 
 .hero-bg {
@@ -667,7 +698,6 @@ section {
 
 .project-link:hover i {
     transform: translateX(3px);
-}
     color: var(--text-primary);
 }
 
@@ -1381,7 +1411,65 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Mobile Responsiveness */
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.5rem 1rem;
+        top: 0.75rem;
+    }
+    
+    nav ul {
+        gap: 0.75rem;
+    }
+    
+    nav a {
+        font-size: 0.8rem;
+    }
+    
+    .hero {
+        padding-top: 7rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Small devices (phones) */
+@media (max-width: 480px) {
+    nav {
+        padding: 0.5rem 0.75rem;
+        top: 0.5rem;
+        max-width: 95%;
+    }
+    
+    nav ul {
+        gap: 0.5rem;
+    }
+    
+    nav a {
+        font-size: 0.75rem;
+    }
+    
+    .hero {
+        padding-top: 6.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
