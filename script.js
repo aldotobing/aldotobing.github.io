@@ -309,44 +309,26 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Add loading animation when page loads
+// Premium Splash Screen Handler
 window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-
+    const splashScreen = document.getElementById('splash-screen');
+    
+    // Ensure the splash screen stays for at least the duration of the animations (2.2s total)
+    // plus a small buffer for smooth transition
     setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
+        splashScreen.classList.add('splash-hidden');
+        
+        // Remove from DOM after fade out to save memory
+        setTimeout(() => {
+            splashScreen.remove();
+            document.body.classList.add('loaded'); // Trigger hero animations
+        }, 800);
+    }, 2200);
 });
 
-// Preloader
-window.addEventListener('load', () => {
-    const preloader = document.createElement('div');
-    preloader.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: var(--bg-primary);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-                transition: opacity 0.5s ease;
-            `;
-
-    const loader = document.createElement('div');
-    loader.className = 'loading';
-    loader.style.width = '50px';
-    loader.style.height = '50px';
-    loader.style.borderWidth = '5px';
-
-    preloader.appendChild(loader);
-    document.body.prepend(preloader);
-
-    setTimeout(() => {
-        preloader.style.opacity = '0';
-        setTimeout(() => preloader.remove(), 500);
-    }, 1000);
+// Toggle Project Description
+document.querySelectorAll('.project-description').forEach(desc => {
+    desc.addEventListener('click', () => {
+        desc.classList.toggle('expanded');
+    });
 });

@@ -192,7 +192,7 @@ nav a.active::after {
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding-top: 6rem;
+    padding-top: 8rem; /* Increased from 6rem */
 }
 
 /* Abstract Background Blob */
@@ -402,16 +402,33 @@ section {
 /* About Grid */
 .about-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 5rem;
-    align-items: center;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.about-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-bio-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .about-text {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     color: var(--text-secondary);
     line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-text:last-child {
+    margin-bottom: 0;
 }
 
 .about-text strong {
@@ -419,35 +436,34 @@ section {
     font-weight: 600;
 }
 
-.stats {
+.stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
+    gap: 1rem;
 }
 
 .stat-card {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    padding: 1.5rem;
+    padding: 1.2rem 0.8rem;
     text-align: center;
     transition: transform 0.3s ease;
 }
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.2rem;
 }
 
 .stat-label {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 500;
     color: var(--text-secondary);
     text-transform: uppercase;
@@ -455,19 +471,23 @@ section {
 }
 
 /* Profile Image */
-.profile-image img {
-    border-radius: var(--card-radius); /* Use consistent radius */
-    box-shadow: var(--shadow-strong);
-    border: none; /* Removed the heavy border */
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    display: block;
+.profile-wrapper {
+    padding: 0.8rem !important;
+    border-radius: 32px;
+    transform: rotate(-1.5deg);
+    transition: all 0.4s ease;
 }
 
-.profile-image:hover img {
-    transform: scale(1.02);
+.profile-wrapper:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.profile-img {
+    border-radius: 24px;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: var(--shadow-strong);
 }
 
 /* Skills */
@@ -603,9 +623,9 @@ section {
 }
 
 .project-logo {
-    max-width: 140px;
-    height: auto;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures screenshots fill the area */
 }
 
 /* Icon placeholder if image missing */
@@ -632,8 +652,28 @@ section {
     color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
-    flex-grow: 1;
+    margin-bottom: 1.5rem;
+    /* Line clamping for tidiness */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer; /* Indicate clickable */
+    transition: color 0.2s ease;
+}
+
+.project-description:hover {
+    color: var(--text-primary);
+}
+
+.project-description.expanded {
+    -webkit-line-clamp: unset; /* Show full text */
+    overflow: visible;
+}
+
+.project-content .tech-stack {
+    margin-top: 0;
 }
 
 .project-links {
@@ -780,12 +820,21 @@ footer {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes textShine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+    animation: textShine 5s linear infinite reverse;
 }
 
 .fade-in {
@@ -873,7 +922,12 @@ footer {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .about-grid, .contact-grid {
+    .about-grid {
+        grid-template-columns: 0.9fr 1.1fr; /* More balanced for tablets */
+        gap: 2.5rem;
+    }
+
+    .contact-grid {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
@@ -884,8 +938,16 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+
     .container {
         padding: 0 20px;
+    }
+
+    .cta-buttons {
+        display: none;
     }
 
     /* Adjust Navigation for Mobile */
@@ -893,7 +955,7 @@ footer {
         bottom: 1.5rem;
         top: auto;
         padding: 0.6rem 1.2rem;
-        background: rgba(30, 30, 30, 0.9);
+        background: var(--glass-bg); /* Follow theme variable */
         width: 90%;
         max-width: 400px;
         justify-content: space-between;
@@ -920,9 +982,9 @@ footer {
         grid-template-columns: 1fr; /* Single column on mobile */
     }
 
-    .stats {
-        grid-template-columns: 1fr; /* Stack stats */
-        gap: 1rem;
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr); /* Keep 3 cols on mobile for compact stats */
+        gap: 0.8rem;
     }
 
     /* Typography & Spacing */
@@ -949,6 +1011,22 @@ footer {
         padding: 1.5rem;
     }
 
+    /* Enforce uniformity on mobile for a tidy look */
+    .project-description {
+        -webkit-line-clamp: 4; /* Limit to 4 lines */
+        font-size: 0.95rem; /* Slightly smaller for mobile */
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .project-image {
+        height: 180px; /* Reduce height on mobile */
+    }
+    
+    .profile-wrapper {
+        padding: 0.5rem !important;
+    }
+
     .section-title {
         margin-bottom: 3rem;
     }
@@ -963,11 +1041,6 @@ footer {
         padding: 0.8rem 1.5rem;
         width: 100%;
         justify-content: center;
-    }
-
-    .cta-buttons {
-        flex-direction: column;
-        width: 100%;
     }
 
     .social-links {

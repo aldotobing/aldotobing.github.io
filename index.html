@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="splash.css">
     <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@latest"></script>
@@ -29,6 +30,16 @@
     
 </head>
 <body class="dark-mode">
+    <!-- Premium Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <h1 class="splash-title">Aldo Tobing</h1>
+            <div class="splash-line-container">
+                <div class="splash-line"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <ul>
@@ -46,14 +57,14 @@
         <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Aldo Tobing</h1>
-                <p class="hero-subtitle">
+                <h1 class="hero-title hero-animate">Aldo Tobing</h1>
+                <p class="hero-subtitle hero-animate delay-1">
                     I'm a <span class="typing-text" id="typing-text">Software Developer</span>
                 </p>
-                <p class="about-text">
+                <p class="about-text hero-animate delay-2">
                     Backend Engineer specializing in Java and Go, with extensive experience in building high-performance APIs, CI/CD pipelines, and optimizing server infrastructure.
                 </p>
-                <div class="cta-buttons">
+                <div class="cta-buttons hero-animate delay-3">
                     <a href="#contact" class="btn btn-primary">
                         <i class="fas fa-envelope"></i>
                         Get In Touch
@@ -63,7 +74,7 @@
                         Learn More
                     </a>
                 </div>
-                <div class="social-links">
+                <div class="social-links hero-animate delay-3">
                     <a href="https://twitter.com/aldo_tobing" target="_blank" class="social-link" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
@@ -87,33 +98,43 @@
             </div>
             
             <div class="about-grid">
-                <div class="about-content slide-in-left">
-                    <p class="about-text">
-                        I'm a <strong>Software Engineer</strong> with 5+ years of experience in Java development and system administration. I specialize in building scalable backend systems and managing complex infrastructures across both Linux and Windows environments.
-                    </p>
+                <!-- Left Column: Image + Stats -->
+                <div class="about-left slide-in-left">
+                    <div class="profile-wrapper card-style">
+                        <img src="https://aldotobing.github.io/assets/img/profile-img.jpg" alt="Aldo Tobing" class="profile-img">
+                    </div>
                     
-                    <p class="about-text">
-                        My focus is on creating reliable, high-performance solutions through modern technologies and efficient system design. I'm passionate about solving complex problems and delivering impactful results.
-                    </p>
-
-                    <div class="stats">
+                    <div class="stats-grid">
                         <div class="stat-card">
                             <span class="stat-number">5+</span>
-                            <span class="stat-label">Years Experience</span>
+                            <span class="stat-label">Years Exp</span>
                         </div>
                         <div class="stat-card">
                             <span class="stat-number">50+</span>
-                            <span class="stat-label">Projects Completed</span>
+                            <span class="stat-label">Projects</span>
                         </div>
                         <div class="stat-card">
                             <span class="stat-number">10+</span>
-                            <span class="stat-label">Technologies</span>
+                            <span class="stat-label">Tech Stack</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="profile-image slide-in-right">
-                    <img src="https://aldotobing.github.io/assets/img/profile-img.jpg" alt="Aldo Tobing" class="profile-img">
+                <!-- Right Column: Bio Text -->
+                <div class="about-right slide-in-right">
+                    <div class="about-bio-card card-style">
+                        <p class="about-text">
+                            I'm a <strong>Software Engineer</strong> with 5+ years of experience in Java development and system administration. I specialize in building scalable backend systems and managing complex infrastructures across both Linux and Windows environments.
+                        </p>
+                        
+                        <p class="about-text">
+                            My focus is on creating reliable, high-performance solutions through modern technologies and efficient system design. I'm passionate about solving complex problems and delivering impactful results.
+                        </p>
+
+                        <p class="about-text">
+                            I thrive in environments that challenge my technical skills and allow me to implement innovative solutions. Whether it's optimizing server performance or architecting microservices, I'm dedicated to engineering excellence.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -429,7 +450,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <a href="mailto:contact@aldotobing.online" class="contact-link">contact@aldotobing.online</a>
+                            <a href="mailto:aldo_tobing@hotmail.com" class="contact-link">aldo_tobing@hotmail.com</a>
                         </div>
                     </div>
 
