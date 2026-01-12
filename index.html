@@ -18,7 +18,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="splash.css">
@@ -29,7 +29,7 @@
     
     
 </head>
-<body class="dark-mode">
+<body>
     <!-- Premium Splash Screen -->
     <div id="splash-screen">
         <div class="splash-content">
@@ -48,7 +48,14 @@
             <li><a href="#skills" class="nav-link">Skills</a></li>
             <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
-            <li><button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button></li>
+            <li class="nav-control-li">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-back-to-top" id="navBackToTop" aria-label="Back to top">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </li>
         </ul>
     </nav>
 
@@ -515,17 +522,10 @@
     <script src="script.js"></script>
     
     <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+
 
     <!-- WakaTime Chart Script -->
     <script>
-    // Set dark mode as default if no preference is set
-    if (localStorage.getItem('theme') === null) {
-        localStorage.setItem('theme', 'dark');
-    }
-    
     // Add loaded class to body when page is fully loaded
     window.addEventListener('load', function() {
         document.body.classList.add('loaded');
@@ -535,28 +535,19 @@
         if (homeLink) {
             homeLink.addEventListener('click', function(e) {
                 e.preventDefault();
-                // Scroll to top with smooth behavior
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
                 });
-                // Update URL without adding to history
-                history.replaceState(null, null, ' ');
             });
         }
     });
 
-    // Wait for the DOM to be fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        // Custom color palette that works well with both light/dark themes
+    // WakaTime Chart Implementation
+    document.addEventListener('DOMContentLoaded', () => {
         const colorPalette = [
-            '#4F46E5', // Indigo
-            '#10B981', // Emerald
-            '#F59E0B', // Amber
             '#3B82F6', // Blue
-            '#8B5CF6', // Violet
-            '#EC4899', // Pink
-            '#14B8A6', // Teal
+            '#10B981', // Emerald
             '#F97316', // Orange
             '#6366F1', // Indigo
             '#06B6D4', // Cyan
@@ -566,9 +557,8 @@
 
         // Function to initialize chart with data
         function initializeChart(wakatimeData) {
-            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                             (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-            
+            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+
             const textColor = isDarkMode ? '#E5E7EB' : '#1F2937';
             const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
             const tooltipBg = isDarkMode ? '#1F2937' : '#FFFFFF';
@@ -657,10 +647,8 @@
             const chart = new Chart(ctx, config);
             
             // Handle theme changes
-            const observer = new MutationObserver(() => {
-                const isNowDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                
+                        const observer = new MutationObserver(() => {
+                            const isNowDark = document.documentElement.getAttribute('data-theme') === 'dark';                
                 const newTextColor = isNowDark ? '#E5E7EB' : '#1F2937';
                 const newGridColor = isNowDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
                 const newTooltipBg = isNowDark ? '#1F2937' : '#FFFFFF';

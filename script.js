@@ -1,21 +1,69 @@
-// Theme Toggle
-const themeToggle = document.querySelector('.theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
+// Theme Handling
 const html = document.documentElement;
-const nav = document.querySelector('nav');
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+const themeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
 
-// Navbar scroll behavior
-let lastScroll = 0;
+function updateThemeIcon(theme) {
+    if (!themeIcon) return;
+    themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+}
+
+function setTheme(theme, save = true) {
+    html.setAttribute('data-theme', theme);
+    updateThemeIcon(theme);
+    if (save) localStorage.setItem('theme', theme);
+}
+
+// Initial theme setup
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    setTheme(savedTheme, false);
+} else {
+    setTheme(themeMediaQuery.matches ? 'light' : 'dark', false);
+}
+
+// Listen for system theme changes (only if no manual override)
+themeMediaQuery.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+        setTheme(e.matches ? 'light' : 'dark', false);
+    }
+});
+
+// Manual toggle
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    });
+}
+
+// Navbar and Scroll handling
 const navbar = document.querySelector('nav');
-const navbarHeight = navbar.offsetHeight;
+const navBackToTop = document.getElementById('navBackToTop');
+const navControlLi = document.querySelector('.nav-control-li');
+let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
+    const navbarHeight = navbar.offsetHeight;
     
-    // Apply to all screen sizes
-    if (currentScroll <= 0) {
-        // At the top of the page
+    // Toggle between Theme Switch and Back to Top
+    if (currentScroll > 300) {
+        navControlLi.classList.add('scrolled');
+    } else {
+        navControlLi.classList.remove('scrolled');
+    }
+
+    // Show navbar when at the very top or very bottom
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const isAtBottom = currentScroll + windowHeight >= documentHeight - 10;
+
+    if (currentScroll <= 0 || isAtBottom) {
         navbar.classList.remove('hide-nav');
+        lastScroll = currentScroll;
         return;
     }
     
@@ -30,83 +78,16 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    html.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
-} else {
-    // Check system preference
-    const systemTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    html.setAttribute('data-theme', systemTheme);
-    updateThemeIcon(systemTheme);
-}
-
-function updateThemeIcon(theme) {
-    themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
-}
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-});
-
-// Back to Top Button
-document.addEventListener('DOMContentLoaded', function() {
-    const backToTopButton = document.getElementById('backToTop');
-    
-    // Only proceed if the button exists
-    if (!backToTopButton) return;
-    
-    let isScrolling;
-    let scrollTimer;
-    
-    // Function to show the button
-    function showButton() {
-        backToTopButton.classList.add('visible');
-    }
-    
-    // Function to hide the button
-    function hideButton() {
-        backToTopButton.classList.remove('visible');
-    }
-    
-    // Function to handle scroll events
-    function handleScroll() {
-        // Hide button when scrolling starts
-        hideButton();
-        
-        // Clear any existing timeout
-        window.clearTimeout(scrollTimer);
-        
-        // Only show if scrolled more than 300px
-        if (window.scrollY > 300) {
-            // Set a timeout to show the button when scrolling stops
-            scrollTimer = setTimeout(showButton, 300);
-        }
-    }
-    
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Initial check in case page loads scrolled
-    if (window.scrollY > 300) {
-        showButton();
-    }
-    
-    // Smooth scroll to top when clicked
-    backToTopButton.addEventListener('click', function(e) {
+// Nav Back to Top Click Handler
+if (navBackToTop) {
+    navBackToTop.addEventListener('click', (e) => {
         e.preventDefault();
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     });
-});
+}
 
 // Smooth Scrolling and Active Navigation
 const navLinks = document.querySelectorAll('.nav-link');
