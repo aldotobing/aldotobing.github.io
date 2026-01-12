@@ -834,6 +834,35 @@ footer {
     }
 }
 
+/* Hero Staggered Entrance */
+.hero-animate {
+    opacity: 0; /* Hidden initially */
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.hero-animate.delay-1 { animation-delay: 0.1s; }
+.hero-animate.delay-2 { animation-delay: 0.3s; }
+.hero-animate.delay-3 { animation-delay: 0.5s; }
+
+/* Enhanced Title Shimmer */
+.hero-title {
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.03em;
+    /* Shimmer Gradient */
+    background: linear-gradient(
+        to right, 
+        var(--text-primary) 20%, 
+        #888 40%, 
+        #fff 50%, 
+        #888 60%, 
+        var(--text-primary) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     animation: textShine 5s linear infinite reverse;
 }
 
