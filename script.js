@@ -179,30 +179,65 @@ function typeWriter() {
 
 typeWriter();
 
-// Particles Animation
-function createParticles() {
-    const heroSection = document.querySelector('.hero');
+// Liquid Background Animation
+function createLiquidBackground() {
     const heroBg = document.querySelector('.hero-bg');
+    if (!heroBg) return;
 
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
+    // Clear existing content if any
+    heroBg.innerHTML = '';
 
-        const x = Math.random() * window.innerWidth;
-        const y = Math.random() * window.innerHeight;
-        const delay = Math.random() * 6;
-        const duration = 4 + Math.random() * 4;
+    // Create 3 large floating blobs
+    const colors = [
+        'rgba(41, 151, 255, 0.4)',  // Blue
+        'rgba(191, 90, 242, 0.4)',  // Purple
+        'rgba(50, 215, 75, 0.3)'    // Greenish hint
+    ];
 
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        particle.style.animationDelay = delay + 's';
-        particle.style.animationDuration = duration + 's';
+    for (let i = 0; i < 3; i++) {
+        const blob = document.createElement('div');
+        blob.className = 'blob';
+        
+        // Random sizes between 40vw and 70vw
+        const size = Math.floor(Math.random() * 30) + 40;
+        
+        blob.style.cssText = `
+            position: absolute;
+            width: ${size}vw;
+            height: ${size}vw;
+            background: radial-gradient(circle, ${colors[i]} 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: moveBlob${i} ${20 + i * 5}s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+            top: ${Math.random() * 50}%;
+            left: ${Math.random() * 50}%;
+        `;
 
-        heroBg.appendChild(particle);
+        heroBg.appendChild(blob);
     }
+
+    // Add CSS for blobs programmatically
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+        @keyframes moveBlob0 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(20vw, 20vh) scale(1.1); }
+        }
+        @keyframes moveBlob1 {
+            0% { transform: translate(0, 0) scale(1.1); }
+            100% { transform: translate(-20vw, 10vh) scale(0.9); }
+        }
+        @keyframes moveBlob2 {
+            0% { transform: translate(0, 0) scale(0.9); }
+            100% { transform: translate(10vw, -20vh) scale(1.1); }
+        }
+    `;
+    document.head.appendChild(styleSheet);
 }
 
-createParticles();
+createLiquidBackground();
 
 // Scroll Animations
 const observerOptions = {
@@ -259,18 +294,8 @@ let lastScrollTop = 0;
 // This functionality is now handled by the scroll event listener at the top of the file
 // which uses requestAnimationFrame for better performance
 
-// Add smooth hover effects for cards
-const cards = document.querySelectorAll('.skill-card, .project-card, .stat-card');
-
-cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-    });
-});
+// Cards hover effect handled by CSS for better performance
+// const cards = document.querySelectorAll('.skill-card, .project-card, .stat-card'); ... handled in CSS
 
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
