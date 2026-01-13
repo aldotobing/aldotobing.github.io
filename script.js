@@ -6,7 +6,16 @@ const themeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
 
 function updateThemeIcon(theme) {
     if (!themeIcon) return;
-    themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    
+    // Premium icon transition
+    themeIcon.style.transform = 'scale(0) rotate(-90deg)';
+    themeIcon.style.opacity = '0';
+    
+    setTimeout(() => {
+        themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        themeIcon.style.transform = 'scale(1) rotate(0deg)';
+        themeIcon.style.opacity = '1';
+    }, 250);
 }
 
 function setTheme(theme, save = true) {
@@ -32,25 +41,76 @@ themeMediaQuery.addEventListener('change', (e) => {
 
 // Manual toggle
 if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
+    themeToggle.addEventListener('click', (event) => {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
+        
+        // Get click coordinates or fallback to button center
+        let x, y;
+        if (event.clientX !== undefined && event.clientY !== undefined && event.clientX !== 0 && event.clientY !== 0) {
+            x = event.clientX;
+            y = event.clientY;
+        } else {
+            const rect = themeToggle.getBoundingClientRect();
+            x = rect.left + rect.width / 2;
+            y = rect.top + rect.height / 2;
+        }
+
+        // Premium View Transition
+        if (!document.startViewTransition) {
+            setTheme(newTheme);
+            return;
+        }
+
+        const endRadius = Math.hypot(
+            Math.max(x, innerWidth - x),
+            Math.max(y, innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(() => {
+            setTheme(newTheme);
+        });
+
+        transition.ready.then(() => {
+            document.documentElement.animate(
+                [
+                    { 
+                        clipPath: `circle(0px at ${x}px ${y}px)`,
+                        filter: 'blur(10px)',
+                        opacity: 0.8
+                    },
+                    { 
+                        clipPath: `circle(${endRadius}px at ${x}px ${y}px)`,
+                        filter: 'blur(0px)',
+                        opacity: 1
+                    }
+                ],
+                {
+                    duration: 650,
+                    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                    pseudoElement: '::view-transition-new(root)',
+                }
+            );
+        });
     });
 }
 
 // Navbar and Scroll handling
 const navBackToTop = document.getElementById('navBackToTop');
 const navControlLi = document.querySelector('.nav-control-li');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
+const navIndicator = document.querySelector('.nav-indicator-pill');
+let isScrollingFromClick = false; // Lock to prevent hopping
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     
     // Toggle between Theme Switch and Back to Top
     if (currentScroll > 300) {
-        navControlLi.classList.add('scrolled');
+        if (navControlLi) navControlLi.classList.add('scrolled');
     } else {
-        navControlLi.classList.remove('scrolled');
+        if (navControlLi) navControlLi.classList.remove('scrolled');
     }
 });
 
@@ -64,12 +124,6 @@ if (navBackToTop) {
         });
     });
 }
-
-// Smooth Scrolling and Active Navigation
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('section');
-const navIndicator = document.querySelector('.nav-indicator-pill');
-let isScrollingFromClick = false; // Lock to prevent hopping
 
 function updateNavIndicator() {
     const activeLink = document.querySelector('.nav-link.active');
@@ -91,6 +145,7 @@ function trackIndicator() {
     indicatorFrame = requestAnimationFrame(trackIndicator);
 }
 
+// Navbar link click with premium reveal
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -103,6 +158,12 @@ navLinks.forEach(link => {
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
             
+            // Premium reveal effect
+            const originalTransition = targetSection.style.transition;
+            targetSection.style.transition = 'none';
+            targetSection.style.opacity = '0';
+            targetSection.style.transform = 'translateY(20px)';
+            
             // Start tracking animation
             trackIndicator();
             setTimeout(() => cancelAnimationFrame(indicatorFrame), 600);
@@ -112,9 +173,22 @@ navLinks.forEach(link => {
                 block: 'start'
             });
 
+            // Fade and slide in the section
             setTimeout(() => {
-                isScrollingFromClick = false;
-            }, 1000); 
+                targetSection.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+                targetSection.style.opacity = '1';
+                targetSection.style.transform = 'translateY(0)';
+                
+                setTimeout(() => {
+                    isScrollingFromClick = false;
+                    // Reset inline styles after animation to avoid conflicts with other logic
+                    setTimeout(() => {
+                        targetSection.style.opacity = '';
+                        targetSection.style.transform = '';
+                        targetSection.style.transition = originalTransition;
+                    }, 800);
+                }, 200);
+            }, 300);
         }
     });
 });
@@ -170,7 +244,7 @@ let charIndex = 0;
 let isDeleting = false;
 
 function typeWriter() {
-    const currentWord = words[wordIndex];
+    const currentWord = words[wordIndex] || "";
 
     if (isDeleting) {
         typingText.textContent = currentWord.substring(0, charIndex - 1);
@@ -192,7 +266,7 @@ function typeWriter() {
     }
 }
 
-typeWriter();
+if (typingText) typeWriter();
 
 // Liquid Background Animation
 function createLiquidBackground() {
@@ -276,35 +350,34 @@ animateElements.forEach(el => observer.observe(el));
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+if (contactForm && submitBtn) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
 
-    // Show loading state
-    submitBtn.innerHTML = '<div class="loading"></div> Sending...';
-    submitBtn.disabled = true;
+        // Show loading state
+        submitBtn.innerHTML = '<div class="loading"></div> Sending...';
+        submitBtn.disabled = true;
 
-    // Simulate form submission
-    setTimeout(() => {
-        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-        submitBtn.style.background = '#10b981';
-
-        // Reset form
-        contactForm.reset();
-
-        // Reset button after 3 seconds
+        // Simulate form submission
         setTimeout(() => {
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-            submitBtn.style.background = '';
-            submitBtn.disabled = false;
-        }, 3000);
-    }, 2000);
-});
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            submitBtn.style.background = '#10b981';
 
-// Cards hover effect handled by CSS for better performance
-// const cards = document.querySelectorAll('.skill-card, .project-card, .stat-card'); ... handled in CSS
+            // Reset form
+            contactForm.reset();
+
+            // Reset button after 3 seconds
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                submitBtn.style.background = '';
+                submitBtn.disabled = false;
+            }, 3000);
+        }, 2000);
+    });
+}
 
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
@@ -314,6 +387,8 @@ window.addEventListener('scroll', () => {
 
     if (hero) {
         hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+    if (heroContent) {
         heroContent.style.transform = `translateY(${scrolled * -0.2}px)`;
     }
 });
@@ -324,15 +399,19 @@ window.addEventListener('load', () => {
     
     // Ensure the splash screen stays for at least the duration of the animations (2.2s total)
     // plus a small buffer for smooth transition
-    setTimeout(() => {
-        splashScreen.classList.add('splash-hidden');
-        
-        // Remove from DOM after fade out to save memory
+    if (splashScreen) {
         setTimeout(() => {
-            splashScreen.remove();
-            document.body.classList.add('loaded'); // Trigger hero animations
-        }, 800);
-    }, 2200);
+            splashScreen.classList.add('splash-hidden');
+            
+            // Remove from DOM after fade out to save memory
+            setTimeout(() => {
+                splashScreen.remove();
+                document.body.classList.add('loaded'); // Trigger hero animations
+            }, 800);
+        }, 2200);
+    } else {
+        document.body.classList.add('loaded');
+    }
 });
 
 // Toggle Project Description
