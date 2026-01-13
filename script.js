@@ -40,14 +40,11 @@ if (themeToggle) {
 }
 
 // Navbar and Scroll handling
-const navbar = document.querySelector('nav');
 const navBackToTop = document.getElementById('navBackToTop');
 const navControlLi = document.querySelector('.nav-control-li');
-let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    const navbarHeight = navbar.offsetHeight;
     
     // Toggle between Theme Switch and Back to Top
     if (currentScroll > 300) {
@@ -55,27 +52,6 @@ window.addEventListener('scroll', () => {
     } else {
         navControlLi.classList.remove('scrolled');
     }
-
-    // Show navbar when at the very top or very bottom
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const isAtBottom = currentScroll + windowHeight >= documentHeight - 10;
-
-    if (currentScroll <= 0 || isAtBottom) {
-        navbar.classList.remove('hide-nav');
-        lastScroll = currentScroll;
-        return;
-    }
-    
-    if (currentScroll > lastScroll && currentScroll > navbarHeight) {
-        // Scrolling down
-        navbar.classList.add('hide-nav');
-    } else if (currentScroll < lastScroll) {
-        // Scrolling up
-        navbar.classList.remove('hide-nav');
-    }
-    
-    lastScroll = currentScroll;
 });
 
 // Nav Back to Top Click Handler
@@ -268,12 +244,6 @@ contactForm.addEventListener('submit', async (e) => {
         }, 3000);
     }, 2000);
 });
-
-// Navbar hide on scroll down, show on scroll up
-let lastScrollTop = 0;
-
-// This functionality is now handled by the scroll event listener at the top of the file
-// which uses requestAnimationFrame for better performance
 
 // Cards hover effect handled by CSS for better performance
 // const cards = document.querySelectorAll('.skill-card, .project-card, .stat-card'); ... handled in CSS
