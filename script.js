@@ -69,6 +69,7 @@ if (navBackToTop) {
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
 const navIndicator = document.querySelector('.nav-indicator-pill');
+let isScrollingFromClick = false; // Lock to prevent hopping
 
 function updateNavIndicator() {
     const activeLink = document.querySelector('.nav-link.active');
@@ -86,21 +87,30 @@ navLinks.forEach(link => {
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
+            isScrollingFromClick = true; // Activate lock
+            
+            // Update active class immediately to the destination
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            updateNavIndicator();
+
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
-            
-            // Update active class immediately for feedback
-            navLinks.forEach(l => l.classList.remove('active'));
-            link.classList.add('active');
-            updateNavIndicator();
+
+            // Release lock after smooth scroll is likely finished
+            setTimeout(() => {
+                isScrollingFromClick = false;
+            }, 1000); 
         }
     });
 });
 
 // Update active navigation on scroll
 window.addEventListener('scroll', () => {
+    if (isScrollingFromClick) return; // Ignore scroll updates if we're moving to a clicked destination
+
     const scrollPosition = window.scrollY + 200;
 
     sections.forEach(section => {
