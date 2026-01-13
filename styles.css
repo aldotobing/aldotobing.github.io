@@ -1102,39 +1102,63 @@ body.loaded .hero-title {
     /* Adjust Navigation for Mobile */
     nav {
         top: auto;
-        bottom: 1.5rem; /* Better reachability on mobile */
-        width: 95%; /* Slightly wider for better fit */
-        max-width: 480px;
+        bottom: 1.5rem;
+        width: 92%; /* Breathable side margins */
+        max-width: 500px;
         justify-content: center;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .glass-content {
-        padding: 5px 8px; /* Balanced 8px end-padding */
+        padding: 4px; /* Slightly tighter for mobile */
         width: 100%;
     }
     
     nav ul {
-        gap: 0;
+        gap: 2px;
         width: 100%;
-        padding: 0;
-        justify-content: space-between;
+        padding: 0 4px;
+        justify-content: space-around; /* Better distribution for various widths */
     }
 
     .nav-control-li {
         margin-left: 0;
         margin-right: 0;
-        width: 44px;
-        height: 44px;
+        width: 40px; /* Scaled down for mobile */
+        height: 40px;
+        flex-shrink: 0;
     }
 
     nav a {
-        font-size: 0.85rem;
-        padding: 0 8px;
-        height: 44px;
+        font-size: 0.8rem;
+        padding: 0 10px;
+        height: 40px;
+        flex: 1; /* Allow equal distribution */
+        text-align: center;
+        min-width: 0; /* Prevent overflow */
     }
 
     .nav-indicator-pill {
-        height: 44px;
+        height: 40px;
+    }
+
+    /* Fix for very small screens (iPhone SE, etc) */
+    @media (max-width: 360px) {
+        nav {
+            width: 96%;
+        }
+        nav a {
+            font-size: 0.7rem;
+            padding: 0 6px;
+        }
+        .glass-content {
+            padding: 3px;
+        }
+        .nav-control-li {
+            width: 36px;
+            height: 36px;
+        }
     }
 
     /* Nav slide out animation for bottom position */
