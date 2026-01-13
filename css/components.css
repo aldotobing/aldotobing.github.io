@@ -329,11 +329,18 @@
     background: var(--glass-bg);
     backdrop-filter: blur(40px);
     border-radius: var(--card-radius);
-    padding: 3rem;
+    padding: 2.5rem;
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-soft), inset 0 1px 0 0 var(--glass-highlight);
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 800px;
+    margin: 3rem auto 0;
+    position: relative;
+}
+
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
 }
 
 /* Footer */

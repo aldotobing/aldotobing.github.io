@@ -178,9 +178,9 @@
     .section-title {
         margin-bottom: 3rem;
     }
-    
-    .nav-control-li {
-        margin-left: 0.5rem;
+
+    .chart-container {
+        height: 300px;
     }
 }
 

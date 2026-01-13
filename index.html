@@ -252,23 +252,18 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Languages Section -->
-    <section id="languages" class="languages section-bg">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Languages</h2>
-            </div>
-            <div class="chart-frame">
-                <h4>
+            <!-- Languages over Last Year -->
+            <div class="chart-frame fade-in">
+                <h4 style="text-align: center; margin-bottom: 2rem; color: var(--text-primary);">
                     Languages over Last Year
-                    <span>(Powered by
-                        <a href="https://wakatime.com/" target="_blank" rel="noopener noreferrer">wakatime.com</a>)
+                    <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-secondary); display: block; margin-top: 0.5rem;">
+                        (Powered by <a href="https://wakatime.com/" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">wakatime.com</a>)
                     </span>
                 </h4>
-                <canvas id="wakatimeChart" width="400" height="800"></canvas>
+                <div class="chart-container">
+                    <canvas id="wakatimeChart"></canvas>
+                </div>
             </div>
         </div>
     </section>
@@ -561,35 +556,78 @@
             '#EF4444'  // Red
         ];
 
+        const languageLogos = {
+            'Java': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+            'TypeScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+            'JavaScript': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+            'Go': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg',
+            'Python': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+            'PHP': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg',
+            'Dart': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg',
+            'HTML': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg',
+            'CSS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
+            'SQL': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+            'Bash': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg',
+            'Nginx config': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg'
+        };
+
         // Function to initialize chart with data
         function initializeChart(wakatimeData) {
             const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+            const isMobile = window.innerWidth <= 768;
 
             const textColor = isDarkMode ? '#E5E7EB' : '#1F2937';
-            const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
             const tooltipBg = isDarkMode ? '#1F2937' : '#FFFFFF';
             
+            // Preload logos for top 3
+            const loadedLogos = {};
+            wakatimeData.logos.slice(0, 3).forEach((logoUrl, index) => {
+                if (logoUrl) {
+                    const img = new Image();
+                    img.src = logoUrl;
+                    loadedLogos[index] = img;
+                }
+            });
+
             const config = {
                 type: 'doughnut',
                 data: wakatimeData,
+                plugins: [{
+                    id: 'arcLogos',
+                    afterDatasetsDraw(chart) {
+                        const { ctx } = chart;
+                        chart.getDatasetMeta(0).data.forEach((datapoint, index) => {
+                            if (index < 3 && loadedLogos[index]) {
+                                const { x, y } = datapoint.tooltipPosition();
+                                const size = isMobile ? 14 : 18;
+                                // Draw logo directly (transparent background)
+                                ctx.save();
+                                ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+                                ctx.shadowBlur = 4;
+                                ctx.drawImage(loadedLogos[index], x - size/2, y - size/2, size, size);
+                                ctx.restore();
+                            }
+                        });
+                    }
+                }],
                 options: {
                     responsive: true,
-                    maintainAspectRatio: true,
+                    maintainAspectRatio: false,
                     layout: {
-                        padding: 20
+                        padding: isMobile ? 10 : 20
                     },
                     plugins: {
                         legend: {
-                            position: 'right',
+                            position: isMobile ? 'bottom' : 'right',
                             align: 'center',
                             labels: {
                                 color: textColor,
                                 font: {
                                     family: '"Inter", sans-serif',
-                                    size: 13,
+                                    size: isMobile ? 11 : 13,
                                     weight: 500
                                 },
-                                padding: 12,
+                                padding: isMobile ? 10 : 15,
                                 usePointStyle: true,
                                 pointStyle: 'circle',
                                 boxWidth: 8,
@@ -640,10 +678,6 @@
                             hoverOffset: 12,
                             hoverBorderWidth: 0
                         }
-                    },
-                    onHover: (event, chartElement) => {
-                        const target = event.native?.target;
-                        target.style.cursor = chartElement[0] ? 'pointer' : 'default';
                     }
                 }
             };
@@ -653,10 +687,9 @@
             const chart = new Chart(ctx, config);
             
             // Handle theme changes
-                        const observer = new MutationObserver(() => {
-                            const isNowDark = document.documentElement.getAttribute('data-theme') === 'dark';                
+            const observer = new MutationObserver(() => {
+                const isNowDark = document.documentElement.getAttribute('data-theme') === 'dark';                
                 const newTextColor = isNowDark ? '#E5E7EB' : '#1F2937';
-                const newGridColor = isNowDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
                 const newTooltipBg = isNowDark ? '#1F2937' : '#FFFFFF';
                 
                 chart.options.plugins.legend.labels.color = newTextColor;
@@ -678,17 +711,12 @@
 
         // Process WakaTime data
         function processWakaTimeData(languages) {
-            // Filter out 'Other' category and very small percentages
             const filteredLanguages = languages
                 .filter(lang => lang.name !== 'Other' && lang.percent >= 0.5);
             
-            // Sort by percentage (descending)
             filteredLanguages.sort((a, b) => b.percent - a.percent);
-            
-            // Limit to top 8 languages for better readability
             const topLanguages = filteredLanguages.slice(0, 8);
             
-            // Calculate "Others" percentage if there are remaining languages
             let othersPercent = 0;
             if (filteredLanguages.length > 8) {
                 othersPercent = filteredLanguages
@@ -696,24 +724,24 @@
                     .reduce((sum, lang) => sum + lang.percent, 0);
             }
             
-            // Prepare labels and data
             const labels = topLanguages.map(lang => lang.name);
             const data = topLanguages.map(lang => parseFloat(lang.percent.toFixed(2)));
+            const logos = topLanguages.map(lang => languageLogos[lang.name] || null);
             const colors = [];
             
-            // Add "Others" category if needed
             if (othersPercent > 0) {
                 labels.push('Others');
                 data.push(parseFloat(othersPercent.toFixed(2)));
+                logos.push(null);
             }
             
-            // Assign colors from our palette
             for (let i = 0; i < labels.length; i++) {
                 colors.push(colorPalette[i % colorPalette.length]);
             }
             
             return {
                 labels: labels,
+                logos: logos,
                 datasets: [{
                     data: data,
                     backgroundColor: colors.map(c => c + 'CC'),
