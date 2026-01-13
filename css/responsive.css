@@ -130,6 +130,20 @@
         grid-template-columns: 1fr; /* Single column on mobile */
     }
 
+    .project-card:first-child {
+        grid-column: span 1;
+        flex-direction: column;
+    }
+
+    .project-card:first-child .project-image,
+    .project-card:first-child .project-content {
+        width: 100%;
+    }
+
+    .project-card:first-child .project-content {
+        padding: 2.2rem;
+    }
+
     .stats-grid {
         grid-template-columns: repeat(3, 1fr); /* Keep 3 cols on mobile for compact stats */
         gap: 0.8rem;
