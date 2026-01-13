@@ -1323,11 +1323,6 @@ body.loaded .hero-title {
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
-  display: block;
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
 }
 
 ::view-transition-old(root) {
@@ -1336,6 +1331,16 @@ body.loaded .hero-title {
 
 ::view-transition-new(root) {
   z-index: 9999;
+}
+
+/* Safari GPU Safety: Disable heavy filters during root animation */
+.transitioning-theme .glass-filter,
+.transitioning-theme .glass-overlay,
+.transitioning-theme .hero-bg,
+.transitioning-theme .blob {
+    filter: none !important;
+    backdrop-filter: none !important;
+    transition: none !important;
 }
 
 /* Ensure background doesn't double-transition when using View Transitions */

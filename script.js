@@ -72,25 +72,24 @@ if (themeToggle) {
         });
 
         transition.ready.then(() => {
+            // Add a safety class to disable heavy filters during transition
+            document.body.classList.add('transitioning-theme');
+            
             document.documentElement.animate(
                 [
-                    { 
-                        clipPath: `circle(0px at ${x}px ${y}px)`,
-                        filter: 'blur(10px)',
-                        opacity: 0.8
-                    },
-                    { 
-                        clipPath: `circle(${endRadius}px at ${x}px ${y}px)`,
-                        filter: 'blur(0px)',
-                        opacity: 1
-                    }
+                    { clipPath: `circle(0px at ${x}px ${y}px)` },
+                    { clipPath: `circle(${endRadius}px at ${x}px ${y}px)` }
                 ],
                 {
-                    duration: 650,
+                    duration: 600,
                     easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
                     pseudoElement: '::view-transition-new(root)',
                 }
             );
+
+            transition.finished.finally(() => {
+                document.body.classList.remove('transitioning-theme');
+            });
         });
     });
 }
