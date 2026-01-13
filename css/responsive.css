@@ -149,6 +149,26 @@
         gap: 0.8rem;
     }
 
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-item {
+        padding: 1.2rem;
+        gap: 1rem;
+    }
+
+    .contact-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
     /* Typography & Spacing */
     .hero-title {
         font-size: 3rem;
