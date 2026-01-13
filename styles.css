@@ -6,6 +6,11 @@
     --text-secondary: #86868b; /* Apple's gray text */
     --text-muted: #6e6e73;
     
+    /* Liquid Glass Variables */
+    --lg-bg-color: rgba(255, 255, 255, 0.08); /* More subtle for dark mode */
+    --lg-highlight: rgba(255, 255, 255, 0.3); /* Softer highlight */
+    --lg-text: #ffffff;
+    
     /* Liquid Gradients */
     --accent-primary: #2997ff; /* Apple Blue */
     --accent-secondary: #bf5af2; /* Apple Purple */
@@ -14,7 +19,7 @@
     
     /* Glass Effects */
     --glass-bg: rgba(30, 30, 30, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.1);
     --glass-highlight: rgba(255, 255, 255, 0.15);
     
     /* Shadows */
@@ -36,8 +41,12 @@
     --text-muted: #6e6e73;
     
     --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-border: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1); /* Darker border for definition */
     --glass-highlight: rgba(255, 255, 255, 0.8);
+    
+    /* Liquid Glass Light Mode */
+    --lg-bg-color: rgba(200, 200, 200, 0.15); /* Slight dark tint to make white highlights pop */
+    --lg-highlight: rgba(255, 255, 255, 1.0); /* Strong white highlight */
     
     --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
     --shadow-strong: 0 30px 60px rgba(0, 0, 0, 0.12);
@@ -103,21 +112,57 @@ nav {
     transform: translateX(-50%) translateY(-30px);
     opacity: 0;
     z-index: 1000;
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    /* Liquid Glass Base Styles */
+    background: transparent;
+    border: none;
     border-radius: 999px;
-    padding: 6px 6px 6px 22px; /* Precision padding: 6px top/bottom/right, 22px left */
+    padding: 0; /* Padding moved to glass-content */
     box-shadow: var(--shadow-soft);
+    overflow: hidden; /* Required for glass layers */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                background-color 0.3s ease;
+                opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     min-width: min-content;
     width: auto;
     pointer-events: none;
     display: flex;
     align-items: center;
+}
+
+/* Liquid Glass Layers */
+.glass-filter,
+.glass-overlay,
+.glass-specular {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.glass-filter {
+    z-index: 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    filter: url(#lensFilter) saturate(120%) brightness(1.15);
+}
+
+.glass-overlay {
+    z-index: 1;
+    background: var(--lg-bg-color);
+}
+
+.glass-specular {
+    z-index: 2;
+    box-shadow: inset 1px 1px 0 var(--lg-highlight),
+                inset 0 0 5px var(--lg-highlight);
+}
+
+.glass-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    padding: 6px 6px 6px 22px; /* Restoring original nav padding */
+    width: 100%;
 }
 
 body.loaded nav {
@@ -1042,11 +1087,16 @@ body.loaded .hero-title {
     nav {
         bottom: 1.5rem;
         top: auto;
-        padding: 6px 6px 6px 18px;
-        background: var(--glass-bg); /* Follow theme variable */
+        padding: 0;
+        background: transparent;
         width: 90%;
         max-width: 380px;
-        justify-content: space-between;
+        justify-content: center;
+    }
+
+    .glass-content {
+        padding: 6px 6px 6px 18px;
+        width: 100%;
     }
     
     nav ul {

@@ -41,22 +41,27 @@
     </div>
 
     <!-- Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#about" class="nav-link">About</a></li>
-            <li><a href="#skills" class="nav-link">Skills</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
-            <li class="nav-control-li">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <button class="nav-back-to-top" id="navBackToTop" aria-label="Back to top">
-                    <i class="fas fa-arrow-up"></i>
-                </button>
-            </li>
-        </ul>
+    <nav class="glass-container">
+        <div class="glass-filter"></div>
+        <div class="glass-overlay"></div>
+        <div class="glass-specular"></div>
+        <div class="glass-content">
+            <ul>
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="nav-control-li">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="nav-back-to-top" id="navBackToTop" aria-label="Back to top">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -755,5 +760,17 @@
         }
     });
     </script>
+    <!-- Liquid Glass SVG Filter -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <filter id="lensFilter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+        <feComponentTransfer in="SourceAlpha" result="alpha">
+          <feFuncA type="identity" />
+        </feComponentTransfer>
+
+        <feGaussianBlur in="alpha" stdDeviation="50" result="blur" />
+
+        <feDisplacementMap in="SourceGraphic" in2="blur" scale="50" xChannelSelector="A" yChannelSelector="A" />
+      </filter>
+    </svg>
 </body>
 </html>
