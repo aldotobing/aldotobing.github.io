@@ -161,7 +161,7 @@ nav {
     z-index: 3;
     display: flex;
     align-items: center;
-    padding: 6px 6px 6px 22px; /* Restoring original nav padding */
+    padding: 10px 10px 10px 28px; /* Increased padding */
     width: 100%;
 }
 
@@ -181,7 +181,7 @@ nav.hide-nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1.25rem; /* Tighter, more elegant spacing */
+    gap: 1.75rem; /* Increased gap */
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -192,11 +192,11 @@ nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.85rem;
+    font-size: 1rem; /* Increased font size */
     transition: color 0.3s ease;
     position: relative;
     display: block;
-    padding: 4px 2px;
+    padding: 6px 2px; /* Increased padding */
 }
 
 nav a:hover,
@@ -227,9 +227,9 @@ nav a.active::after {
 /* Theme Toggle */
 .nav-control-li {
     position: relative;
-    width: 32px;
-    height: 32px;
-    margin-left: 0.5rem;
+    width: 40px;
+    height: 40px;
+    margin-left: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,8 +240,8 @@ nav a.active::after {
     background: rgba(120, 120, 128, 0.1);
     border: none;
     color: var(--text-primary);
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -1085,17 +1085,15 @@ body.loaded .hero-title {
 
     /* Adjust Navigation for Mobile */
     nav {
-        bottom: 1.5rem;
         top: auto;
-        padding: 0;
-        background: transparent;
+        bottom: 1.5rem; /* Better reachability on mobile */
         width: 90%;
-        max-width: 380px;
+        max-width: 440px; /* Increased from 380px */
         justify-content: center;
     }
 
     .glass-content {
-        padding: 6px 6px 6px 18px;
+        padding: 8px 8px 8px 22px; /* Increased from 6px 6px 6px 18px */
         width: 100%;
     }
     
@@ -1110,7 +1108,7 @@ body.loaded .hero-title {
     }
 
     nav a {
-        font-size: 0.75rem;
+        font-size: 0.9rem; /* Increased from 0.75rem */
     }
 
     /* Nav slide out animation for bottom position */
