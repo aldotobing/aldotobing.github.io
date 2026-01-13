@@ -73,9 +73,13 @@ let isScrollingFromClick = false; // Lock to prevent hopping
 
 function updateNavIndicator() {
     const activeLink = document.querySelector('.nav-link.active');
-    if (activeLink && navIndicator) {
-        navIndicator.style.width = `${activeLink.offsetWidth}px`;
-        navIndicator.style.left = `${activeLink.offsetLeft}px`;
+    const navList = document.querySelector('nav ul');
+    if (activeLink && navIndicator && navList) {
+        const linkRect = activeLink.getBoundingClientRect();
+        const listRect = navList.getBoundingClientRect();
+        
+        navIndicator.style.width = `${linkRect.width}px`;
+        navIndicator.style.left = `${linkRect.left - listRect.left}px`;
         navIndicator.style.opacity = '1';
     }
 }

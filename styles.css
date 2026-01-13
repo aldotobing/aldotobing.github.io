@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 :root {
     --bg-primary: #000000;
     --bg-secondary: #1c1c1e;
@@ -1103,61 +1109,60 @@ body.loaded .hero-title {
     nav {
         top: auto;
         bottom: 1.5rem;
-        width: 92%; /* Breathable side margins */
+        width: 92%;
         max-width: 500px;
-        justify-content: center;
         left: 50%;
         transform: translateX(-50%);
     }
 
     .glass-content {
-        padding: 4px; /* Slightly tighter for mobile */
+        padding: 5px; /* Standardized precision buffer */
         width: 100%;
     }
     
     nav ul {
-        gap: 2px;
+        gap: 0;
         width: 100%;
-        padding: 0 4px;
-        justify-content: space-around; /* Better distribution for various widths */
+        padding: 0 5px; /* Symmetrical side buffer */
+        justify-content: space-between;
     }
 
     .nav-control-li {
-        margin-left: 0;
+        margin-left: 4px;
         margin-right: 0;
-        width: 40px; /* Scaled down for mobile */
+        width: 40px;
         height: 40px;
         flex-shrink: 0;
     }
 
     nav a {
         font-size: 0.8rem;
-        padding: 0 10px;
+        padding: 0 6px;
         height: 40px;
-        flex: 1; /* Allow equal distribution */
+        flex: 1; 
         text-align: center;
-        min-width: 0; /* Prevent overflow */
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .nav-indicator-pill {
-        height: 40px;
+        height: 40px; /* Synchronized with link height */
     }
 
     /* Fix for very small screens (iPhone SE, etc) */
     @media (max-width: 360px) {
         nav {
-            width: 96%;
+            width: 94%;
         }
         nav a {
-            font-size: 0.7rem;
-            padding: 0 6px;
-        }
-        .glass-content {
-            padding: 3px;
+            font-size: 0.72rem;
+            padding: 0 4px;
         }
         .nav-control-li {
             width: 36px;
-            height: 36px;
+            height: 40px; /* Keep height consistent for the pill bar */
         }
     }
 
