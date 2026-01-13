@@ -397,18 +397,25 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     const splashScreen = document.getElementById('splash-screen');
     
-    // Ensure the splash screen stays for at least the duration of the animations (2.2s total)
-    // plus a small buffer for smooth transition
     if (splashScreen) {
         setTimeout(() => {
+            // Start both animations at the same time for a seamless transition
             splashScreen.classList.add('splash-hidden');
+            document.body.classList.add('loaded');
             
-            // Remove from DOM after fade out to save memory
+            // Remove splash from DOM after transition completes
             setTimeout(() => {
                 splashScreen.remove();
-                document.body.classList.add('loaded'); // Trigger hero animations
-            }, 800);
-        }, 2200);
+                
+                // Delay navbar appearance until hero is shown
+                const mainNav = document.querySelector('nav');
+                if (mainNav) {
+                    setTimeout(() => {
+                        mainNav.classList.add('nav-visible');
+                    }, 1000); // 1s delay for a more orchestrated feel
+                }
+            }, 1000);
+        }, 2000);
     } else {
         document.body.classList.add('loaded');
     }
