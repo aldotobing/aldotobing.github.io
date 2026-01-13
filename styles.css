@@ -161,7 +161,7 @@ nav {
     z-index: 3;
     display: flex;
     align-items: center;
-    padding: 10px 10px 10px 28px; /* Increased padding */
+    padding: 5px 8px; /* Perfectly balanced: 5px vertical, 8px horizontal */
     width: 100%;
 }
 
@@ -181,22 +181,57 @@ nav.hide-nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 1.75rem; /* Increased gap */
+    gap: 0;
     align-items: center;
     justify-content: center;
     margin: 0;
     padding: 0;
+    position: relative;
+}
+
+.nav-indicator-pill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 44px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 0 10px rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+}
+
+body.loaded .nav-indicator-pill {
+    opacity: 1;
+}
+
+[data-theme="dark"] .nav-indicator-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    font-size: 1rem; /* Increased font size */
-    transition: color 0.3s ease;
+    font-size: 1rem;
+    transition: all 0.3s ease;
     position: relative;
-    display: block;
-    padding: 6px 2px; /* Increased padding */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 22px;
+    z-index: 1;
+    border-radius: 99px;
+    white-space: nowrap;
 }
 
 nav a:hover,
@@ -204,32 +239,13 @@ nav a.active {
     color: var(--text-primary);
 }
 
-/* Subtle dot indicator instead of underline */
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
-    width: 4px;
-    height: 4px;
-    background: var(--accent-primary);
-    border-radius: 50%;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    opacity: 0;
-}
-
-nav a.active::after {
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-}
-
 /* Theme Toggle */
 .nav-control-li {
     position: relative;
-    width: 40px;
-    height: 40px;
-    margin-left: 0.75rem;
+    width: 44px;
+    height: 44px;
+    margin-left: 4px; /* Standard small gap from menu items */
+    margin-right: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,8 +256,8 @@ nav a.active::after {
     background: rgba(120, 120, 128, 0.1);
     border: none;
     color: var(--text-primary);
-    width: 38px;
-    height: 38px;
+    width: 40px; /* Perfectly centered within 44px li */
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -1087,28 +1103,38 @@ body.loaded .hero-title {
     nav {
         top: auto;
         bottom: 1.5rem; /* Better reachability on mobile */
-        width: 90%;
-        max-width: 440px; /* Increased from 380px */
+        width: 95%; /* Slightly wider for better fit */
+        max-width: 480px;
         justify-content: center;
     }
 
     .glass-content {
-        padding: 8px 8px 8px 22px; /* Increased from 6px 6px 6px 18px */
+        padding: 5px 8px; /* Balanced 8px end-padding */
         width: 100%;
     }
     
     nav ul {
-        gap: 0.8rem;
+        gap: 0;
         width: 100%;
+        padding: 0;
         justify-content: space-between;
     }
 
     .nav-control-li {
         margin-left: 0;
+        margin-right: 0;
+        width: 44px;
+        height: 44px;
     }
 
     nav a {
-        font-size: 0.9rem; /* Increased from 0.75rem */
+        font-size: 0.85rem;
+        padding: 0 8px;
+        height: 44px;
+    }
+
+    .nav-indicator-pill {
+        height: 44px;
     }
 
     /* Nav slide out animation for bottom position */

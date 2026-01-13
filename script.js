@@ -68,6 +68,16 @@ if (navBackToTop) {
 // Smooth Scrolling and Active Navigation
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
+const navIndicator = document.querySelector('.nav-indicator-pill');
+
+function updateNavIndicator() {
+    const activeLink = document.querySelector('.nav-link.active');
+    if (activeLink && navIndicator) {
+        navIndicator.style.width = `${activeLink.offsetWidth}px`;
+        navIndicator.style.left = `${activeLink.offsetLeft}px`;
+        navIndicator.style.opacity = '1';
+    }
+}
 
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -80,6 +90,11 @@ navLinks.forEach(link => {
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Update active class immediately for feedback
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            updateNavIndicator();
         }
     });
 });
@@ -102,7 +117,14 @@ window.addEventListener('scroll', () => {
             });
         }
     });
+    updateNavIndicator();
 });
+
+// Initialize indicator
+window.addEventListener('load', () => {
+    setTimeout(updateNavIndicator, 100); // Small delay to ensure layout is ready
+});
+window.addEventListener('resize', updateNavIndicator);
 
 // Typing Animation
 const typingText = document.getElementById('typing-text');
