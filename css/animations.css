@@ -1,0 +1,137 @@
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes textShine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+@keyframes heroReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        filter: blur(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    50% { opacity: 0.5; }
+    100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
+}
+
+/* Hero Staggered Entrance */
+.hero-animate {
+    opacity: 0; /* Hidden initially */
+    will-change: transform, opacity, filter;
+}
+
+body.loaded .hero-animate {
+    animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+body.loaded .hero-animate.delay-1 { animation-delay: 0.2s; }
+body.loaded .hero-animate.delay-2 { animation-delay: 0.4s; }
+body.loaded .hero-animate.delay-3 { animation-delay: 0.6s; }
+
+/* Enhanced Title Shimmer */
+body.loaded .hero-title {
+    animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, 
+               textShine 5s linear infinite reverse;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Loading Spinner */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Premium View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Safari GPU Safety: Disable heavy filters during root animation */
+.transitioning-theme .glass-filter,
+.transitioning-theme .glass-overlay,
+.transitioning-theme .hero-bg,
+.transitioning-theme .blob {
+    filter: none !important;
+    backdrop-filter: none !important;
+    transition: none !important;
+}
+
+/* Ensure background doesn't double-transition when using View Transitions */
+@supports (view-transition-name: root) {
+  body {
+    transition-property: background-color, color;
+    transition-duration: 0s, 0.1s;
+  }
+}

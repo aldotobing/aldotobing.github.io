@@ -1,0 +1,53 @@
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #1c1c1e;
+    --bg-tertiary: #2c2c2e;
+    --text-primary: #f5f5f7; /* Apple's off-white */
+    --text-secondary: #86868b; /* Apple's gray text */
+    --text-muted: #6e6e73;
+    
+    /* Liquid Glass Variables */
+    --lg-bg-color: rgba(255, 255, 255, 0.08); /* More subtle for dark mode */
+    --lg-highlight: rgba(255, 255, 255, 0.3); /* Softer highlight */
+    --lg-text: #ffffff;
+    
+    /* Liquid Gradients */
+    --accent-primary: #2997ff; /* Apple Blue */
+    --accent-secondary: #bf5af2; /* Apple Purple */
+    --accent-gradient: linear-gradient(135deg, #2997ff 0%, #bf5af2 100%);
+    --liquid-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
+    
+    /* Glass Effects */
+    --glass-bg: rgba(30, 30, 30, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.15);
+    
+    /* Shadows */
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.25);
+    --shadow-strong: 0 30px 60px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(41, 151, 255, 0.3);
+    
+    /* Spacing */
+    --section-spacing: 8rem;
+    --card-radius: 24px;
+}
+
+[data-theme="light"] {
+    --bg-primary: #f5f5f7;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f2f2f7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #86868b;
+    --text-muted: #6e6e73;
+    
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(0, 0, 0, 0.1); /* Darker border for definition */
+    --glass-highlight: rgba(255, 255, 255, 0.8);
+    
+    /* Liquid Glass Light Mode */
+    --lg-bg-color: rgba(200, 200, 200, 0.15); /* Slight dark tint to make white highlights pop */
+    --lg-highlight: rgba(255, 255, 255, 1.0); /* Strong white highlight */
+    
+    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
+    --shadow-strong: 0 30px 60px rgba(0, 0, 0, 0.12);
+}

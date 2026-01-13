@@ -1,0 +1,290 @@
+/* Navigation - Floating Capsule */
+body:not(.loaded) {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+body.loaded {
+    visibility: visible;
+    opacity: 1;
+}
+
+nav {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px) scale(0.98);
+    opacity: 0;
+    z-index: 1000;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    padding: 0;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    min-width: min-content;
+    width: auto;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    filter: blur(10px);
+}
+
+/* Liquid Glass Layers */
+.glass-filter,
+.glass-overlay,
+.glass-specular {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+.glass-filter {
+    z-index: 1;
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    filter: url(#glass-distortion);
+}
+
+.glass-overlay {
+    z-index: 2;
+    background: var(--lg-bg-color);
+}
+
+.glass-specular {
+    z-index: 3;
+    box-shadow: inset 0 1px 1px var(--lg-highlight);
+}
+
+.glass-content {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    padding: 6px 9px; /* Precision 6px vertical, 9px horizontal */
+    width: 100%;
+}
+
+/* Staggered items setup */
+nav ul li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav.nav-visible {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    filter: none;
+}
+
+/* Trigger staggered reveal when nav is visible */
+nav.nav-visible ul li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Precise delays for each item */
+nav.nav-visible ul li:nth-child(1) { transition-delay: 0.1s; }
+nav.nav-visible ul li:nth-child(2) { transition-delay: 0.15s; }
+nav.nav-visible ul li:nth-child(3) { transition-delay: 0.2s; }
+nav.nav-visible ul li:nth-child(4) { transition-delay: 0.25s; }
+nav.nav-visible ul li:nth-child(5) { transition-delay: 0.3s; }
+nav.nav-visible ul li:nth-child(6) { transition-delay: 0.35s; }
+nav.nav-visible .nav-indicator-pill { transition-delay: 0.5s; }
+
+
+nav.hide-nav {
+    transform: translateX(-50%) translateY(-150%) !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.nav-indicator-pill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 44px;
+    transform: translateY(-50%) scale(1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 99px;
+    /* Warmer, more fluid organic bounce */
+    transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    will-change: left, width, transform;
+}
+
+/* Subtle organic 'squash' effect when the pill moves */
+nav.nav-visible .nav-indicator-pill:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+body.loaded .nav-indicator-pill {
+    opacity: 1;
+}
+
+[data-theme="dark"] .nav-indicator-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.15s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    padding: 0 18px;
+    z-index: 1;
+    border-radius: 99px;
+    white-space: nowrap;
+    gap: 0; /* No gap on desktop as icons are hidden */
+}
+
+nav a i {
+    font-size: 1rem;
+    display: none !important; /* Strictly hidden on desktop */
+}
+
+nav a span {
+    display: inline-block;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--text-primary);
+}
+
+/* Theme Toggle */
+.nav-control-li {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    margin-left: 6px; /* Balanced gap between menu and controls */
+    margin-right: -3px; /* Precise inset for the right curve */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle, .nav-back-to-top {
+    position: absolute;
+    background: rgba(120, 120, 128, 0.1);
+    border: none;
+    color: var(--text-primary);
+    width: 40px; /* Perfectly centered within 44px li */
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Initially theme toggle is visible, back-to-top is hidden */
+.theme-toggle {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    visibility: visible;
+}
+
+.nav-back-to-top {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+    visibility: hidden;
+}
+
+/* Scrolled state transitions */
+.scrolled .theme-toggle {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+    visibility: hidden;
+}
+
+.scrolled .nav-back-to-top {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+    visibility: visible;
+}
+
+.theme-toggle:hover, .nav-back-to-top:hover {
+    background: rgba(120, 120, 128, 0.2);
+    transform: scale(1.1);
+}
+
+/* Premium Icon Animation */
+.theme-toggle i {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
+}
+
+.theme-toggle:hover {
+    background: rgba(120, 120, 128, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.85);
+    background: rgba(120, 120, 128, 0.3);
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Sophisticated inner pulse on click */
+.theme-toggle::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.theme-toggle:active::after {
+    opacity: 0.2;
+    transform: scale(1.2);
+    transition: 0s;
+}
+
+[data-theme='light'] .theme-toggle i {
+    color: #f39c12; /* Sun golden color */
+    filter: drop-shadow(0 0 5px rgba(243, 156, 18, 0.4));
+}
+
+[data-theme='dark'] .theme-toggle i {
+    color: #f1c40f; /* Moon soft yellow */
+    filter: drop-shadow(0 0 8px rgba(241, 196, 15, 0.3));
+}
