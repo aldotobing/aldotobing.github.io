@@ -157,45 +157,28 @@ navLinks.forEach(link => {
             // 1. IMMEDIATE UI UPDATE
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-            updateNavIndicator();
             
-            // 2. PREPARE SECTION REVEAL
-            const originalTransition = targetSection.style.transition;
-            targetSection.style.transition = 'none';
-            targetSection.style.opacity = '0';
-            targetSection.style.transform = 'translateY(20px)';
-            
-            // 3. EXECUTE SCROLL AFTER PAINT
+            // Force immediate layout recalculation and update
             requestAnimationFrame(() => {
-                // Start tracking animation for the pill
-                trackIndicator();
-                
-                // Increase tracking duration to ensure the pill follows any layout shifts
-                setTimeout(() => cancelAnimationFrame(indicatorFrame), 1200);
-
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-
-                // Fade and slide in the section
-                setTimeout(() => {
-                    targetSection.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-                    targetSection.style.opacity = '1';
-                    targetSection.style.transform = 'translateY(0)';
-                    
-                    // Release the lock only after the smooth scroll and fade-in are fully complete
-                    setTimeout(() => {
-                        isScrollingFromClick = false;
-                        // Reset inline styles
-                        setTimeout(() => {
-                            targetSection.style.opacity = '';
-                            targetSection.style.transform = '';
-                            targetSection.style.transition = originalTransition;
-                        }, 800);
-                    }, 800); // Increased from 200ms to 800ms to cover scroll duration
-                }, 300);
+                updateNavIndicator();
             });
+            
+            // 2. EXECUTE SCROLL
+            trackIndicator();
+            
+            // Increase tracking and lock duration for long scrolls
+            const scrollDuration = 1500; 
+            setTimeout(() => cancelAnimationFrame(indicatorFrame), scrollDuration);
+
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+
+            // Release the lock after the smooth scroll is definitely complete
+            setTimeout(() => {
+                isScrollingFromClick = false;
+            }, scrollDuration);
         }
     });
 });
