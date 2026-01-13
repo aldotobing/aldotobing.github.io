@@ -84,6 +84,13 @@ function updateNavIndicator() {
     }
 }
 
+// Continuous tracking during transitions
+let indicatorFrame;
+function trackIndicator() {
+    updateNavIndicator();
+    indicatorFrame = requestAnimationFrame(trackIndicator);
+}
+
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -91,19 +98,20 @@ navLinks.forEach(link => {
         const targetSection = document.querySelector(targetId);
 
         if (targetSection) {
-            isScrollingFromClick = true; // Activate lock
+            isScrollingFromClick = true;
             
-            // Update active class immediately to the destination
             navLinks.forEach(l => l.classList.remove('active'));
             link.classList.add('active');
-            updateNavIndicator();
+            
+            // Start tracking animation
+            trackIndicator();
+            setTimeout(() => cancelAnimationFrame(indicatorFrame), 600);
 
             targetSection.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
 
-            // Release lock after smooth scroll is likely finished
             setTimeout(() => {
                 isScrollingFromClick = false;
             }, 1000); 
@@ -113,9 +121,10 @@ navLinks.forEach(link => {
 
 // Update active navigation on scroll
 window.addEventListener('scroll', () => {
-    if (isScrollingFromClick) return; // Ignore scroll updates if we're moving to a clicked destination
+    if (isScrollingFromClick) return;
 
     const scrollPosition = window.scrollY + 200;
+    let currentActive = null;
 
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
@@ -123,15 +132,28 @@ window.addEventListener('scroll', () => {
         const sectionId = section.getAttribute('id');
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
-            });
+            currentActive = sectionId;
         }
     });
-    updateNavIndicator();
+
+    if (currentActive) {
+        let changed = false;
+        navLinks.forEach(link => {
+            const isMatch = link.getAttribute('href') === `#${currentActive}`;
+            if (isMatch && !link.classList.contains('active')) {
+                link.classList.add('active');
+                changed = true;
+            } else if (!isMatch && link.classList.contains('active')) {
+                link.classList.remove('active');
+                changed = true;
+            }
+        });
+
+        if (changed) {
+            trackIndicator();
+            setTimeout(() => cancelAnimationFrame(indicatorFrame), 600);
+        }
+    }
 });
 
 // Initialize indicator

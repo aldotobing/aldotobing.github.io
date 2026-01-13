@@ -167,7 +167,7 @@ nav {
     z-index: 3;
     display: flex;
     align-items: center;
-    padding: 5px 8px; /* Perfectly balanced: 5px vertical, 8px horizontal */
+    padding: 6px 9px; /* Precision 6px vertical, 9px horizontal */
     width: 100%;
 }
 
@@ -201,14 +201,14 @@ nav ul {
     left: 0;
     height: 44px;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
                 inset 0 0 10px rgba(255, 255, 255, 0.1);
     border-radius: 99px;
-    transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    transition: all 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
     z-index: 0;
     pointer-events: none;
     opacity: 0;
@@ -219,25 +219,44 @@ body.loaded .nav-indicator-pill {
 }
 
 [data-theme="dark"] .nav-indicator-pill {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 44px;
-    padding: 0 22px;
+    padding: 0 18px;
     z-index: 1;
     border-radius: 99px;
     white-space: nowrap;
+    gap: 0; /* No gap on desktop as icons are hidden */
+}
+
+nav a i {
+    font-size: 1rem;
+    display: none !important; /* Strictly hidden on desktop */
+}
+
+nav a span {
+    display: inline-block;
+}
+
+@media (max-width: 992px) {
+    nav a {
+        gap: 8px; /* Restore gap for mobile */
+    }
+    nav a i {
+        display: inline-block !important; /* Show icons on mobile */
+    }
 }
 
 nav a:hover,
@@ -250,8 +269,8 @@ nav a.active {
     position: relative;
     width: 44px;
     height: 44px;
-    margin-left: 4px; /* Standard small gap from menu items */
-    margin-right: 0;
+    margin-left: 6px; /* Balanced gap between menu and controls */
+    margin-right: -3px; /* Precise inset for the right curve */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1116,53 +1135,75 @@ body.loaded .hero-title {
     }
 
     .glass-content {
-        padding: 5px; /* Standardized precision buffer */
+        padding: 6px 9px; /* Precision 6px vertical, 9px horizontal */
         width: 100%;
     }
     
     nav ul {
         gap: 0;
         width: 100%;
-        padding: 0 5px; /* Symmetrical side buffer */
+        padding: 0; /* Remove internal padding for symmetrical pill edge */
         justify-content: space-between;
     }
 
     .nav-control-li {
-        margin-left: 4px;
-        margin-right: 0;
-        width: 40px;
-        height: 40px;
+        margin-left: 0;
+        margin-right: -4px; /* Precision inset for right curve */
+        width: 44px;
+        height: 44px;
         flex-shrink: 0;
     }
 
     nav a {
         font-size: 0.8rem;
-        padding: 0 6px;
-        height: 40px;
-        flex: 1; 
-        text-align: center;
-        min-width: 0;
+        padding: 0;
+        width: 44px; 
+        height: 44px;
+        flex: 0 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+    }
+
+    nav a span {
+        display: none; 
+    }
+
+    nav a.active {
+        flex: 1; 
+        width: auto;
+        padding: 0 14px; /* Balanced active padding */
+        gap: 8px;
+    }
+
+    nav a.active span {
+        display: inline-block;
     }
 
     .nav-indicator-pill {
-        height: 40px; /* Synchronized with link height */
+        height: 44px;
     }
 
     /* Fix for very small screens (iPhone SE, etc) */
-    @media (max-width: 360px) {
+    @media (max-width: 380px) {
         nav {
-            width: 94%;
+            width: 96%;
+        }
+        .glass-content {
+            padding: 6px 6px; /* Tighten horizontal for very narrow screens */
         }
         nav a {
-            font-size: 0.72rem;
-            padding: 0 4px;
+            width: 40px;
+            height: 40px;
         }
-        .nav-control-li {
-            width: 36px;
-            height: 40px; /* Keep height consistent for the pill bar */
+        nav a.active {
+            padding: 0 10px;
+            font-size: 0.72rem;
+        }
+        .nav-indicator-pill, .nav-control-li {
+            height: 40px;
         }
     }
 
@@ -1242,3 +1283,4 @@ body.loaded .hero-title {
         gap: 1.5rem;
     }
 }
+
