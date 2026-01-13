@@ -282,7 +282,7 @@ nav a span {
     display: inline-block;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     nav a {
         gap: 8px; /* Restore gap for mobile */
     }
