@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Main Portfolio Page -->
+  <url>
+    <loc>https://aldotobing.github.io/</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Portfolio Details Page -->
+  <url>
+    <loc>https://aldotobing.github.io/portfolio-details.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Link Page (Valentine's Messages) -->
+  <url>
+    <loc>https://aldotobing.github.io/link.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  
+  <!-- AI Assistant & Image Generator -->
+  <url>
+    <loc>https://aldotobing.github.io/ai/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Lazy Loop App -->
+  <url>
+    <loc>https://aldotobing.github.io/lazyloop/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- PPN Calculator -->
+  <url>
+    <loc>https://aldotobing.github.io/ppncalc/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- QR Generator -->
+  <url>
+    <loc>https://aldotobing.github.io/qrgenerator/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- Geo Location Haversine -->
+  <url>
+    <loc>https://aldotobing.github.io/geolochaversine/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <!-- LinkedIn Bio Generator -->
+  <url>
+    <loc>https://aldotobing.github.io/linkedin/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Valentine's Day Messages -->
+  <url>
+    <loc>https://aldotobing.github.io/val/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Space App -->
+  <url>
+    <loc>https://aldotobing.github.io/space/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Apple Liquid Glass Effect -->
+  <url>
+    <loc>https://aldotobing.github.io/apple-liquid-glass/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Neural Network Demo -->
+  <url>
+    <loc>https://aldotobing.github.io/NN/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Apps Directory -->
+  <url>
+    <loc>https://aldotobing.github.io/apps/lazyloop/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://aldotobing.github.io/apps/ppncalc/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://aldotobing.github.io/apps/qrgenerator/index.html</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+</urlset>
