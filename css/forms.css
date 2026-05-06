@@ -32,14 +32,19 @@
 }
 
 .btn-secondary {
-    background: rgba(120, 120, 128, 0.12); /* Semi-transparent gray */
+    background: rgba(var(--text-primary-rgb), 0.08); /* Unified tint */
     color: var(--text-primary);
     backdrop-filter: blur(10px);
 }
 
+[data-theme="light"] .btn-secondary {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .btn-secondary:hover {
-    background: rgba(120, 120, 128, 0.2);
-    transform: scale(1.02);
+    background: rgba(var(--text-primary-rgb), 0.15);
+    transform: translateY(-2px);
 }
 
 /* Contact Section */
@@ -71,8 +76,12 @@
 
 .contact-item:hover {
     transform: translateX(10px);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(var(--text-primary-rgb), 0.05);
     border-color: var(--accent-primary);
+}
+
+[data-theme="light"] .contact-item {
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .contact-icon {
@@ -171,7 +180,7 @@ input, textarea {
 input:focus, textarea:focus {
     outline: none;
     border-color: var(--accent-primary);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(var(--text-primary-rgb), 0.05);
     box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.1);
     transform: translateY(-2px);
 }

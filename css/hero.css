@@ -39,15 +39,16 @@ body.loaded .hero-bg {
     letter-spacing: -0.03em;
     line-height: 1.1;
     color: var(--text-primary);
-    /* Subtle gradient for depth, not flashiness */
-    background: linear-gradient(180deg, var(--text-primary) 50%, rgba(var(--text-primary-rgb), 0.7) 100%);
+    background: linear-gradient(180deg, var(--text-primary) 60%, rgba(var(--text-primary-rgb), 0.75) 100%);
     -webkit-background-clip: text;
     background-clip: text;
 }
 
-/* Light theme adjustment for title */
+/* Light theme refinement - Clean and punchy */
 [data-theme="light"] .hero-title {
-    background: linear-gradient(180deg, #1d1d1f 50%, rgba(29, 29, 31, 0.7) 100%);
+    background: none;
+    -webkit-text-fill-color: var(--text-primary);
+    color: var(--text-primary);
 }
 
 .hero-subtitle {
@@ -98,6 +99,11 @@ body.loaded .hero-bg {
     background: transparent;
     color: var(--text-primary);
     border: 1px solid var(--glass-border);
+}
+
+[data-theme="light"] .btn-secondary {
+    border-color: rgba(0, 0, 0, 0.15);
+    background: rgba(0, 0, 0, 0.02);
 }
 
 .btn-secondary:hover {

@@ -37,7 +37,11 @@
 .card-style:hover {
     transform: translateY(-6px) scale(1.005);
     box-shadow: var(--shadow-strong);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-primary);
+}
+
+[data-theme="light"] .card-style {
+    border-color: var(--glass-border-strong);
 }
 
 /* About Grid */
@@ -84,12 +88,17 @@
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(var(--text-primary-rgb), 0.03);
+    border: 1px solid var(--glass-border);
     border-radius: 16px;
     padding: 1.2rem 0.8rem;
     text-align: center;
     transition: transform 0.3s ease;
+}
+
+[data-theme="light"] .stat-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.05);
 }
 
 .stat-number {
@@ -143,11 +152,15 @@
     border-radius: var(--card-radius);
     padding: 2.5rem;
     border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-soft), inset 0 1px 0 0 var(--glass-highlight);
+    box-shadow: var(--shadow-soft);
     backdrop-filter: blur(40px);
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     position: relative;
     overflow: hidden;
+}
+
+[data-theme="light"] .skill-card {
+    border-color: var(--glass-border-strong);
 }
 
 .skill-card::after {
@@ -200,14 +213,19 @@
 }
 
 .tech-tag {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(var(--text-primary-rgb), 0.05);
     color: var(--text-secondary);
     padding: 0.4rem 0.9rem;
     border-radius: 99px;
     font-size: 0.8rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: 1px solid transparent;
+    border: 1px solid var(--glass-border);
+}
+
+[data-theme="light"] .tech-tag {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
 }
 
 .tech-tag:hover {
@@ -352,16 +370,21 @@
     justify-content: center;
     gap: 0.5rem;
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(var(--text-primary-rgb), 0.05);
     padding: 0.7rem 1.4rem;
     border-radius: 99px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     font-size: 0.9rem;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
     flex: 1; /* Make main buttons grow */
     white-space: nowrap;
+}
+
+[data-theme="light"] .project-link {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* GitHub Icon-only specific styling */

@@ -147,6 +147,11 @@ body.loaded .nav-indicator-pill {
     opacity: 1;
 }
 
+[data-theme="light"] .nav-indicator-pill {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 [data-theme="dark"] .nav-indicator-pill {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.15);

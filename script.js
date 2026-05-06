@@ -265,7 +265,13 @@ function createLiquidBackground() {
 
     heroBg.innerHTML = '';
 
-    const colors = [
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    
+    const colors = isLight ? [
+        'rgba(59, 130, 246, 0.15)', // Very faint blue
+        'rgba(168, 85, 247, 0.15)', // Very faint purple
+        'rgba(6, 182, 212, 0.1)'    // Very faint cyan
+    ] : [
         'rgba(59, 130, 246, 0.3)',  // Subtle Blue
         'rgba(168, 85, 247, 0.3)',  // Subtle Purple
         'rgba(6, 182, 212, 0.2)'    // Subtle Cyan
@@ -283,7 +289,7 @@ function createLiquidBackground() {
             background: radial-gradient(circle, ${colors[i]} 0%, transparent 70%);
             border-radius: 50%;
             filter: blur(100px);
-            opacity: 0.4;
+            opacity: ${isLight ? 0.3 : 0.4};
             z-index: -1;
             top: ${Math.random() * 50}%;
             left: ${Math.random() * 50}%;

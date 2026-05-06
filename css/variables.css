@@ -34,22 +34,23 @@
 }
 
 [data-theme="light"] {
-    --bg-primary: #f5f5f7;
+    --bg-primary: #fbfbfd; /* Softer, more comfortable off-white */
     --bg-secondary: #ffffff;
-    --bg-tertiary: #f2f2f7;
+    --bg-tertiary: #f5f5f7;
     --text-primary: #1d1d1f;
     --text-primary-rgb: 29, 29, 31;
-    --text-secondary: #86868b;
-    --text-muted: #6e6e73;
+    --text-secondary: #515154; /* Slightly more contrast for legibility */
+    --text-muted: #86868b;
     
-    --glass-bg: rgba(255, 255, 255, 0.75);
-    --glass-border: rgba(0, 0, 0, 0.1); /* Darker border for definition */
-    --glass-highlight: rgba(255, 255, 255, 0.8);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.08); 
+    --glass-border-strong: rgba(0, 0, 0, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.9);
     
     /* Liquid Glass Light Mode */
-    --lg-bg-color: rgba(200, 200, 200, 0.15); /* Slight dark tint to make white highlights pop */
-    --lg-highlight: rgba(255, 255, 255, 1.0); /* Strong white highlight */
+    --lg-bg-color: rgba(0, 0, 0, 0.03); 
+    --lg-highlight: rgba(255, 255, 255, 1.0); 
     
-    --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.08);
-    --shadow-strong: 0 30px 60px rgba(0, 0, 0, 0.12);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05); /* Lighter shadow */
+    --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.08); /* Lighter shadow */
 }
