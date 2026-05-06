@@ -407,22 +407,34 @@
 }
 
 
-/* Languages Chart */
+/* Languages Chart Card */
 .chart-frame {
     background: var(--glass-bg);
-    backdrop-filter: blur(40px);
+    backdrop-filter: blur(40px) saturate(180%);
     border-radius: var(--card-radius);
-    padding: 2.5rem;
+    padding: clamp(1.5rem, 5vw, 2.5rem); /* Responsive padding */
     border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-soft), inset 0 1px 0 0 var(--glass-highlight);
-    max-width: 800px;
-    margin: 3rem auto 0;
+    box-shadow: var(--shadow-soft);
+    max-width: 850px;
+    width: 100%;
+    margin: 4rem auto 0;
     position: relative;
+    transition: all 0.4s ease;
+}
+
+[data-theme="light"] .chart-frame {
+    background: rgba(255, 255, 255, 0.6);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+.chart-frame:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-strong);
 }
 
 .chart-container {
     position: relative;
-    height: 400px;
+    height: clamp(300px, 50vh, 450px); /* Responsive height */
     width: 100%;
 }
 
