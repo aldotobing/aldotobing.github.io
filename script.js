@@ -258,27 +258,23 @@ function typeWriter() {
 
 if (typingText) typeWriter();
 
-// Liquid Background Animation
+// Professional Ambient Background
 function createLiquidBackground() {
     const heroBg = document.querySelector('.hero-bg');
     if (!heroBg) return;
 
-    // Clear existing content if any
     heroBg.innerHTML = '';
 
-    // Create 3 large floating blobs
     const colors = [
-        'rgba(41, 151, 255, 0.4)',  // Blue
-        'rgba(191, 90, 242, 0.4)',  // Purple
-        'rgba(50, 215, 75, 0.3)'    // Greenish hint
+        'rgba(59, 130, 246, 0.3)',  // Subtle Blue
+        'rgba(168, 85, 247, 0.3)',  // Subtle Purple
+        'rgba(6, 182, 212, 0.2)'    // Subtle Cyan
     ];
 
     for (let i = 0; i < 3; i++) {
         const blob = document.createElement('div');
         blob.className = 'blob';
-        
-        // Random sizes between 40vw and 70vw
-        const size = Math.floor(Math.random() * 30) + 40;
+        const size = Math.floor(Math.random() * 20) + 40; // 40-60vw
         
         blob.style.cssText = `
             position: absolute;
@@ -286,31 +282,32 @@ function createLiquidBackground() {
             height: ${size}vw;
             background: radial-gradient(circle, ${colors[i]} 0%, transparent 70%);
             border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.6;
-            animation: moveBlob${i} ${20 + i * 5}s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(100px);
+            opacity: 0.4;
             z-index: -1;
             top: ${Math.random() * 50}%;
             left: ${Math.random() * 50}%;
+            pointer-events: none;
+            animation: moveAmbient${i} ${25 + i * 10}s infinite alternate ease-in-out;
         `;
 
         heroBg.appendChild(blob);
     }
 
-    // Add CSS for blobs programmatically
+    // Add slow ambient keyframes
     const styleSheet = document.createElement("style");
     styleSheet.innerText = `
-        @keyframes moveBlob0 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(20vw, 20vh) scale(1.1); }
+        @keyframes moveAmbient0 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(15vw, 10vh); }
         }
-        @keyframes moveBlob1 {
-            0% { transform: translate(0, 0) scale(1.1); }
-            100% { transform: translate(-20vw, 10vh) scale(0.9); }
+        @keyframes moveAmbient1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-10vw, 15vh); }
         }
-        @keyframes moveBlob2 {
-            0% { transform: translate(0, 0) scale(0.9); }
-            100% { transform: translate(10vw, -20vh) scale(1.1); }
+        @keyframes moveAmbient2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(10vw, -10vh); }
         }
     `;
     document.head.appendChild(styleSheet);

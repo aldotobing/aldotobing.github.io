@@ -1,4 +1,4 @@
-/* Hero Section */
+/* Hero Section - Professional Premium (Clean/Minimalist) */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -6,90 +6,108 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 6rem 0; /* Balanced padding for centering */
+    padding: 2rem 0;
+    background: var(--bg-primary);
 }
 
-/* Abstract Background Blob */
+/* Very subtle ambient background light */
 .hero-bg {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9);
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(circle at 50% 50%, rgba(41, 151, 255, 0.15), transparent 60%);
-    filter: blur(80px);
-    z-index: -1;
+    inset: 0;
+    z-index: 0;
+    filter: blur(120px);
     opacity: 0;
-    transition: opacity 2.5s cubic-bezier(0.16, 1, 0.3, 1), transform 2.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 3s ease;
 }
 
 body.loaded .hero-bg {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* Optional particle adjustment */
-.particle {
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: var(--text-primary);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: float 10s infinite linear;
+    opacity: 0.6;
 }
 
 .hero-content {
     text-align: center;
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
-    z-index: 1;
-    padding: 0 20px;
+    z-index: 10;
+    padding: 0 2rem;
 }
 
 .hero-title {
-    font-size: clamp(3.5rem, 6vw, 5.5rem);
-    font-weight: 700;
-    margin-bottom: 2rem;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
     letter-spacing: -0.03em;
-    line-height: 1.2;
-    padding-bottom: 0.1em;
-    background: linear-gradient(180deg, var(--text-primary) 20%, rgba(255, 255, 255, 0.5) 100%);
+    line-height: 1.1;
+    color: var(--text-primary);
+    /* Subtle gradient for depth, not flashiness */
+    background: linear-gradient(180deg, var(--text-primary) 50%, rgba(var(--text-primary-rgb), 0.7) 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
+/* Light theme adjustment for title */
 [data-theme="light"] .hero-title {
-    background: linear-gradient(180deg, #1d1d1f 20%, rgba(29, 29, 31, 0.6) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: linear-gradient(180deg, #1d1d1f 50%, rgba(29, 29, 31, 0.7) 100%);
 }
 
 .hero-subtitle {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     font-weight: 500;
+    letter-spacing: -0.01em;
 }
 
 .typing-text {
-    background: var(--accent-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
+    color: var(--accent-primary);
+    font-weight: 600;
 }
 
-.hero .about-text {
-    margin-bottom: 2rem;
+/* Clean Professional CTAs */
+.cta-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 
-/* Social Links - Clean & Minimal */
+.btn {
+    padding: 0.9rem 2.2rem;
+    border-radius: 12px; /* Less round, more modern professional */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.btn-primary {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: 1px solid var(--text-primary);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+    background: rgba(var(--text-primary-rgb), 0.05);
+    transform: translateY(-2px);
+    border-color: var(--text-primary);
+}
+
+/* Minimalist Social Links */
 .social-links {
-    margin-top: 2rem;
     display: flex;
     gap: 2rem;
     justify-content: center;
@@ -97,13 +115,21 @@ body.loaded .hero-bg {
 
 .social-link {
     color: var(--text-secondary);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     transition: all 0.3s ease;
-    opacity: 0.8;
 }
 
 .social-link:hover {
     color: var(--text-primary);
-    opacity: 1;
     transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
