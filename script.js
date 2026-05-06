@@ -389,23 +389,27 @@ window.addEventListener('load', () => {
     
     if (splashScreen) {
         setTimeout(() => {
-            // Start both animations at the same time for a seamless transition
+            // Start splash fade
             splashScreen.classList.add('splash-hidden');
-            document.body.classList.add('loaded');
             
-            // Remove splash from DOM after transition completes
+            // Start hero reveal slightly after splash begins to fade for a layered look
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 400);
+            
+            // Remove splash from DOM after transition completes (1.5s transition + buffer)
             setTimeout(() => {
                 splashScreen.remove();
                 
-                // Delay navbar appearance until hero is shown
+                // Delay navbar appearance until hero is mostly shown
                 const mainNav = document.querySelector('nav');
                 if (mainNav) {
                     setTimeout(() => {
                         mainNav.classList.add('nav-visible');
-                    }, 1000); // 1s delay for a more orchestrated feel
+                    }, 500); 
                 }
-            }, 1000);
-        }, 2000);
+            }, 1600);
+        }, 3200); // Increased from 2000 to 3200 to allow the 3s splash reveal to complete
     } else {
         document.body.classList.add('loaded');
     }

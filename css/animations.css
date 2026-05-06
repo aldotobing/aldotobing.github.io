@@ -19,12 +19,12 @@
 @keyframes heroReveal {
     0% {
         opacity: 0;
-        transform: translateY(40px) scale(0.98);
+        transform: scale(1.02);
         filter: blur(10px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1);
         filter: blur(0);
     }
 }
@@ -42,7 +42,7 @@
 }
 
 body.loaded .hero-animate {
-    animation: heroReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: heroReveal 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 body.loaded .hero-animate.delay-1 { animation-delay: 0.2s; }
