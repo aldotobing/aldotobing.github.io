@@ -51,6 +51,14 @@ nav {
     filter: url(#glass-distortion);
 }
 
+@media (max-width: 768px) {
+    .glass-filter {
+        filter: none; /* Disable expensive SVG distortion on mobile */
+        backdrop-filter: blur(8px); /* Lighter blur for mobile GPU */
+        -webkit-backdrop-filter: blur(8px);
+    }
+}
+
 .glass-overlay {
     z-index: 2;
     background: var(--lg-bg-color);

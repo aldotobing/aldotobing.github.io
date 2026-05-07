@@ -263,8 +263,13 @@ function createLiquidBackground() {
     const heroBg = document.querySelector('.hero-bg');
     if (!heroBg) return;
 
-    heroBg.innerHTML = '';
+    // Performance Optimization: Disable complex ambient blobs on mobile
+    if (window.innerWidth < 768) {
+        heroBg.innerHTML = '';
+        return;
+    }
 
+    heroBg.innerHTML = '';
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     
     const colors = isLight ? [
@@ -336,7 +341,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all animation elements
-const animateElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right');
+const animateElements = document.querySelectorAll('.fade-in, .reveal-card, .mask-reveal');
 animateElements.forEach(el => observer.observe(el));
 
 // Contact Form

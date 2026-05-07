@@ -55,37 +55,52 @@ body.loaded .hero-title {
                textShine 5s linear infinite reverse;
 }
 
+/* Premium Content Reveal */
+.reveal-card {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    filter: blur(10px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity, filter;
+}
+
+.reveal-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
+
+/* Staggered Delay Utilities */
+.stagger-1 { transition-delay: 0.1s; }
+.stagger-2 { transition-delay: 0.2s; }
+.stagger-3 { transition-delay: 0.3s; }
+.stagger-4 { transition-delay: 0.4s; }
+
+/* Mask Reveal for Text */
+.mask-reveal {
+    overflow: hidden;
+    display: block;
+}
+
+.mask-reveal span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mask-reveal.visible span {
+    transform: translateY(0);
+}
+
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in.visible {
     opacity: 1;
     transform: translateY(0);
-}
-
-.slide-in-left {
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.slide-in-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.slide-in-right {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.slide-in-right.visible {
-    opacity: 1;
-    transform: translateX(0);
 }
 
 /* Loading Spinner */

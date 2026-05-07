@@ -20,6 +20,12 @@
     transition: opacity 3s ease;
 }
 
+@media (max-width: 768px) {
+    .hero-bg {
+        display: none; /* Kill performance-heavy background on mobile */
+    }
+}
+
 body.loaded .hero-bg {
     opacity: 0.6;
 }

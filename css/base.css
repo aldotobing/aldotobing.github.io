@@ -1,10 +1,4 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -27,10 +21,19 @@ body {
     transition: background-color 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/* Global Performance Optimization for Mobile */
+@media (max-width: 768px) {
+    * {
+        /* Reduce calculation overhead on mobile GPUs */
+        text-rendering: optimizeSpeed;
+    }
+}
+
 /* Typography Enhancements */
 h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.02em; /* Tighten up headings like Apple */
-    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 p {
@@ -39,34 +42,31 @@ p {
 }
 
 .container {
-    max-width: 1140px; /* Slightly tighter container for focus */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px; /* Generous side padding */
+    padding: 0 clamp(1.5rem, 6vw, 3rem); /* Fluid responsive padding */
     width: 100%;
 }
 
 /* Section Styling */
 section {
-    padding: var(--section-spacing) 0;
+    padding: clamp(5rem, 15vh, 8rem) 0;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: clamp(3rem, 10vh, 6rem);
 }
 
 .section-title h2 {
-    font-size: 3rem;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     margin-bottom: 1rem;
-    background: var(--text-primary); /* Solid color for headers */
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text-primary);
 }
 
 .section-title p {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     color: var(--text-secondary);
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
 }
