@@ -49,13 +49,18 @@ p {
 }
 
 /* Section Styling */
+:root {
+    --section-gap: clamp(6rem, 12vh, 10rem);
+}
+
 section {
-    padding: clamp(5rem, 15vh, 8rem) 0;
+    padding-block: var(--section-gap);
+    position: relative;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: clamp(3rem, 10vh, 6rem);
+    margin-bottom: clamp(3rem, 8vh, 5rem);
 }
 
 .section-title h2 {

@@ -6,7 +6,7 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 2rem 0;
+    padding-block: var(--section-gap);
     background: var(--bg-primary);
 }
 
