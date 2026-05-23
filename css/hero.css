@@ -79,43 +79,66 @@ body.loaded .hero-bg {
 }
 
 .btn {
-    padding: 0.9rem 2.2rem;
-    border-radius: 12px; /* Less round, more modern professional */
-    font-weight: 600;
+    padding: 0.95rem 2.4rem;
+    border-radius: 14px;
+    font-weight: 500;
     font-size: 1rem;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.3px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    border: 1px solid transparent;
 }
 
 .btn-primary {
-    background: var(--text-primary);
+    background: linear-gradient(135deg, var(--text-primary) 0%, rgba(var(--text-primary-rgb), 0.9) 100%);
     color: var(--bg-primary);
-    border: 1px solid var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    filter: brightness(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .btn-secondary {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.15);
     color: var(--text-primary);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .btn-secondary {
-    border-color: rgba(0, 0, 0, 0.15);
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .btn-secondary:hover {
-    background: rgba(var(--text-primary-rgb), 0.05);
-    transform: translateY(-2px);
-    border-color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Minimalist Social Links */
