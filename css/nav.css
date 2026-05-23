@@ -18,10 +18,10 @@ nav {
     opacity: 0;
     z-index: 1000;
     background: transparent;
-    border: 0.5px solid var(--glass-border);
+    border: none;
     border-radius: 999px;
     padding: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
     overflow: hidden;
     transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
                 opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
@@ -46,8 +46,8 @@ nav {
 
 .glass-filter {
     z-index: 1;
-    backdrop-filter: blur(12px) saturate(150%);
-    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
+    -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
     filter: url(#glass-distortion);
 }
 
@@ -61,7 +61,11 @@ nav {
 
 .glass-overlay {
     z-index: 2;
-    background: var(--lg-bg-color);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+[data-theme="dark"] .glass-overlay {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
 }
 
 .glass-specular {
@@ -156,31 +160,34 @@ body.loaded .nav-indicator-pill {
 }
 
 [data-theme="light"] .nav-indicator-pill {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 [data-theme="dark"] .nav-indicator-pill {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
 nav a {
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 400;
-    font-size: 0.95rem;
-    transition: color 0.15s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    transition: color 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 36px;
-    padding: 0 14px;
+    padding: 0 16px;
     z-index: 1;
     border-radius: 99px;
     white-space: nowrap;
-    gap: 0; /* No gap on desktop as icons are hidden */
+    gap: 0;
 }
 
 nav a i {
@@ -211,17 +218,18 @@ nav a.active {
 
 .theme-toggle, .nav-back-to-top {
     position: absolute;
-    background: rgba(120, 120, 128, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     color: var(--text-primary);
-    width: 40px; /* Perfectly centered within 44px li */
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(10px);
 }
 
 /* Initially theme toggle is visible, back-to-top is hidden */
@@ -251,8 +259,9 @@ nav a.active {
 }
 
 .theme-toggle:hover, .nav-back-to-top:hover {
-    background: rgba(120, 120, 128, 0.2);
-    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Premium Icon Animation */
@@ -262,14 +271,14 @@ nav a.active {
 }
 
 .theme-toggle:hover {
-    background: rgba(120, 120, 128, 0.2);
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .theme-toggle:active {
-    transform: scale(0.85);
-    background: rgba(120, 120, 128, 0.3);
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.25);
     transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
