@@ -106,7 +106,8 @@
 }
 
 [data-theme="light"] .contact-item {
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 .contact-icon {
@@ -141,6 +142,16 @@
     font-size: 1rem;
     text-decoration: none;
     transition: color 0.2s;
+}
+
+[data-theme="light"] .contact-details p,
+[data-theme="light"] .contact-link {
+    color: #42464b;
+}
+
+[data-theme="light"] .contact-details p,
+[data-theme="light"] .contact-link {
+    color: #42464b;
 }
 
 .contact-link:hover {
@@ -199,7 +210,18 @@ input, textarea {
 
 [data-theme="light"] input, 
 [data-theme="light"] textarea {
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    color: #000000;
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+    color: #717579;
 }
 
 input:focus, textarea:focus {

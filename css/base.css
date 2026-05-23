@@ -39,6 +39,11 @@ h1, h2, h3, h4, h5, h6 {
 p {
     font-weight: 400;
     letter-spacing: -0.01em;
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] p {
+    color: #42464b;
 }
 
 .container {
@@ -74,4 +79,8 @@ section {
     color: var(--text-secondary);
     max-width: 650px;
     margin: 0 auto;
+}
+
+[data-theme="light"] .section-title p {
+    color: #42464b;
 }

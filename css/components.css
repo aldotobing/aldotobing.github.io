@@ -68,8 +68,13 @@
 .about-text {
     font-size: 1.05rem;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
     margin-bottom: 1.5rem;
+}
+
+[data-theme="light"] .about-text {
+    color: #42464b;
+    font-weight: 450;
 }
 
 .about-text:last-child {
@@ -97,8 +102,8 @@
 }
 
 [data-theme="light"] .stat-card {
-    background: rgba(0, 0, 0, 0.02);
-    border-color: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .stat-number {
@@ -118,6 +123,10 @@
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+[data-theme="light"] .stat-label {
+    color: #42464b;
 }
 
 /* Profile Image */
@@ -221,6 +230,12 @@
     font-weight: 500;
     transition: all 0.3s ease;
     border: 1px solid var(--glass-border);
+}
+
+[data-theme="light"] .tech-tag {
+    background: rgba(0, 0, 0, 0.06);
+    color: #42464b;
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 [data-theme="light"] .tech-tag {
@@ -339,6 +354,10 @@
     font-size: 1.05rem;
     line-height: 1.6;
     margin-bottom: 0.5rem;
+}
+
+[data-theme="light"] .project-description {
+    color: #42464b;
 }
 
 .project-links {
